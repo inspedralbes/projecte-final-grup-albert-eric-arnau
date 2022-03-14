@@ -9,7 +9,7 @@ Un cop comenceu heu de canviar aquesta explicació amb la corresponent al vostre
 
 
 # Aquest fitxer ha de contenir com a mínim:
- * Nom dels integrants
+ * Albert Chao, Eric Clemente, Arnau Orts
  * Nom del projecte
  * Petita descripció
  * URL de producció (quan la tingueu)
