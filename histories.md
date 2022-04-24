@@ -1,49 +1,38 @@
 >## Com a **usuari sense registrar**
->- **vull poder** veure una llista de clips ordenats per visualitzacions totals/més populars,\
-> **per** tenir varietat de clips quan arribes.
+>- **vull poder** registrar-me,
+> **per** tindre un perfil d'usuari i accedir a totes les posibilities de la pàgina.
 >---
->- **vull poder** buscar clips mitjançant etiquetes,\
-> **per** poder trobar amb més facilitat un clip específic, o d'un joc concret.
+>- **vull poder** informar-me de la finalitat de la pàgina,i informació del projecte.
+> **per** poder decicir si vull registrarme o no.
 >---
->- **vull poder** veure un clip,\
-> **per** entretenir-me.
+>- **vull poder** veure una llista de grups de chat que em puguin cridar l'atenció(sense veure el contingut), 
+> **per** per tindre més ganes d'accedir a la pagina.
 >---
->- **vull poder** veure els comentaris d’un clip,\
-> **per** saber què li sembla a altres persones que ja han vist el clip.
->---
->- **vull poder** registrar-me,\
-> **per** poder pujar clips, tenir un perfil personal i poder compartir els meus propis clips.
----
->## Com a **usuari registrat (no premium)**
+>## Com a **usuari registrat**
 >- **vull poder** fer tot l’anterior.
 >---
->- **vull poder** pujar els meus propis clips (màxim 1 minut de clip),\
-> **per** compartir els clips amb qui vulgui.
+>- **vull poder** modificar la meva foto de perfil,
+> **per** que el usuaris tinguin mes personalitat.  
 >---
->- **vull poder** comentar en qualsevol clip existent,\
-> **per** deixar constància de què m'ha semblat un clip.
+>- **vull poder** cambiar el meu nom public,
+> **per**  cambiar com els usuaris veuen el meu perfil.
 >---
->- **vull poder** marcar com a “pointer” un clip (equival a un m’agrada),\
-> **per** deixar constància de si m'ha agradat un clip.
+>- **vull poder** cambiar la descripció del meu perfil,
+> **per** cambiar com els usuaris veuen el meu perfil.
 >---
->- **vull poder** crear i unir-se a un grup,\
-> **per** compartir clips amb persones o amics que els hi agraden clips semblants.
+>- **vull poder** cambiar la meva contasenya,
+> **per** una major seguretat.
 >---
->- **vull poder** editar la imatge del meu perfil, el meu nom i la biografia,\
-> **per** personalitzar com veuen el meu perfil la resta d'usuaris.
----
->## Com a **usuari registrat (premium)**
->- **vull poder** fer tot l’anterior.
+>- **vull poder** buscar grups de chat,
+> **per** trobar un grup de chat que me interessi.
 >---
->- **vull poder** pujar els meus propis clips (màxim 3 minuts de clip),\
-> **per** compartir els clips amb qui vulgui.
+>- **vull poder** afegir-me a un grup de chat,
+> **per** poder parlar en ell.
 >---
->- **vull poder** pujar clips a més resolució,\
-> **per** a una millor experiència visual als clips.
+>- **vull poder** afegir un grup de chat a la meva llista de preferits(max 5),
+> **per** trobar amb facilitat els grups que més m'agraden.
 >---
->- **vull poder** descarregar qualsevol clip de manera senzilla,\
-> **per** poder fer recopilacions per una altra plataforma de vídeos.
----
+
 >## Com a **administrador**
 >- **vull poder** fer tot l'anterior.
 >---
