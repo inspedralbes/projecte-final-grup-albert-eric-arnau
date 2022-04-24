@@ -29,8 +29,11 @@
 >- **vull poder** afegir-me a un grup de chat,
 > **per** poder parlar en ell.
 >---
->- **vull poder** afegir un grup de chat a la meva llista de preferits(max 5),
+>- **vull poder** afegir un grup de chat a la meva llista de preferits(max 5(pot cambiar)),
 > **per** trobar amb facilitat els grups que més m'agraden.
+>---
+>- **vull poder** veure el perfil d'un altre usuari,
+> **per** veure els grups en comú que compartim.
 >---
 
 >## Com a **administrador**
