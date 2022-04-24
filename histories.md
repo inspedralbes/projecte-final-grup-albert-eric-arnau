@@ -35,7 +35,9 @@
 >- **vull poder** veure el perfil d'un altre usuari,
 > **per** veure els grups en comú que compartim.
 >---
-
+>- **vull poder** com a usuari puc crear grups de chat(Amb contraseny o sense) i borrar els meus grups de chat,
+> **per** Tindre grups personalitzats.
+>---
 >## Com a **administrador**
 >- **vull poder** fer tot l'anterior.
 >---
