@@ -1,8 +1,8 @@
-// import ChatView from "./components/chat/index.js";
-import LandingView from "./components/landing/LandingView.jsx";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 function App() {
-  return <LandingView />;
+  return <Provider store={store}></Provider>;
 }
 
 export default App;
