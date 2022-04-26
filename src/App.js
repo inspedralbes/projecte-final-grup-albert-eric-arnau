@@ -1,5 +1,8 @@
+// import ChatView from "./components/chat/index.js";
+import LandingView from "./components/landing/LandingView.jsx";
+
 function App() {
-  return <div>Hola asdofhasodfj</div>;
+  return <LandingView />;
 }
 
 export default App;
