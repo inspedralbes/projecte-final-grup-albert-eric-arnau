@@ -1,7 +1,7 @@
 import React from "react";
 
 function ChatView() {
-  const socket = new WebSocket("ws://groupem.herokuapp.com");
+  const socket = new WebSocket("wss://groupem.herokuapp.com");
 
   socket.onopen = () => {
     console.log("Connected to server");
