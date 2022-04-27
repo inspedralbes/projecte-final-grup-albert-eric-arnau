@@ -13,9 +13,37 @@ inputMessage.addEventListener("keypress", (e) => {
       msg: inputMessage.value,
       type: "chatMessage",
     });
-    socket.send(message);
+    const data = {
+      meta: "send_message",
+      roomID: "room_1",
+      clientID: "Albert",
+      message: inputMessage.value,
+    };
+    socket.send(JSON.stringify(data));
     inputMessage.value = "";
   }
+});
+
+const buttonCreateRoom = document.getElementById("createRoom");
+buttonCreateRoom.addEventListener("click", () => {
+  const data = {
+    meta: "create_room",
+    roomID: "room_1",
+    clientID: "Albert",
+    message: "",
+  };
+  socket.send(JSON.stringify(data));
+});
+
+const buttonJoinRoom = document.getElementById("joinRoom");
+buttonJoinRoom.addEventListener("click", () => {
+  const data = {
+    meta: "join_room",
+    roomID: "room_1",
+    clientID: "Albert",
+    message: "",
+  };
+  socket.send(JSON.stringify(data));
 });
 
 // sockets things
@@ -28,16 +56,7 @@ socket.onopen = () => {
   let message = JSON.stringify({
     type: "connection",
   });
-  const data = {
-    // meta: "create_room",
-    // meta: "join_room",
-    meta: "send_message",
-    // meta: "show_all_rooms",
-    roomID: "room_1",
-    clientID: "Albert",
-    message: "Hola buenas tardes tengáis todos un buen día",
-  };
-  socket.send(JSON.stringify(data));
+
   // socket.send(message);
   //socket.onmessage({ data: socket.localAddress });
 };
