@@ -16,7 +16,7 @@ inputMessage.addEventListener("keypress", (e) => {
     const data = {
       meta: "send_message",
       roomID: "room_1",
-      clientID: "Albert",
+      clientID: username.value,
       message: inputMessage.value,
     };
     socket.send(JSON.stringify(data));
@@ -29,7 +29,7 @@ buttonCreateRoom.addEventListener("click", () => {
   const data = {
     meta: "create_room",
     roomID: "room_1",
-    clientID: "Albert",
+    clientID: username.value,
     message: "",
   };
   socket.send(JSON.stringify(data));
@@ -40,16 +40,16 @@ buttonJoinRoom.addEventListener("click", () => {
   const data = {
     meta: "join_room",
     roomID: "room_1",
-    clientID: "Albert",
+    clientID: username.value,
     message: "",
   };
   socket.send(JSON.stringify(data));
 });
 
 // sockets things
-const socket = new WebSocket("ws://192.168.210.154:8000");
+// const socket = new WebSocket("ws://192.168.210.154:8000");
 // const socket = new WebSocket("ws://localhost:8000");
-// const socket = new WebSocket("ws://groupem.herokuapp.com");
+const socket = new WebSocket("ws://groupem.herokuapp.com");
 
 socket.onopen = () => {
   console.log("Connected to server");
