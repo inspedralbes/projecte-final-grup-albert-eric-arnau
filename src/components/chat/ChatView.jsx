@@ -1,27 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
+import { ChatMessage, ChatSideBar } from ".";
+import { ChatInput } from "./ChatInput";
+
+const socket = new WebSocket("wss://groupem.herokuapp.com");
+
+socket.onopen = () => {
+  console.log("Connected to server");
+  let message = JSON.stringify({
+    type: "connection",
+  });
+  socket.send(message);
+};
+
+socket.onmessage = ({ meta = "send_message", user, message }) => {
+  switch (meta) {
+    case "send_message":
+      RenderNewMessage(user, message);
+      break;
+    default:
+      console.log("default");
+  }
+};
+
+const RenderNewMessage = (user, message) => (
+  <ChatMessage
+    messageData={{
+      user,
+      message,
+    }}
+  />
+);
 
 function ChatView() {
-  const socket = new WebSocket("wss://groupem.herokuapp.com");
+  const [messages, setMessages] = useState([]);
 
-  socket.onopen = () => {
-    console.log("Connected to server");
-    let message = JSON.stringify({
-      type: "connection",
-    });
-    socket.send(message);
-    //socket.onmessage({ data: socket.localAddress });
-  };
-
-  setInterval(() => {
-    console.log("still connected");
-    socket.send(
-      JSON.stringify({
-        type: "ping",
-      })
-    );
-  }, 10000);
-
-  return <div>chat</div>;
+  return (
+    <>
+      <ChatSideBar />
+      <div className="chat-messages">
+        {messages.map(({ user, message }) => (
+          <ChatMessage
+            messageData={{
+              user,
+              message,
+            }}
+          />
+        ))}
+      </div>
+      <ChatInput />
+    </>
+  );
 }
 
 export { ChatView };
