@@ -3,5 +3,5 @@
 - Albert Chao, Eric Clemente, Arnau Orts
 - Group'em
 - Web on intereactuar amb altres usuaris a través de grups de xat.
-- URL de producció (quan la tingueu)
+- URL de producció : http://groupem.alumnes.inspedralbes.cat/
 - Estat: Disseny
