@@ -20,25 +20,34 @@ const useStyles = createStyles({
 function ChatInput() {
   const [value, setValue] = useState("");
   const { classes } = useStyles();
+
+  const SendMessage = (e) => {
+    e.preventDefault();
+    console.log("mando mensjae");
+  };
+
   return (
-    <Group position="center" spacing="xl" className={classes.inputContainer}>
-      <TextInput
-        className={classes.input}
-        placeholder="Type a message..."
-        value={value}
-        onChange={(event) => setValue(event.currentTarget.value)}
-      />
-      <Button
-        radius="xl"
-        variant="gradient"
-        gradient={{
-          from: "teal",
-          to: "blue",
-        }}
-      >
-        <Send size={24} strokeWidth={2} color={"white"} />
-      </Button>
-    </Group>
+    <form onSubmit={SendMessage}>
+      <Group position="center" spacing="xl" className={classes.inputContainer}>
+        <TextInput
+          className={classes.input}
+          placeholder="Type a message..."
+          value={value}
+          onChange={(event) => setValue(event.currentTarget.value)}
+        />
+        <Button
+          type="submit"
+          radius="xl"
+          variant="gradient"
+          gradient={{
+            from: "teal",
+            to: "blue",
+          }}
+        >
+          <Send size={24} strokeWidth={2} color={"white"} />
+        </Button>
+      </Group>
+    </form>
   );
 }
 export { ChatInput };
