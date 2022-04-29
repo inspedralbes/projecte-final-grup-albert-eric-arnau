@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { ChatView } from "../chat/ChatView";
+import { ChatView } from "../../components/chat/ChatView";
 
-export default function LandingView() {
+function LandingPageView() {
   const [number, setNumber] = useState(0);
 
   const Sumar = () => {
@@ -42,3 +42,5 @@ export default function LandingView() {
     </>
   );
 }
+
+export default LandingPageView;
