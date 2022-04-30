@@ -1,4 +1,3 @@
-export { ChatView } from "./ChatView";
-export { ChatInput } from "./ChatInput";
-export { ChatMessage } from "./ChatMessage";
-export { ChatSideBar } from "./ChatSideBar";
+export { default as ChatInput } from "./ChatInput";
+export { default as ChatMessage } from "./ChatMessage";
+export { default as ChatSideBar } from "./ChatSideBar";

@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-import { ChatView } from "../components/chat";
+import { ChatView, LandingPageView } from "../views";
 
 function AppRouter() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<ChatView />}></Route>
+        <Route path="/" element={<LandingPageView />}></Route>
+        <Route path="/chat" element={<ChatView />}></Route>
       </Routes>
     </Router>
   );

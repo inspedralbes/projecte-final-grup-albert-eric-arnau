@@ -4,16 +4,13 @@ import { Send } from "tabler-icons-react";
 
 const useStyles = createStyles({
   input: {
-    width: "90%",
+    width: "95%",
   },
   inputContainer: {
     marginBottom: "10px",
-    width: "100vw",
+    width: "80vw",
     position: "fixed",
     bottom: 0,
-  },
-  sendIcon: {
-    marginBlock: "auto",
   },
 });
 
@@ -23,12 +20,15 @@ function ChatInput() {
 
   const SendMessage = (e) => {
     e.preventDefault();
-    console.log("mando mensjae");
+    // TODO: logica para mandar el mensaje al websocket
+    console.log("mando mensaje:", value);
+    // TODO: logica para enseñar el mensaje nuevo en el chat
+    setValue("");
   };
 
   return (
     <form onSubmit={SendMessage}>
-      <Group position="center" spacing="xl" className={classes.inputContainer}>
+      <Group position="apart" spacing="xs" className={classes.inputContainer}>
         <TextInput
           className={classes.input}
           placeholder="Type a message..."
@@ -50,4 +50,4 @@ function ChatInput() {
     </form>
   );
 }
-export { ChatInput };
+export default ChatInput;

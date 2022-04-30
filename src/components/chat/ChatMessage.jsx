@@ -47,4 +47,4 @@ function ChatMessage({ messageData = null }) {
     )
   );
 }
-export { ChatMessage };
+export default ChatMessage;
