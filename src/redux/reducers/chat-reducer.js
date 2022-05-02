@@ -1,4 +1,3 @@
-import { ChartDonut } from "tabler-icons-react";
 import { chatTypes } from "../action-types";
 
 const initialState = [];
