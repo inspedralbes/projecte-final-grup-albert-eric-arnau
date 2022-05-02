@@ -3,11 +3,11 @@ import paths from "../paths";
 const routes = [
   {
     path: paths.HOME,
-    component: views.LandingPageView,
+    component: views.Landing,
   },
   {
     path: paths.CHAT,
-    component: views.ChatView,
+    component: views.Chat,
   },
   {
     path: paths.NOT_FOUND,
