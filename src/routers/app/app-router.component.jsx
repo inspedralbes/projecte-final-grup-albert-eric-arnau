@@ -1,13 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ChatView, LandingPageView } from "../views";
+
+import routes from "./routes";
 
 function AppRouter() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LandingPageView />}></Route>
-        <Route path="/chat" element={<ChatView />}></Route>
+        {routes.map((route, index) => (
+          <Route key={index} path={route.path} component={route.component} />
+        ))}
       </Routes>
     </Router>
   );
