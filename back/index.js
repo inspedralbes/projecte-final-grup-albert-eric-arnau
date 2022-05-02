@@ -1,54 +1,34 @@
 import { WebSocketServer } from "ws";
+import express from "express";
+import router from "./api.js";
 
-//const wss = new WebSocketServer({ port: process.env.PORT || 3456 });
-// console.log("server started on port", process.env.PORT);
-//DATADECODER
-const decoder = new TextDecoder("utf-8");
-//wss = WebsocketServer
-//ws = WebsocketConnexion
+const app = express();
+const apiPort = process.env.PORT || 8001;
+const wsPort = process.env.PORT || 8000;
 
-// wss.on("connection", (wsc, req) => {
-//   //console.log("Persona " + req.socket.localAddress + " se ha conectado");
-//   wsc.on("message", (data) => {
-//     let clientMessage = JSON.parse(decoder.decode(data));
-//     switch (clientMessage.type) {
-//       case "connection":
-//         console.log("User: " + req.socket.remoteAddress);
-//         break;
-//       case "chatMessage":
-//         wss.broadcast(clientMessage, req);
-//         break;
-//       default:
-//         break;
-//     }
-//     // console.log(clientMessage.type);
-//   });
-// });
+// initialize API server
+app.use("/", router);
+app.listen(apiPort, () => {
+  console.log("API server on port", apiPort);
+});
 
-// wss.broadcast = function broadcast(data, req) {
-//   wss.clients.forEach((client) => {
-//     client.send(JSON.stringify(data));
-//   });
-// };
+// initialize WS server
+const wss = new WebSocketServer({ port: wsPort });
+console.log("WS server on port", wsPort);
 
 function noop() {}
 
 function heartbeat() {
   this.isAlive = true;
 }
+let groups = {};
 
-const port = process.env.PORT || 8000;
-const wss = new WebSocketServer({ port });
-console.log("server started on port", port);
-
-let rooms = {};
-
-const paramsExist = (data) => {
+const CheckParameters = (data) => {
   try {
     if (
       "meta" in data &&
-      "roomID" in data &&
-      "clientID" in data &&
+      "groupID" in data &&
+      "userID" in data &&
       "message" in data
     ) {
       return true;
@@ -60,38 +40,35 @@ const paramsExist = (data) => {
   }
 };
 
-const roomExist = (roomID) => {
-  // check for room is already exist or not
-  if (roomID in rooms) {
+const CheckGroup = (groupID) => {
+  // check if group is already exist or not
+  if (groupID in groups) {
     return true;
   } else {
     return false;
   }
 };
 
-const insideRoomdataExist = (arr, data) => {
-  let status = false;
-  for (let i = 0; i < arr.length; i++) {
-    if (data in arr[i]) {
-      status = true;
-      break;
-    }
-  }
-  return status;
-};
+// NOT USED
 
-const clientExistInRoom = (roomID, ws, clientID) => {
+// const insideRoomdataExist = (arr, data) => {
+//   let status = false;
+//   for (let i = 0; i < arr.length; i++) {
+//     if (data in arr[i]) {
+//       status = true;
+//       break;
+//     }
+//   }
+//   return status;
+// };
+
+const CheckUserInGroup = (groupID, userID) => {
   let status = false;
-  const data = rooms[roomID];
-  for (let i = 0; i < data.length; i++) {
-    let temp = data[i];
-    // if(roomID in temp){
-    //   status=true;
-    //   console.log("hello world");
-    // }
-    for (const obj in temp) {
-      // if(ws == temp[obj]){
-      if (clientID == obj) {
+  const currentGroup = groups[groupID];
+  for (let i = 0; i < currentGroup.length; i++) {
+    let currentUser = data[i];
+    for (const checkingUserID in currentUser) {
+      if (userID == checkingUserID) {
         status = true;
         break;
       }
@@ -99,11 +76,12 @@ const clientExistInRoom = (roomID, ws, clientID) => {
   }
   return status;
 };
-// create room
-const createRoom = (data, ws) => {
+
+// create group
+const CreateGroup = (data, ws) => {
   try {
     let { roomID, clientID } = data;
-    const status = roomExist(roomID);
+    const status = CheckGroup(roomID);
     if (status) {
       ws.send(
         JSON.stringify({
@@ -112,10 +90,10 @@ const createRoom = (data, ws) => {
         })
       );
     } else {
-      rooms[roomID] = [];
+      groups[roomID] = [];
       let obj = {};
       obj[clientID] = ws;
-      rooms[roomID].push(obj);
+      groups[roomID].push(obj);
       ws["roomID"] = roomID;
       ws["clientID"] = clientID;
       ws["admin"] = true;
@@ -142,7 +120,7 @@ const joinRoom = (data, ws) => {
   try {
     let { roomID, clientID } = data;
     // check if room exist or not
-    const roomExist = roomID in rooms;
+    const roomExist = roomID in groups;
     if (!roomExist) {
       ws.send(
         JSON.stringify({
@@ -153,7 +131,7 @@ const joinRoom = (data, ws) => {
       return;
     }
     // const inRoom = insideRoomdataExist(rooms[roomID],clientID);
-    const inRoom = clientExistInRoom(roomID, ws, clientID);
+    const inRoom = CheckUserInGroup(roomID, ws, clientID);
     if (inRoom) {
       ws.send(
         JSON.stringify({
@@ -164,7 +142,7 @@ const joinRoom = (data, ws) => {
     } else {
       let obj = {};
       obj[clientID] = ws;
-      rooms[roomID].push(obj);
+      groups[roomID].push(obj);
       ws["roomID"] = roomID;
       ws["clientID"] = clientID;
       ws.send(
@@ -189,7 +167,7 @@ const sendMessage = (data, ws, Status = null) => {
   try {
     let { roomID, message, clientID } = data;
     //check whether room exist or not
-    const roomExist = roomID in rooms;
+    const roomExist = roomID in groups;
     if (!roomExist) {
       ws.send(
         JSON.stringify({
@@ -200,7 +178,7 @@ const sendMessage = (data, ws, Status = null) => {
       return;
     }
     // check whether client is in room or not
-    const clientExist = clientExistInRoom(roomID, ws, clientID);
+    const clientExist = CheckUserInGroup(roomID, ws, clientID);
     if (!clientExist) {
       ws.send(
         JSON.stringify({
@@ -210,7 +188,7 @@ const sendMessage = (data, ws, Status = null) => {
       );
       return;
     }
-    const room = rooms[roomID];
+    const room = groups[roomID];
     for (let i = 0; i < room.length; i++) {
       let user = room[i];
       for (let username in user) {
@@ -241,7 +219,7 @@ const leaveRoom = (ws, data) => {
   try {
     const { roomID } = data;
     // manual code started------------------------------------------------------------
-    const roomExist = roomID in rooms;
+    const roomExist = roomID in groups;
     if (!roomExist) {
       ws.send(
         JSON.stringify({
@@ -254,11 +232,11 @@ const leaveRoom = (ws, data) => {
     if ("admin" in ws) {
       data["message"] = "Admin left the room.";
       sendMessage(data, ws, (Status = 2));
-      delete rooms[ws.roomID];
+      delete groups[ws.roomID];
       return;
     } else {
       // find the index of object
-      lst_obj = rooms[roomID];
+      lst_obj = groups[roomID];
       let index = null;
       for (let i = 0; i < lst_obj.length; i++) {
         let temp_obj = lst_obj[i];
@@ -278,8 +256,8 @@ const leaveRoom = (ws, data) => {
         }
       }
       if (index != null) {
-        rooms[roomID].splice(index, 1);
-        console.log(rooms[roomID].length);
+        groups[roomID].splice(index, 1);
+        console.log(groups[roomID].length);
       }
     }
   } catch (error) {
@@ -295,7 +273,7 @@ const leaveRoom = (ws, data) => {
 const available_room = (ws) => {
   try {
     let available_room_id = [];
-    for (let i in rooms) {
+    for (let i in groups) {
       available_room_id.push(parseInt(i));
     }
     ws.send(
@@ -318,7 +296,7 @@ wss.on("connection", (ws) => {
   try {
     ws.on("message", (recieveData) => {
       let data = JSON.parse(recieveData);
-      const error = paramsExist(data);
+      const error = CheckParameters(data);
       if (!error) {
         console.log("error");
         ws.send(
@@ -332,24 +310,24 @@ wss.on("connection", (ws) => {
       let { roomID, meta } = data;
       switch (meta) {
         case "create_room":
-          createRoom(data, ws);
-          console.log(rooms);
+          CreateGroup(data, ws);
+          console.log(groups);
           break;
 
         case "join_room":
           joinRoom(data, ws);
-          console.log(rooms);
+          console.log(groups);
           break;
 
         case "send_message":
           sendMessage(data, ws);
-          console.log(rooms);
+          console.log(groups);
           break;
 
         case "show_all_rooms":
           ws.send(
             JSON.stringify({
-              rooms: [rooms],
+              rooms: [groups],
             })
           );
           break;
@@ -396,12 +374,12 @@ const interval = setInterval(function ping() {
 
 const serverFree = setInterval(() => {
   let removeKey = [];
-  for (const obj in rooms) {
-    if (rooms[obj].length < 1) {
+  for (const obj in groups) {
+    if (groups[obj].length < 1) {
       removeKey.push(obj);
     }
   }
   for (let i = 0; i < removeKey.length; i++) {
-    delete rooms[removeKey[i]];
+    delete groups[removeKey[i]];
   }
 }, 30000);
