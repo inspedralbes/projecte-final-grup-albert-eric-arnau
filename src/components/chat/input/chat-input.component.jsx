@@ -1,18 +1,8 @@
 import React, { useState } from "react";
-import { TextInput, createStyles, Group, Button } from "@mantine/core";
+import { TextInput, Group, Button } from "@mantine/core";
 import { Send } from "tabler-icons-react";
 
-const useStyles = createStyles({
-  input: {
-    width: "95%",
-  },
-  inputContainer: {
-    marginBottom: "10px",
-    width: "80vw",
-    position: "fixed",
-    bottom: 0,
-  },
-});
+import { useStyles } from "./chat-input.styles";
 
 function ChatInput() {
   const [value, setValue] = useState("");
