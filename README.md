@@ -4,4 +4,5 @@
 - Group'em
 - Web on intereactuar amb altres usuaris a través de grups de xat.
 - URL de producció : http://groupem.alumnes.inspedralbes.cat/
+- URL trello : https://trello.com/invite/b/XIF8ot30/1870d223832f151e5c8b377da336bbc6/groupem
 - Estat: Disseny
