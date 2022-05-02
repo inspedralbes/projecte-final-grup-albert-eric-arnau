@@ -12,4 +12,4 @@
   - Heroku(Servidor)
   - Trello(Organització de tasques)
   - Discord(Xat)
-  
+  - Figma(Disseny)
