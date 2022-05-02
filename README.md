@@ -5,4 +5,5 @@
 - Web on intereactuar amb altres usuaris a través de grups de xat.
 - URL de producció : http://groupem.alumnes.inspedralbes.cat/
 - URL trello : https://trello.com/invite/b/XIF8ot30/1870d223832f151e5c8b377da336bbc6/groupem
+- URL figma : https://www.figma.com/file/fVs0SmDibaXOsFodE9PZux/ProjecteFinal?node-id=7%3A2
 - Estat: Disseny
