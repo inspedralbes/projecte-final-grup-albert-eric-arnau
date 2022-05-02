@@ -1,6 +1,6 @@
 const authTypes = {
-  login: "AUTH_LOGIN",
-  logout: "AUTH_LOGOUT",
+  LOGIN: "AUTH_LOGIN",
+  LOGOUT: "AUTH_LOGOUT",
 
   // TODO - create more auth action types
 };
