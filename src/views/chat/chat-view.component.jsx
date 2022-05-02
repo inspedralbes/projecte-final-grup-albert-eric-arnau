@@ -1,8 +1,8 @@
 import { createStyles, Group, Paper } from "@mantine/core";
 import React, { useState } from "react";
-import { ChatSideBar } from "../../components/chat";
-import { ChatInput } from "../../components/chat";
-import { ChatMessage } from "../../components/chat";
+import { ChatSideBar } from "../../components/chat/index";
+import { ChatInput } from "../../components/chat/index";
+import { ChatMessage } from "../../components/chat/index";
 
 const socket = new WebSocket("wss://groupem.herokuapp.com");
 
@@ -59,7 +59,7 @@ function ChatView() {
         <ChatSideBar />
         <Paper radius="md">
           <div className={classes.chatContainer}>
-            {<ChatMessage messageData={messages} />}
+            <ChatMessage messageData={messages} />
           </div>
           <ChatInput />
         </Paper>
