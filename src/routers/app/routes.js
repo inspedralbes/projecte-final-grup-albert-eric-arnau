@@ -11,7 +11,7 @@ const routes = [
   },
   {
     path: paths.NOT_FOUND,
-    component: null,
+    component: views.NotFound,
   },
 ];
 
