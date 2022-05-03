@@ -1,5 +1,24 @@
-import React from 'react'
-import { SideBarStyles } from "./sidebar.styles.js";
+import { useStyles } from "./sidebar.styles.js";
+import {
+  Navbar,
+  TextInput,
+  Code,
+  UnstyledButton,
+  Badge,
+  Text,
+  Group,
+  ActionIcon,
+  Tooltip,
+} from "@mantine/core";
+import {
+  Bulb,
+  User,
+  Checkbox,
+  Search,
+  Plus,
+  Selector,
+} from "tabler-icons-react";
+import { UserButton } from "../user-button";
 
 const links = [
   { icon: Bulb, label: 'Activity', notifications: 3 },
@@ -20,7 +39,7 @@ const collections = [
 ];
 
 function Sidebar() {
-  const { classes } = SideBarStyles();
+  const { classes } = useStyles();
 
   const mainLinks = links.map((link) => (
     <UnstyledButton key={link.label} className={classes.mainLink}>

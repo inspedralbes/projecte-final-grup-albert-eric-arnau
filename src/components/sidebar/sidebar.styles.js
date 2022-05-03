@@ -1,28 +1,9 @@
-import {
-  createStyles,
-  Navbar,
-  TextInput,
-  Code,
-  UnstyledButton,
-  Badge,
-  Text,
-  Group,
-  ActionIcon,
-  Tooltip,
-} from "@mantine/core";
-import {
-  Bulb,
-  User,
-  Checkbox,
-  Search,
-  Plus,
-  Selector,
-} from "tabler-icons-react";
-import { UserButton } from "../UserButton/UserButton";
+import { createStyles } from "@mantine/core";
 
-export const SideBarStyles = createStyles((theme) => ({
+export const useStyles = createStyles((theme) => ({
   navbar: {
     paddingTop: 0,
+    height: "100vh",
   },
 
   section: {
