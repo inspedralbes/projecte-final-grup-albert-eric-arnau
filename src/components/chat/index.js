@@ -1,3 +1,3 @@
-export { default as ChatInput } from "./input/chat-input.component";
-export { default as ChatMessage } from "./message/chat-message.component";
-export { default as ChatSideBar } from "./sidebar/chat-sidebar.component";
+export { default as ChatInput } from "./input";
+export { default as ChatMessage } from "./message";
+export { default as ChatSideBar } from "./sidebar";

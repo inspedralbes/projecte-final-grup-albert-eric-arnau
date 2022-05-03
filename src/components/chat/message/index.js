@@ -1,1 +1,1 @@
-export { default as ChatMessage } from "./message/chat-message.component";
+export { default } from "./chat-message.component";

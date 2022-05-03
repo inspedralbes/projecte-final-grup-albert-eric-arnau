@@ -1,1 +1,1 @@
-export { default as ChatSideBar } from "./sidebar/chat-sidebar.component";
+export { default } from "./chat-sidebar.component";

@@ -16,7 +16,7 @@ const paths = {
   GROUP_DETAILS: "/group/:groupId",
   GROUP_EDIT: "/group/:groupId/edit",
   //ERROR
-  NOT_FOUND: "/*",
+  NOT_FOUND: "/error-404",
 };
 
 export default paths;

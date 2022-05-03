@@ -1,5 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import paths from "../paths";
 
 import routes from "./routes";
 
@@ -8,8 +14,9 @@ function AppRouter() {
     <Router>
       <Routes>
         {routes.map((route, index) => (
-          <Route key={index} path={route.path} component={route.component} />
+          <Route key={index} path={route.path} element={<route.component />} />
         ))}
+        <Route path="*" element={<Navigate to={paths.NOT_FOUND} />} />
       </Routes>
     </Router>
   );

@@ -33,20 +33,20 @@ const useStyles = createStyles({
   },
 });
 
-function ChatView() {
+function Chat() {
   const [messages, setMessages] = useState([]);
   const { classes } = useStyles();
 
   socket.onmessage = ({ meta = "send_message", user, message }) => {
     switch (meta) {
       case "send_message":
-        setMessages((messages) => [
-          ...messages,
-          {
-            user,
-            message,
-          },
-        ]);
+        // setMessages((messages) => [
+        //   ...messages,
+        //   {
+        //     user,
+        //     message,
+        //   },
+        // ]);
         break;
       default:
         console.log("default");
@@ -68,4 +68,4 @@ function ChatView() {
   );
 }
 
-export default ChatView;
+export default Chat;
