@@ -1,4 +1,4 @@
-const paths = {
+const PATHS = {
   HOME: "/",
   ABOUT: "/about",
   CONTACT: "/contact",
@@ -19,4 +19,4 @@ const paths = {
   NOT_FOUND: "/error-404",
 };
 
-export default paths;
+export default PATHS;

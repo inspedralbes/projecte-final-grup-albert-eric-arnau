@@ -5,18 +5,20 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import paths from "../paths";
-
-import routes from "./routes";
+import PATHS from "../paths";
+import { Landing, Chat, NotFound } from "../../views";
 
 function AppRouter() {
+  const logged = true;
   return (
     <Router>
       <Routes>
-        {routes.map((route, index) => (
-          <Route key={index} path={route.path} element={<route.component />} />
-        ))}
-        <Route path="*" element={<Navigate to={paths.NOT_FOUND} />} />
+        {logged ? (
+          <Route path={PATHS.CHAT} element={<Chat />} />
+        ) : (
+          <Route path={PATHS.HOME} element={<Landing />} />
+        )}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
