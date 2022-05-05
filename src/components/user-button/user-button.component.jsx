@@ -27,8 +27,6 @@ function UserButton({ image, name, email, icon, ...others }) {
             {email}
           </Text>
         </div>
-
-        {icon || <ChevronRight size={14} />}
       </Group>
     </UnstyledButton>
   );
