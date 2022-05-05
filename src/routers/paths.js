@@ -4,9 +4,8 @@ const PATHS = {
   CONTACT: "/contact",
   CHAT: "/chat",
   LOGIN: "/login",
-  SIGNUP: "/signup",
+  REGISTER: "/register",
   //USER PROFILE ROUTES
-  PROFILE: "/profile",
   PROFILE_EDIT: "/profile/edit",
   PROFILE_USER: "/profile/:userId",
   SETTINGS: "/settings",
