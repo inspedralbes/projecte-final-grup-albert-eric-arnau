@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { useWebSocket } from "../../hooks/useWebSocket";
+//import { useWebSocket } from "../../hooks/useWebSocket";
 
 function PrivateRoutes({ children, isLogged }) {
   // const dispatch = useDispatch();

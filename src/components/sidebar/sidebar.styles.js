@@ -1,4 +1,4 @@
-import { createStyles } from "@mantine/core";
+import { Autocomplete, createStyles } from "@mantine/core";
 
 export const useStyles = createStyles((theme) => ({
   navbar: {
@@ -75,25 +75,26 @@ export const useStyles = createStyles((theme) => ({
   },
 
   mainLinkBadge: {
-    padding: 0,
-    width: 20,
+    paddingX: 1,
+    width: "auto",
+    position: "absolute",
+    right: 10,
     height: 20,
     pointerEvents: "none",
   },
-
-  collections: {
+  groups: {
     paddingLeft: theme.spacing.md - 6,
     paddingRight: theme.spacing.md - 6,
     paddingBottom: theme.spacing.md,
   },
 
-  collectionsHeader: {
+  groupsHeader: {
     paddingLeft: theme.spacing.md + 2,
     paddingRight: theme.spacing.md,
     marginBottom: 5,
   },
 
-  collectionLink: {
+  groupLink: {
     display: "block",
     padding: `8px ${theme.spacing.xs}px`,
     textDecoration: "none",
