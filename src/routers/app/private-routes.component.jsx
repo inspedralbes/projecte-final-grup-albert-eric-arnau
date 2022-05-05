@@ -1,15 +1,14 @@
-import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { useWebSocket } from "../../hooks/useWebSocket";
 
 function PrivateRoutes({ children, isLogged }) {
-  const dispatch = useDispatch();
-  const { initializeWebsocket } = useWebSocket();
+  // const dispatch = useDispatch();
+  // const { initializeWebsocket } = useWebSocket();
 
-  useEffect(() => {
-    initializeWebsocket();
-  }, [dispatch]);
+  // useEffect(() => {
+  //   initializeWebsocket();
+  // }, [dispatch]);
 
   return isLogged ? children : <Navigate to="/" />;
 }
