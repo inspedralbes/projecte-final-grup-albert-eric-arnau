@@ -6,9 +6,13 @@ import {
 } from "firebase/auth";
 import { addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { auth, db } from "./firebase.config.js";
+import CryptoJS from "crypto-js";
 
 const usersCollection = collection(db, "users");
 const groupsCollection = collection(db, "groups");
+
+const getGroup = (groupID) => getDoc(groupsCollection, groupID);
+const getUser = (userID) => getDoc(usersCollection, userID);
 
 // login user with email and password
 export const Login = async (email, password) => {
@@ -65,15 +69,64 @@ export const test = async (userID) => {
   // });
 };
 
-export const SaveMessage = (groupID, message) => {
-  const messageRef = db.collection("groups").doc(groupID);
+export const SaveGroup = (data) => {
+  const { admin, name, description, limit, password } = data;
+  const newGroup = {
+    admin: admin,
+    name: name,
+    description: description,
+    limit: limit,
+    password: CryptoJS.AES.encrypt(password, "groupem-4").toString(),
+  };
+  try {
+    addDoc(groupsCollection, newGroup)
+      .then(() => {
+        console.log("Group added successfully");
+      })
+      .catch((error) => {
+        console.log("inside addDoc", error);
+      });
+  } catch (error) {
+    console.log("SaveGroup:", error);
+    return;
+  }
+};
+
+export const JoinGroup = async (data) => {
+  const { userID, groupID, password } = data;
+  const groupDoc = doc(groupsCollection, groupID);
+  const groupData = await getDoc(groupDoc);
+
+  const { password: hashedPassword } = groupData.data();
+  const bytes = CryptoJS.AES.decrypt(hashedPassword, "groupem-4");
+  const decryptedPassword = bytes.toString(CryptoJS.enc.Utf8);
+
+  if (decryptedPassword === password) {
+    try {
+      const userDoc = doc(usersCollection, userID);
+      const userData = await getDoc(userDoc);
+      console.log("User joined group successfully");
+    } catch (error) {
+      console.log("JoinGroup:", error);
+    }
+  } else {
+    return "Wrong password";
+  }
+};
+
+export const SaveMessage = (groupID, userID, message) => {
+  const groupDoc = getGroup(groupID);
   const messageData = {
     message: message,
+    user: `users/${userID}`,
     timestamp: Date.now(),
   };
-  return messageRef.update({
-    messages: firebase.firestore.FieldValue.arrayUnion(messageData),
-  });
+  try {
+    const messagesCol = collection(groupDoc, "messages");
+    addDoc(messagesCol, messageData);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const CheckIfGroupExists = (groupID) => {

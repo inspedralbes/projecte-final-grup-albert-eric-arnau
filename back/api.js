@@ -1,49 +1,44 @@
 import { Router } from "express";
 import bodyParser from "body-parser";
+import { JoinGroup, SaveGroup } from "./firebase/services.js";
 const router = Router();
 
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
-router.get("/", (req, res) => {
-  res.send("API is working");
-});
+const keys = {
+  createGroup: ["admin", "name", "description", "limit", "password"],
+  joinGroup: ["userID", "groupID", "password"],
+};
 
-let groups = {};
-
-const CheckGroup = (groupID) => {
-  // check if group is already exist or not
-  if (groupID in groups) {
-    return true;
-  } else {
-    return false;
-  }
+const CheckParameters = (data, keys) => {
+  let responseKeys = Object.keys(data);
+  return keys.every((checkKeys) => responseKeys.includes(checkKeys));
 };
 
 // Create group
 router.post("/create-group", (req, res) => {
-  const { groupID, userID } = req.body;
-  if (groupID && userID) {
-    if (CheckGroup(groupID)) {
-      res.send({
-        status: "error",
-        message: "Group already exist",
-      });
-    } else {
-      groups[groupID] = {
-        users: [userID],
-        messages: [],
-      };
-      res.send({
-        status: "success",
-        message: "Group created successfully",
-        groupStatus: groups,
-      });
-    }
+  let data = req.body;
+  if (CheckParameters(data, keys.createGroup)) {
+    // si no funciona, hacer el JSON.parse(req.body);
+    SaveGroup(data);
   } else {
     res.send({
       status: "error",
-      message: "Please provide groupID and userID",
+      message: "Please provide correct parameters",
+    });
+  }
+});
+
+router.post("/join-group", (req, res) => {
+  let data = req.body;
+  if (CheckParameters(data, keys.joinGroup)) {
+    // si no funciona, hacer el JSON.parse(req.body);
+    JoinGroup(data);
+  } else {
+    res.send({
+      status: "error",
+      message: "Please provide correct parameters",
     });
   }
 });
@@ -56,11 +51,6 @@ router.get("/group-info", (req, res) => {
 router.get("/joined-groups", (req, res) => {
   console.log(req.body);
   res.send("get joined-groups");
-});
-
-router.post("/join-group", (req, res) => {
-  console.log(req.body);
-  res.send("post join-group");
 });
 
 router.post("/leave-group", (req, res) => {
