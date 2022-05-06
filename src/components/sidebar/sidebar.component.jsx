@@ -1,4 +1,4 @@
-import { notificationNumberDisplay } from '../../helpers/notificationNumberDisplay';
+import { GroupLink } from "./components/index";
 import { useStyles } from "./sidebar.styles.js";
 import {
   Navbar,
@@ -23,17 +23,37 @@ import {
 import { UserButton } from "../user-button";
 
 const links = [
-  { icon: Message, label: 'Chat'},  
-  { icon: User, label: 'Perfil'},
-  { icon: Settings, label: 'Ajustes'},
+  { icon: Message, label: "Chat" },
+  { icon: User, label: "Perfil" },
+  { icon: Settings, label: "Ajustes" },
 ];
 
 const groups = [
-  { icon: 'https://storage.qoo-img.com/game/17607/KGhkiIABcwb0ZdwWMfGGBsHCb6gQbQNX.jpg', name: 'Valorant_ESP',notifications: 200 },
-  { icon: 'https://upload.wikimedia.org/wikipedia/commons/2/2a/LoL_icon.svg', name: 'LOL_ESP',notifications: 4 },
-  { icon: 'https://i.pinimg.com/550x/52/1c/b8/521cb800d77337409282a9781e506203.jpg', name: 'COD',notifications: null },
-  { icon: 'https://cdn.icon-icons.com/icons2/2699/PNG/512/minecraft_logo_icon_168974.png', name: 'Minecraft_ESP',notifications: 1 },
-  { icon: 'https://assets.materialup.com/uploads/d6522050-2ab3-4c75-945c-90fbb0ddd5ac/preview.jpg', name: 'Formula1',notifications: 2000000 },
+  {
+    icon: "https://storage.qoo-img.com/game/17607/KGhkiIABcwb0ZdwWMfGGBsHCb6gQbQNX.jpg",
+    name: "Valorant_ESP",
+    notifications: 200,
+  },
+  {
+    icon: "https://upload.wikimedia.org/wikipedia/commons/2/2a/LoL_icon.svg",
+    name: "LOL_ESP",
+    notifications: 4,
+  },
+  {
+    icon: "https://i.pinimg.com/550x/52/1c/b8/521cb800d77337409282a9781e506203.jpg",
+    name: "COD",
+    notifications: null,
+  },
+  {
+    icon: "https://cdn.icon-icons.com/icons2/2699/PNG/512/minecraft_logo_icon_168974.png",
+    name: "Minecraft_ESP",
+    notifications: 1,
+  },
+  {
+    icon: "https://assets.materialup.com/uploads/d6522050-2ab3-4c75-945c-90fbb0ddd5ac/preview.jpg",
+    name: "Formula1",
+    notifications: 2000000,
+  },
 ];
 
 function Sidebar() {
@@ -45,33 +65,11 @@ function Sidebar() {
         <link.icon size={25} className={classes.mainLinkIcon} />
         <span>{link.label}</span>
       </div>
- 
     </UnstyledButton>
   ));
 
-  const groupLinks = groups.map((group) => (
-    <div style={{ position: "relative"}}>
-      <a
-      href="/"
-      onClick={(event) => event.preventDefault()}
-      key={group.name}
-      className={classes.groupLink}
-    >
-      <Group>
-         <Avatar src={group.icon} radius="xl"/>
-        {group.name} 
-
-        {group.notifications && (
-         
-        <Badge fullWidth position="right" gradient={{ from: 'orange', to: 'red' }} size="sm" variant="gradient" color="red" className={classes.mainLinkBadge}>
-          {notificationNumberDisplay(group.notifications)}
-        </Badge>
-      )}  
-        </Group>
-     
-    </a>
-    </div>
-    
+  const groupLinks = groups.map((group, index) => (
+    <GroupLink key={index} data={group} />
   ));
 
   return (
@@ -102,9 +100,8 @@ function Sidebar() {
         <div className={classes.groups}>{groupLinks}</div>
       </Navbar.Section>
 
-
-      <Navbar.Section className={classes.section}  style={{ marginTop:"auto"}}>
-      <UserButton
+      <Navbar.Section className={classes.section} style={{ marginTop: "auto" }}>
+        <UserButton
           image="https://www.disponalencasa.com/pub/media/catalog/product/cache/4025f56c98cb88143bb53de4d18da868/m/o/monster-juice-mango-loco.jpg"
           name="MangoLoco"
           email="@Arnau"
@@ -112,7 +109,7 @@ function Sidebar() {
         />
       </Navbar.Section>
     </Navbar>
-  )
+  );
 }
 
-export default Sidebar
+export default Sidebar;

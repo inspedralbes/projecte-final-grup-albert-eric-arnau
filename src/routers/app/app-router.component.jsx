@@ -8,6 +8,8 @@ import PATHS from "../paths";
 import { Landing, Chat, NotFound } from "../../views";
 import PrivateRoutes from "./private-routes.component";
 import PublicRoutes from "./public-routes.component";
+import { SideBar } from "../../components/sidebar/index";
+import { Group } from "@mantine/core";
 
 function AppRouter() {
   const logged = true;
@@ -38,7 +40,10 @@ function AppRouter() {
           path={PATHS.CHAT}
           element={
             <PrivateRoutes isLogged={logged}>
-              <Chat />
+              <Group spacing={"xl"}>
+                <SideBar />
+                <Chat />
+              </Group>
             </PrivateRoutes>
           }
         />
