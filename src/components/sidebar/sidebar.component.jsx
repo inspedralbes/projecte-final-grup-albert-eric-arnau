@@ -1,3 +1,4 @@
+import { notificationNumberDisplay } from '../../helpers/notificationNumberDisplay';
 import { useStyles } from "./sidebar.styles.js";
 import {
   Navbar,
@@ -63,7 +64,7 @@ function Sidebar() {
         {group.notifications && (
          
         <Badge fullWidth position="right" gradient={{ from: 'orange', to: 'red' }} size="sm" variant="gradient" color="red" className={classes.mainLinkBadge}>
-          {group.notifications}
+          {notificationNumberDisplay(group.notifications)}
         </Badge>
       )}  
         </Group>
