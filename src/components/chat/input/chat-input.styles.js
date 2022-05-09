@@ -2,12 +2,14 @@ import { createStyles } from "@mantine/core";
 
 export const useStyles = createStyles({
   input: {
-    width: "95%",
+    width: "80%",
+  },
+  button: {
+    width: "20%",
   },
   inputContainer: {
     marginBottom: "10px",
-    width: "80vw",
-    position: "fixed",
+    width: "100%",
     bottom: 0,
   },
 });

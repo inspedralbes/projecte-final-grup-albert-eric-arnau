@@ -8,6 +8,7 @@ import PATHS from "../paths";
 import { Landing, Chat, NotFound } from "../../views";
 import PrivateRoutes from "./private-routes.component";
 import PublicRoutes from "./public-routes.component";
+import Layout from "../../views/Layout.view";
 
 function AppRouter() {
   const logged = true;
@@ -38,7 +39,9 @@ function AppRouter() {
           path={PATHS.CHAT}
           element={
             <PrivateRoutes isLogged={logged}>
-              <Chat />
+              <Layout>
+                <Chat />
+              </Layout>
             </PrivateRoutes>
           }
         />
