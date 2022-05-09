@@ -5,7 +5,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore";
-import { auth, db } from "./firebase.config.js";
+import { auth, db } from "./config/firebase.js";
 import CryptoJS from "crypto-js";
 
 const usersCollection = collection(db, "users");
