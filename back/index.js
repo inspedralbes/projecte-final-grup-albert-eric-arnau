@@ -8,15 +8,15 @@ const wsPort = +process.env.PORT || 8001;
 (async () => {
   try {
     await initializeWebsocket(wsPort).catch((error) => {
-      console.log(`Error al iniciar el websocket: ${error.message}`);
+      console.log("Error al iniciar el websocket:", error.message);
       throw new Error();
     });
     console.log("Websocket iniciado en:", wsPort);
     await initializeServer(app, apiPort).catch((error) => {
-      console.log(`Error al iniciar el servidor: ${error.message}`);
+      console.log("Error al iniciar el servidor:", error.message);
       throw new Error();
     });
-    console.log("Servidor iniciado en PORT:", apiPort);
+    console.log("Servidor iniciado en:", apiPort);
   } catch (error) {
     console.log("Exit with error: ", error);
     process.exit(1);
