@@ -1,4 +1,5 @@
 function checkUserInRoom(groupID, userID, activeGroups) {
+  const data = activeGroups[groupID];
   const currentGroup = activeGroups[groupID];
   for (let i = 0; i < currentGroup.length; i++) {
     let currentUser = data[i];

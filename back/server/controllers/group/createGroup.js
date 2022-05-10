@@ -1,5 +1,7 @@
-const createGroup = async (req, res, next) => {
-  if (CheckParameters(data, keys.createGroup)) {
+import { checkParameters, keys } from "../../methods/parameters/index.js";
+
+const createGroup = async (req, res) => {
+  if (checkParameters(data, keys.createGroup)) {
     SaveGroup(data);
   } else {
     res.status(500).json({

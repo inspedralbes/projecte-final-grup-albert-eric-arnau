@@ -8,8 +8,7 @@ import PATHS from "../paths";
 import { Landing, Chat, NotFound } from "../../views";
 import PrivateRoutes from "./private-routes.component";
 import PublicRoutes from "./public-routes.component";
-import { SideBar } from "../../components/sidebar/index";
-import { Group } from "@mantine/core";
+import Layout from "../../views/Layout.view";
 
 function AppRouter() {
   const logged = true;
@@ -39,8 +38,10 @@ function AppRouter() {
         <Route
           path={PATHS.CHAT}
           element={
-            <PrivateRoutes isLogged={logged} navbarType="chat">
-              <Chat />
+            <PrivateRoutes isLogged={logged}>
+              <Layout>
+                <Chat />
+              </Layout>
             </PrivateRoutes>
           }
         />

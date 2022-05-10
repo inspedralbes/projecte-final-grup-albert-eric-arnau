@@ -1,5 +1,5 @@
-import { checkUserInRoom } from "./checkers/index.js";
-import { wsSend } from "./index.js";
+import { checkUserInRoom } from "../checkers/index.js";
+import wsSend from "../wsSend.js";
 
 function handleJoinRoom({ groupID, userID }, ws, activeGroups) {
   try {

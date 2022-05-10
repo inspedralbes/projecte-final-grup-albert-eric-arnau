@@ -1,12 +1,13 @@
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../config/firebase";
+import { db } from "../../config/firebase.js";
 
-async function createUserDatabase(email, name, username) {
+async function createUser(email, name, username) {
   try {
     const user = await addDoc(db, collection("users"), {
       email,
       name,
       username,
+      color,
     });
 
     return user;
@@ -18,4 +19,4 @@ async function createUserDatabase(email, name, username) {
   }
 }
 
-export default createUserDatabase;
+export default createUser;

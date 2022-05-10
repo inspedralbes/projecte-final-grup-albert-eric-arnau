@@ -1,5 +1,5 @@
-import { checkRoomExists } from "./checkers";
-import { wsSend } from "./index.js";
+import { checkRoomExists } from "../checkers/index.js";
+import wsSend from "../wsSend.js";
 
 function handleBroadcastMessage(groupID, userID, message, ws, activeGroups) {
   try {

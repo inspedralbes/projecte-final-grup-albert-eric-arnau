@@ -1,5 +1,6 @@
 function checkRoomExists(groupID, activeGroups) {
-  if (groupID in activeGroups) true;
+  console.log(groupID, activeGroups);
+  if (groupID in activeGroups) return true;
   return false;
 }
 
