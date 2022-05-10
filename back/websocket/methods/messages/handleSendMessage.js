@@ -2,49 +2,46 @@ import {
   checkGroupExists,
   checkUserInGroup,
 } from "../../../database/methods/group/index.js";
+import getUserDocument from "../../../database/methods/user/getUserDocument.js";
 import {
   checkParameters,
   checkRoomExists,
   checkUserInRoom,
 } from "../checkers/index.js";
-import wsSend from "../wsSend.js";
+import handleJoinRoom from "./handleJoinRoom.js";
 import { handleCreateRoom, handleBroadcastMessage } from "./index.js";
 
-function handleSendMessage(data, ws, activeGroups) {
-  if (!checkParameters(data)) return;
+async function handleSendMessage(data, ws, activeGroups) {
+  if (!checkParameters(data)) {
+    console.log("Invalid parameters provided");
+    return;
+  }
 
   const { groupID, userID, message } = data;
 
-  if (!checkGroupExists(groupID))
-    return wsSend(ws, {
-      status: 404,
-      message: "Group does not exist in the database",
-    });
+  const groupExists = await checkGroupExists(groupID);
+  const userInGroup = await checkUserInGroup(groupID, userID);
+  if (!groupExists) {
+    console.log("group does not exist in the database");
+    return;
+  } else if (!userInGroup) {
+    console.log("user is not in group");
+    return;
+  }
 
-  // TODO: check if user is in the group database
-  checkUserInGroup(groupID, userID);
+  const { username, name: userDisplayName } = await getUserDocument(userID);
 
   if (!checkRoomExists(groupID, activeGroups)) {
-    handleCreateRoom(ws, userID, groupID, activeGroups);
+    console.log("room does not exist, creating room");
+    await handleCreateRoom(ws, username, groupID, activeGroups);
+  } else if (!checkUserInRoom(groupID, username, activeGroups)) {
+    console.log("user not in group, joining room");
+    await handleJoinRoom(ws, groupID, username, activeGroups);
   }
 
-  if (!checkUserInRoom(groupID, userID, activeGroups)) {
-    console.log("user not in group");
-    return wsSend(ws, {
-      status: 404,
-      message: "User is not in the room",
-    });
-  }
+  console.log("todo bien al final", activeGroups);
 
-  console.log("después", activeGroups);
-
-  console.log("dataRecieved", {
-    groupID,
-    userID,
-    message,
-  });
-
-  // handleBroadcastMessage(groupID, userID, message, ws, activeGroups);
+  handleBroadcastMessage(ws, groupID, userDisplayName, message, activeGroups);
 }
 
 export default handleSendMessage;

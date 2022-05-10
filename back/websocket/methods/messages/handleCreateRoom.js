@@ -1,4 +1,4 @@
-const handleCreateRoom = (ws, userID, groupID, activeGroups) => {
+const handleCreateRoom = async (ws, userID, groupID, activeGroups) => {
   activeGroups[groupID] = [];
   let obj = {};
   obj[userID] = ws;
@@ -7,13 +7,7 @@ const handleCreateRoom = (ws, userID, groupID, activeGroups) => {
   ws["userID"] = userID;
 
   console.log("room created");
-  // TODO: eliminar el ws.send()
-  ws.send(
-    JSON.stringify({
-      message: "Room created succesfully",
-      status: 201,
-    })
-  );
+  return;
 };
 
 export default handleCreateRoom;

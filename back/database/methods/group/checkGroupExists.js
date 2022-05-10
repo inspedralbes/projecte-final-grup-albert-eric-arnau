@@ -1,7 +1,7 @@
 import { getGroupDocument } from "./index.js";
 
-const checkGroupExists = async (groupId) => {
-  const data = await getGroupDocument(groupId);
+const checkGroupExists = async (groupID) => {
+  const data = await getGroupDocument(groupID);
   if (data.status) return false;
   return true;
 };

@@ -13,11 +13,11 @@ const initializeWebsocket = (port) =>
         ws.on("message", (recieveData) => {
           let data = JSON.parse(recieveData);
           switch (data.meta) {
-            case "sendMessage":
+            case "send_message":
               handleSendMessage(data, ws, activeGroups);
               break;
 
-            case "joinRoom":
+            case "join_room":
               // handleJoinRoom(data, ws, activeGroups);
               break;
 
