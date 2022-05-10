@@ -1,7 +1,6 @@
-import React from "react";
 import { useStyles } from "./group-link.styles";
 import { Avatar, Badge, Group } from "@mantine/core";
-import { notificationNumberDisplay } from "../../../../helpers/notificationNumberDisplay  ";
+import { notificationNumberDisplay } from "../../../../helpers/notificationNumberDisplay";
 function GroupLink({ data }) {
   const { name, icon, notifications } = data;
   const { classes } = useStyles();

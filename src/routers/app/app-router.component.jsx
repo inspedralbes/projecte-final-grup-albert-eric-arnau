@@ -39,11 +39,8 @@ function AppRouter() {
         <Route
           path={PATHS.CHAT}
           element={
-            <PrivateRoutes isLogged={logged}>
-              <Group spacing={"xl"}>
-                <SideBar />
-                <Chat />
-              </Group>
+            <PrivateRoutes isLogged={logged} navbarType="chat">
+              <Chat />
             </PrivateRoutes>
           }
         />
