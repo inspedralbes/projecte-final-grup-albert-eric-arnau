@@ -76,7 +76,11 @@ function Chat() {
 
   return (
     <>
-      <Grid sx={{ height: "100%", width: "80%", margin: 0 }} grow gutter="xs">
+      <Grid
+        container
+        sx={{ height: "100%", width: "100%", margin: 0 }}
+        grow
+        gutter="xs">
         <Grid.Col span={12} className={classes.chatContainer}>
           {messages.map((message) => (
             <ChatMessage messageData={message} key={Math.random() * 55555555} />

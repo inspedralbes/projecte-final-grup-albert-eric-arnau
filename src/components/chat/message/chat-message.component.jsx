@@ -5,7 +5,9 @@ import { useStyles } from "./chat-message.styles";
 
 function ChatMessage({ messageData = null }) {
   const { classes } = useStyles();
+  //! change for user
   const isLocal = "12345" === messageData.userID;
+
   console.log(isLocal);
   return (
     messageData && (
@@ -26,9 +28,11 @@ function ChatMessage({ messageData = null }) {
         <Paper className={isLocal ? classes.localMessage : classes.message}>
           {!isLocal && (
             <Group>
-              <Text size="sm">{messageData.user}</Text>
+              <Text weight={700} size="sm">
+                {messageData.user}
+              </Text>
               <Text size="xs" color="dimmed">
-                Hoy 10:30 pm
+                {messageData.time || "Hoy 10:30 pm"}
               </Text>
             </Group>
           )}
