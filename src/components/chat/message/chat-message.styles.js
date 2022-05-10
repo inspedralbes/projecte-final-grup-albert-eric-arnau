@@ -1,10 +1,17 @@
-import {createStyles} from "@mantine/core";
+import { createStyles } from "@mantine/core";
 
 export const useStyles = createStyles({
   message: {
     width: "fit-content",
-    maxWidth: "50%",
-    margin: "5px",
-    padding: "10px 20px 10px 5px",
+    maxWidth: "70%",
+    padding: "10px",
+  },
+  localMessage: {
+    width: "fit-content",
+    maxWidth: "70%",
+    padding: "10px",
+    backgroundColor: "#3ddbc1",
+    color: "#fff",
+    overflowWrap: "break-word",
   },
 });
