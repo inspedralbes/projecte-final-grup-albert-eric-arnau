@@ -3,6 +3,7 @@ const PATHS = {
   ABOUT: "/about",
   CONTACT: "/contact",
   CHAT: "/chat",
+  CHAT_ZONE: "*",
   LOGIN: "/login",
   REGISTER: "/register",
   //USER PROFILE ROUTES
