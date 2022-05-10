@@ -1,6 +1,3 @@
-import { activeGroups } from "./groups.js";
-import { sendMessage, joinRoom } from "./methods/index.js";
-
 function noop() {}
 
 class heartbeat {
@@ -14,12 +11,13 @@ wss.on("connection", (ws) => {
     ws.on("message", (recieveData) => {
       let data = JSON.parse(recieveData);
       switch (data.meta) {
-        case "sendMessage":
-          handleSendMessage(data, ws, activeGroups);
+        case "send_message":
+          console.log("buenas");
+          // handleSendMessage(data, ws, activeGroups);
           break;
 
         case "joinRoom":
-          handleJoinRoom(data, ws, activeGroups);
+          // handleJoinRoom(data, ws, activeGroups);
           break;
 
         default:

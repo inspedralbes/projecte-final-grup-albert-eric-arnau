@@ -12,6 +12,7 @@ const wsPort = +process.env.PORT || 8001;
       throw new Error();
     });
     console.log("Websocket iniciado en:", wsPort);
+
     await initializeServer(app, apiPort).catch((error) => {
       console.log("Error al iniciar el servidor:", error.message);
       throw new Error();
