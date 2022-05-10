@@ -1,7 +1,4 @@
-import { checkRoomExists } from "../checkers/index.js";
-import wsSend from "../wsSend.js";
-
-function handleBroadcastMessage(groupID, userID, message, ws, activeGroups) {
+const handleBroadcastMessage = (ws, groupID, name, message, activeGroups) => {
   try {
     const group = activeGroups[groupID];
     for (let i = 0; i < group.length; i++) {
@@ -11,18 +8,19 @@ function handleBroadcastMessage(groupID, userID, message, ws, activeGroups) {
         if (ws !== wsUserID) {
           wsUserID.send(
             JSON.stringify({
-              user: userID,
+              user: name,
               message: message,
-              status: Status ? Status : 1,
+              status: 200,
             })
           );
         }
       }
     }
-    SaveMessage(groupID, userID, message);
+    // TODO: save the message in the database
+    // SaveMessage(groupID, userID, message);
   } catch (error) {
-    wsSend(ws, "There was some problem in sending message", 0);
+    console.log(error.message);
   }
-}
+};
 
 export default handleBroadcastMessage;

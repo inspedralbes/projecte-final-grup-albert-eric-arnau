@@ -2,10 +2,16 @@ import { getDoc } from "firebase/firestore";
 import { getGroupDocument } from "./index.js";
 
 const checkUserInGroup = async (groupID, userID) => {
-  const groupDoc = await getGroupDocument(groupID);
-  const groupData = await getDoc(groupDoc);
-  const members = groupData.data();
-  console.log(members);
+  const { members } = await getGroupDocument(groupID);
+  let userInGroup = false;
+  members.map((member) => {
+    if (member.id === userID) {
+      userInGroup = true;
+      return;
+    }
+  });
+  if (userInGroup) return true;
+  return false;
 };
 
 export default checkUserInGroup;
