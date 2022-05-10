@@ -22,4 +22,12 @@ export const useStyles = createStyles((theme) => ({
       color: theme.colorScheme === "dark" ? theme.white : theme.black,
     },
   },
+  mainLinkBadge: {
+    paddingX: 1,
+    width: "auto",
+    position: "absolute",
+    right: 10,
+    height: 20,
+    pointerEvents: "none",
+  },
 }));
