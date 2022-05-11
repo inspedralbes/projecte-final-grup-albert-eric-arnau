@@ -1,7 +1,7 @@
 import {
   checkGroupExists,
   checkUserInGroup,
-} from "../../../database/methods/group/index.js";
+} from "../../../database/methods/checkers/index.js";
 import { saveMessage } from "../../../database/methods/messages/index.js";
 import { checkRoomExists, checkUserInRoom } from "../checkers/index.js";
 import { joinRoom, createRoom } from "../rooms/index.js";

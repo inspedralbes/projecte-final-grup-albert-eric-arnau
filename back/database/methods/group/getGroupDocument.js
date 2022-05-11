@@ -1,5 +1,6 @@
 import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "../../config/firebase.js";
+import { referencesToId } from "../transforms/index.js";
 
 const getGroupDocument = async (groupID) => {
   const groupsCollection = collection(db, "groups");
@@ -11,6 +12,9 @@ const getGroupDocument = async (groupID) => {
     if (!groupData) {
       throw new Error("Group does not exist");
     }
+
+    groupData.admin = groupData.admin.id;
+    groupData.members = referencesToId(groupData.members);
 
     return groupData;
   } catch (error) {

@@ -2,20 +2,10 @@ import { createUser } from "../../../database/methods/user/index.js";
 
 const register = async (req, res) => {
   const { email, name, username } = req.body;
-  try {
-    const user = await createUser(email, name, username);
-    if (user.statusCode)
-      return res
-        .status(user.statusCode)
-        .json({ message: "Error creating user" });
+  const user = await createUser(email, name, username);
+  if (user.status) return res.status(user.status).json(user.message);
 
-    return res.status(201).json({
-      message: "User created successfully",
-      user,
-    });
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
+  return res.status(201).json(user);
 };
 
 export default register;

@@ -1,5 +1,4 @@
-import { getDoc } from "firebase/firestore";
-import { getGroupDocument } from "./index.js";
+import { getGroupDocument } from "../group/index.js";
 
 const checkUserInGroup = async (groupID, userID) => {
   const { members } = await getGroupDocument(groupID);

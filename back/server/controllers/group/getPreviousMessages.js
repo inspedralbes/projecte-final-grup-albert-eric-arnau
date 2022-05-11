@@ -1,20 +1,15 @@
 import { getGroupDocument } from "../../../database/methods/group/index.js";
-import { keys } from "../../methods/parameters/index.js";
+import { getMessages } from "../../../database/methods/messages/index.js";
+import { keys, checkParameters } from "../../methods/parameters/index.js";
 
 const getPreviousMessages = async (req, res) => {
   const data = req.body;
-  try {
-    if (checkParameters(data, keys.getPreviousMessages)) {
-      const group = await getGroupDocument(data.groupID);
-      console.log(group);
-    }
-    return res.status(200).json({ group });
-  } catch (error) {
-    return {
-      status: 500,
-      message: error.message,
-    };
-  }
+  if (!checkParameters(data, keys.getPreviousMessages)) return;
+  const { groupID } = data;
+  const group = await getGroupDocument(groupID);
+  if (group.status) return res.status(group.status).send(group.message);
+  const messages = await getMessages(groupID);
+  return res.status(200).json(messages);
 };
 
 export default getPreviousMessages;
