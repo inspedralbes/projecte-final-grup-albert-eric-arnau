@@ -1,11 +1,11 @@
 import { AppShell, Header } from "@mantine/core";
 import { SideBar } from "../components/sidebar";
 
-function Layout({ children }) {
+function Layout({ children, navbarType }) {
   return (
     <AppShell
       padding="md"
-      navbar={<SideBar />}
+      navbar={<SideBar navbarType={navbarType} />}
       styles={(theme) => ({
         main: {
           backgroundColor:

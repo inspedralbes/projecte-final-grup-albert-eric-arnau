@@ -4,7 +4,7 @@ import thunk from "redux-thunk";
 
 // importar reducers desde la carpeta de reducers
 // crear nuevo reducer en esa carpeta
-import { authReducer } from "../redux/reducers";
+import { authReducer } from "../reducers";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&

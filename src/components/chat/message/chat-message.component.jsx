@@ -12,7 +12,6 @@ function ChatMessage({ messageData = null }) {
   return (
     messageData && (
       <Group
-        withBorder
         radius="md"
         sx={
           isLocal
@@ -29,7 +28,7 @@ function ChatMessage({ messageData = null }) {
           {!isLocal && (
             <Group>
               <Text weight={700} size="sm">
-                {messageData.user}
+                {messageData.name}
               </Text>
               <Text size="xs" color="dimmed">
                 {messageData.time || "Hoy 10:30 pm"}
