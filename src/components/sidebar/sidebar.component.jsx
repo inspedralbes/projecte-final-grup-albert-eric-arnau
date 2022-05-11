@@ -1,7 +1,7 @@
 import { FavGroups, MainLinks, AllGroups } from "./components/index";
 import { useStyles } from "./sidebar.styles.js";
-import { Navbar } from "@mantine/core";
-import { Selector } from "tabler-icons-react";
+import { Navbar, Group } from "@mantine/core";
+import { Selector, Logout } from "tabler-icons-react";
 import { UserButton } from "../user-button";
 
 function Sidebar({ navbarType }) {
@@ -33,13 +33,22 @@ function Sidebar({ navbarType }) {
       {navbarType === "chat" && <AllGroups />}
       {/* All Groups */}
 
-      <Navbar.Section className={classes.section} style={{ marginTop: "auto" }}>
-        <UserButton
-          image="https://www.disponalencasa.com/pub/media/catalog/product/cache/4025f56c98cb88143bb53de4d18da868/m/o/monster-juice-mango-loco.jpg"
-          name="MangoLoco"
-          email="@Arnau"
-          icon={<Selector size={14} />}
-        />
+      <Navbar.Section
+        className={classes.section}
+        style={{ marginTop: "auto", position: "relative" }}>
+        <Group>
+          <UserButton
+            image="https://www.disponalencasa.com/pub/media/catalog/product/cache/4025f56c98cb88143bb53de4d18da868/m/o/monster-juice-mango-loco.jpg"
+            name="MangoLoco"
+            email="@Arnau"
+            icon={<Selector size={14} />}
+          />
+          <Logout
+            className={classes.user}
+            size={20}
+            style={{ position: "absolute", right: 10 }}
+          />
+        </Group>
       </Navbar.Section>
     </Navbar>
   );

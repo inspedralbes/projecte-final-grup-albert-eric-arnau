@@ -78,4 +78,11 @@ export const useStyles = createStyles((theme) => ({
       color: theme.colorScheme === "dark" ? theme.white : theme.black,
     },
   },
+  user: {
+    color: theme.colorScheme === "dark" ? theme.colors.dark[0] : theme.black,
+
+    "&:hover": {
+      cursor: "pointer",
+    },
+  },
 }));
