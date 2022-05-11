@@ -13,8 +13,8 @@ async function createUser(email, name, username) {
     return user;
   } catch (error) {
     return {
-      error: error.message,
-      statusCode: 500,
+      message: error.message,
+      status: 500,
     };
   }
 }

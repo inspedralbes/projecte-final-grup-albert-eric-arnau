@@ -15,7 +15,10 @@ const saveMessage = async (groupID, userID, message, time) => {
 
     return true;
   } catch (error) {
-    return { error: error.message, status: 500 };
+    return {
+      message: error.message,
+      status: 500,
+    };
   }
 };
 
