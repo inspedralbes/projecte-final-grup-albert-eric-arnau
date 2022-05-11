@@ -3,15 +3,8 @@ import { getGroupDocument } from "./index.js";
 
 const checkUserInGroup = async (groupID, userID) => {
   const { members } = await getGroupDocument(groupID);
-  let userInGroup = false;
-  members.map((member) => {
-    if (member.id === userID) {
-      userInGroup = true;
-      return;
-    }
-  });
-  if (userInGroup) return true;
-  return false;
+
+  return members.some((member) => member.id === userID);
 };
 
 export default checkUserInGroup;

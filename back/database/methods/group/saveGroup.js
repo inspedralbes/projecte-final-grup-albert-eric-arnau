@@ -1,3 +1,3 @@
-const saveGroup = () => {};
+const saveGroup = async () => {};
 
 export default saveGroup;
