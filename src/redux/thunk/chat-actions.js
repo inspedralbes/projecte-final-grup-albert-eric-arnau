@@ -1,5 +1,5 @@
 import { chatTypes } from "../action-types/chat-types";
-
+// TODO: LOAD LAZY LOADING MESSAGES FROM SERVER
 export const sendMessage = (message) => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;

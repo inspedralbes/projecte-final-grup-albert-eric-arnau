@@ -8,9 +8,12 @@ const initialState = {
 
 const chatReducer = (state = initialState, action) => {
   let newState;
-  switch (action.type) {
+  const { type, payload: message } = action;
+
+  switch (type) {
     case chatTypes.MESSAGE_SEND:
-      newState = [...state, action.message];
+    case chatTypes.MESSAGE_RECEIVE:
+      newState = [...state, message];
       break;
     default:
       newState = [...state];
