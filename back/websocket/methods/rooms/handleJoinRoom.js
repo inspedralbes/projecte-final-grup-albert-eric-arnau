@@ -1,11 +1,9 @@
-const handleJoinRoom = async (ws, groupID, userID, activeGroups) => {
-  let obj = {};
-  obj[userID] = ws;
-  activeGroups[groupID].push(obj);
-  ws["groupID"] = groupID;
-  ws["userID"] = userID;
+import { joinRoom } from "./index.js";
 
-  console.log("joined successfully");
+const handleJoinRoom = async (ws, data, activeGroups) => {
+  const { groupID, username } = data;
+  await joinRoom(ws, groupID, username, activeGroups);
+
   return;
 };
 

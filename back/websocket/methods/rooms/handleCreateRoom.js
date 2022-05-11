@@ -1,12 +1,9 @@
-const handleCreateRoom = async (ws, userID, groupID, activeGroups) => {
-  activeGroups[groupID] = [];
-  let obj = {};
-  obj[userID] = ws;
-  activeGroups[groupID].push(obj);
-  ws["groupID"] = groupID;
-  ws["userID"] = userID;
+import { createRoom } from "./index.js";
 
-  console.log("room created");
+const handleCreateRoom = async (ws, data, activeGroups) => {
+  const { groupID, username } = data;
+  createRoom(ws, username, groupID, activeGroups);
+
   return;
 };
 
