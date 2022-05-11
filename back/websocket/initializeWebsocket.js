@@ -1,6 +1,9 @@
 import { WebSocketServer } from "ws";
-import { handleSendMessage } from "./methods/messages/index.js";
 import { activeGroups } from "./groups.js";
+import { handleSendMessage } from "./methods/messages/index.js";
+import { handleJoinRoom } from "./methods/rooms/index.js";
+import { handleCreateRoom } from "./methods/rooms/index.js";
+import { checkParameters } from "./methods/checkers/index.js";
 
 const initializeWebsocket = (port) =>
   new Promise((resolve, reject) => {
@@ -10,15 +13,23 @@ const initializeWebsocket = (port) =>
 
     wss.on("connection", (ws) => {
       try {
-        ws.on("message", (recieveData) => {
-          let data = JSON.parse(recieveData);
+        ws.on("message", (receivedData) => {
+          let data = JSON.parse(receivedData);
+          if (data.meta && !checkParameters(data)) {
+            console.log("Invalid parameters provided");
+            return;
+          }
           switch (data.meta) {
             case "send_message":
-              handleSendMessage(data, ws, activeGroups);
+              handleSendMessage(ws, data, activeGroups);
               break;
 
             case "join_room":
-              // handleJoinRoom(data, ws, activeGroups);
+              handleJoinRoom(ws, data, activeGroups);
+              break;
+
+            case "create_room":
+              handleCreateRoom(ws, data, activeGroups);
               break;
 
             default:
@@ -34,8 +45,6 @@ const initializeWebsocket = (port) =>
         ws.on("close", () => {
           ws.terminate();
         });
-
-        ws.on("pong", heartbeat);
       } catch (error) {
         ws.send(
           JSON.stringify({
