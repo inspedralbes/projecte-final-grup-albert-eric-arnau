@@ -1,6 +1,12 @@
+import { useDispatch, useSelector } from "react-redux";
+import { sendMessageAction } from "../redux/actions";
+
 let socket = null;
 
-export const useWebSocket = () => {
+const useWebSocket = () => {
+  const dispatch = useDispatch();
+  const { chat } = useSelector((store) => store); // this is the state of the chat reducer
+  console.log("chat", chat);
   function initializeWebsocket() {
     if (socket) return;
     socket = new WebSocket("ws://localhost:8000");
@@ -18,6 +24,11 @@ export const useWebSocket = () => {
   }
 
   function sendMessage(messageData) {
+    dispatch(sendMessageAction(messageData));
+    socket.send(JSON.stringify(messageData));
+  }
+  function receiveMessage(messageData) {
+    dispatch(sendMessageAction(messageData));
     socket.send(JSON.stringify(messageData));
   }
 
@@ -39,3 +50,5 @@ export const useWebSocket = () => {
     createGroup,
   };
 };
+
+export default useWebSocket;

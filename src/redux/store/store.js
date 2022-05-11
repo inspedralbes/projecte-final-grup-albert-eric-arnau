@@ -4,7 +4,7 @@ import thunk from "redux-thunk";
 
 // importar reducers desde la carpeta de reducers
 // crear nuevo reducer en esa carpeta
-import { authReducer } from "../reducers";
+import { authReducer, chatReducer } from "../reducers";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -14,6 +14,7 @@ const composeEnhancers =
 // añadir todos los reducers para combinarlos en uno solo
 const reducers = combineReducers({
   auth: authReducer,
+  chat: chatReducer,
 });
 
 export const store = createStore(

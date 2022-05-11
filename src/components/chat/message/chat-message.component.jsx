@@ -2,9 +2,11 @@ import React from "react";
 import { Text, Avatar, Group, Paper } from "@mantine/core";
 
 import { useStyles } from "./chat-message.styles";
+import useWebSocket from "../../../hooks/useWebSocket";
 
 function ChatMessage({ messageData = null }) {
   const { classes } = useStyles();
+  useWebSocket();
   //! change for user
   const isLocal = "12345" === messageData.userID;
 

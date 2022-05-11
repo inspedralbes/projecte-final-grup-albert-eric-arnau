@@ -1,9 +1,6 @@
 import { chatTypes } from "../action-types";
 
-export const sendMessage = (id, message) => ({
+export const sendMessageAction = (message) => ({
   type: chatTypes.MESSAGE_SEND,
-  payload: {
-    id,
-    ...message,
-  },
+  message,
 });
