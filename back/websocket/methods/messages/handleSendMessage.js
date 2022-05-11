@@ -2,46 +2,50 @@ import {
   checkGroupExists,
   checkUserInGroup,
 } from "../../../database/methods/group/index.js";
-import getUserDocument from "../../../database/methods/user/getUserDocument.js";
+import { saveMessage } from "../../../database/methods/messages/index.js";
 import {
   checkParameters,
   checkRoomExists,
   checkUserInRoom,
 } from "../checkers/index.js";
-import handleJoinRoom from "./handleJoinRoom.js";
-import { handleCreateRoom, handleBroadcastMessage } from "./index.js";
+import { handleJoinRoom, handleCreateRoom } from "../rooms/index.js";
+import { handleBroadcastMessage } from "./index.js";
 
-async function handleSendMessage(data, ws, activeGroups) {
+const handleSendMessage = async (data, ws, activeGroups) => {
   if (!checkParameters(data)) {
     console.log("Invalid parameters provided");
     return;
   }
 
-  const { groupID, userID, message } = data;
+  const { groupID, userID, message, name, username } = data;
 
   const groupExists = await checkGroupExists(groupID);
   const userInGroup = await checkUserInGroup(groupID, userID);
-  if (!groupExists) {
-    console.log("group does not exist in the database");
-    return;
-  } else if (!userInGroup) {
-    console.log("user is not in group");
-    return;
-  }
 
-  const { username, name: userDisplayName } = await getUserDocument(userID);
+  if (!groupExists || !userInGroup) return;
 
   if (!checkRoomExists(groupID, activeGroups)) {
-    console.log("room does not exist, creating room");
     await handleCreateRoom(ws, username, groupID, activeGroups);
   } else if (!checkUserInRoom(groupID, username, activeGroups)) {
-    console.log("user not in group, joining room");
     await handleJoinRoom(ws, groupID, username, activeGroups);
   }
 
-  console.log("todo bien al final", activeGroups);
+  const time = Date.now();
+  console.log("antes de saveMessage");
+  const savedMessage = await saveMessage(groupID, userID, message, time);
+  console.log("despues", savedMessage);
 
-  handleBroadcastMessage(ws, groupID, userDisplayName, message, activeGroups);
-}
+  if (!savedMessage) return;
+
+  handleBroadcastMessage(
+    groupID,
+    userID,
+    name,
+    username,
+    message,
+    time,
+    activeGroups
+  );
+};
 
 export default handleSendMessage;

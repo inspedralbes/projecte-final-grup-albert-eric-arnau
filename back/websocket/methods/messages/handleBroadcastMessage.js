@@ -1,23 +1,31 @@
-const handleBroadcastMessage = (ws, groupID, name, message, activeGroups) => {
+import { saveMessage } from "../../../database/methods/messages/index.js";
+
+const handleBroadcastMessage = (
+  groupID,
+  userID,
+  name,
+  username,
+  message,
+  time,
+  activeGroups
+) => {
   try {
     const group = activeGroups[groupID];
-    for (let i = 0; i < group.length; i++) {
-      let user = group[i];
-      for (let username in user) {
-        let wsUserID = user[username];
-        if (ws !== wsUserID) {
-          wsUserID.send(
-            JSON.stringify({
-              user: name,
-              message: message,
-              status: 200,
-            })
-          );
-        }
-      }
-    }
-    // TODO: save the message in the database
-    // SaveMessage(groupID, userID, message);
+    group.forEach((user) => {
+      const [key, wsUser] = Object.entries(user).flat();
+      if (key === username) return;
+      wsUser.send(
+        JSON.stringify({
+          meta: "receive_message",
+          userID,
+          groupID,
+          name,
+          time,
+          username,
+          message,
+        })
+      );
+    });
   } catch (error) {
     console.log(error.message);
   }

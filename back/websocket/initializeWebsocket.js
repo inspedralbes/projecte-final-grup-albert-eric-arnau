@@ -4,7 +4,7 @@ import { activeGroups } from "./groups.js";
 
 const initializeWebsocket = (port) =>
   new Promise((resolve, reject) => {
-    const wss = new WebSocketServer({ port }, () => {
+    const wss = new WebSocketServer({ port, host: "0.0.0.0" }, () => {
       resolve();
     });
 
