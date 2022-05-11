@@ -1,5 +1,5 @@
 import { createStyles, Grid, Group, Paper } from "@mantine/core";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ChatInput } from "../../components/chat/index";
 import { ChatMessage } from "../../components/chat/index";
 import { SideBar } from "../../components/sidebar/index";
@@ -27,16 +27,48 @@ socket.onopen = () => {
 
 const useStyles = createStyles({
   chatContainer: {
-    minHeight: "90%",
+    height: "90vh",
     border: "1px solid black",
     borderRadius: "15px",
+    overflowY: "auto",
+    "&::-webkit-scrollbar": {
+      border: "10px solid transparent",
+      width: "10px",
+      marginRight: "10px",
+    },
+
+    "&::-webkit-scrollbar-track": {
+      borderRadius: "10px",
+      backgroundColor: "#e1e1e1",
+      marginBottom: "5px",
+      marginTop: "5px",
+    },
+
+    "&::-webkit-scrollbar-thumb": {
+      border: "1px solid #e1e1e1",
+      borderRadius: "10px",
+      backgroundColor: "#3ddbc1",
+    },
   },
 });
 
 function Chat() {
   //!\ CUIDAO LOCO
   const userID = "12345";
+
   const [messages, setMessages] = useState([]);
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    console.log(messagesEndRef);
+    messagesEndRef.current.scrollIntoView({ block: "end", behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+    console.log("scrolled");
+  }, [messages]);
+
   const { classes } = useStyles();
   useEffect(() => {
     setMessages((messages) => [
@@ -80,7 +112,7 @@ function Chat() {
     socket.send(
       JSON.stringify({
         meta: "send_message",
-        name: "guntasan",
+        name: "GunteR_",
         username: "GunteR_",
         groupID: "uJZNitszHdqWRqceyXXn",
         userID: "x3NKtQfvOd0g5ylKMBqi",
@@ -96,6 +128,7 @@ function Chat() {
           {messages.map((message) => (
             <ChatMessage messageData={message} key={Math.random() * 55555555} />
           ))}
+          <div ref={messagesEndRef} />
         </Grid.Col>
         <Grid.Col span={12} sx={{ padding: 0, marginTop: 20 }}>
           <ChatInput handleMessage={handleMessage} />
