@@ -13,13 +13,16 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated: true,
       };
+      break;
     case authTypes.LOGOUT:
       newState = {
         user: null,
         isAuthenticated: false,
       };
+      break;
     default:
-      break
+      newState = { ...state };
+      break;
   }
   return newState;
 };
