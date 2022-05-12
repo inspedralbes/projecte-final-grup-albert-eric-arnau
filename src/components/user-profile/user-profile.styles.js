@@ -3,8 +3,10 @@ import { createStyles } from "@mantine/core";
 export const useStyles = createStyles((theme) => ({
   wrapper: {
     width: "fit-content",
-    margin: "auto",
+    height: "fit-content",
     display: "flex",
+    marginTop: 90,
+    marginInline: "auto",
     alignItems: "center",
     padding: theme.spacing.xl * 2,
     borderRadius: theme.radius.md,
@@ -50,7 +52,10 @@ export const useStyles = createStyles((theme) => ({
     display: "flex",
     marginTop: theme.spacing.xl,
   },
-
+  text: {
+    maxWidth: 250,
+    marginTop: 5,
+  },
   inputWrapper: {
     width: "100%",
     flex: "1",

@@ -1,6 +1,7 @@
-import { Text, Title, TextInput, Button, Image } from "@mantine/core";
+import { Text, Title, Image } from "@mantine/core";
 import { useStyles } from "./user-profile.styles";
-function PublicUserProfile({ avatar, name, username, email }) {
+import { Mail } from "tabler-icons-react";
+function PublicUserProfile({ avatar, name, username, email, description }) {
   const { classes } = useStyles();
   return (
     <div className={classes.wrapper}>
@@ -11,8 +12,12 @@ function PublicUserProfile({ avatar, name, username, email }) {
           <Text weight={500} size="lg" mb={5}>
             {username}
           </Text>
-          <Text size="sm" color="dimmed">
+          <Text size="sm">
+            <Mail size={16} className={classes.icon} />
             {email}
+          </Text>
+          <Text size="sm" color="dimmed" className={classes.text}>
+            {description}
           </Text>
         </div>
 
