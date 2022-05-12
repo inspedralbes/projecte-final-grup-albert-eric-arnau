@@ -8,10 +8,12 @@ import {
 } from "../../controllers/user/index.js";
 const router = express.Router();
 
-// TODO: add middleware for authentication
+// AUTH
 router.post("/register", register);
+
+// PROFILE
+router.get("/:id", getProfileInfo);
 router.get("/joined-groups/:id", getJoinedGroups);
-router.get("/profile/:id", getProfileInfo);
 router.put("/update-profile", updateProfileInfo);
 
 export default router;

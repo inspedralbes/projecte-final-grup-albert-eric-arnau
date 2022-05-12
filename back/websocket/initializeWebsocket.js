@@ -15,10 +15,14 @@ const initializeWebsocket = (port) =>
       try {
         ws.on("message", (receivedData) => {
           let data = JSON.parse(receivedData);
+
+          if (data.meta === "connection") return;
+
           if (data.meta && !checkParameters(data)) {
             console.log("Invalid parameters provided");
             return;
           }
+
           switch (data.meta) {
             case "send_message":
               handleSendMessage(ws, data, activeGroups);
@@ -35,6 +39,7 @@ const initializeWebsocket = (port) =>
             default:
               ws.send(
                 JSON.stringify({
+                  meta: "error",
                   message: "Unsupported meta data provided provide valid data",
                   status: 0,
                 })
@@ -48,6 +53,7 @@ const initializeWebsocket = (port) =>
       } catch (error) {
         ws.send(
           JSON.stringify({
+            meta: "error",
             message: "there was some problem",
             status: 0,
           })

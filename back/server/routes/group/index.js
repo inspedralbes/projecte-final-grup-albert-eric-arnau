@@ -8,7 +8,7 @@ import {
 const router = express.Router();
 
 router.post("/create", createGroup);
-router.post("/join", joinGroup);
-router.post("/previous-messages", getPreviousMessages);
+router.post("/:id/join", joinGroup);
+router.get("/:id/messages", getPreviousMessages);
 
 export default router;

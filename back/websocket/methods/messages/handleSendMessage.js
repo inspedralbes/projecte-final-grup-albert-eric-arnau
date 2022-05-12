@@ -22,9 +22,7 @@ const handleSendMessage = async (ws, data, activeGroups) => {
   }
 
   const time = Date.now();
-  console.log("antes de saveMessage");
   const savedMessage = await saveMessage(groupID, userID, message, time);
-  console.log("despues", savedMessage);
 
   if (!savedMessage) return;
 

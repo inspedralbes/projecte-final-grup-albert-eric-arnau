@@ -1,1 +1,1 @@
-export { default as createGroup } from "./createGroup.js";
+export { default as createGroupInDatabase } from "./createGroupInDatabase.js";

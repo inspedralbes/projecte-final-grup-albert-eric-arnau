@@ -1,14 +1,27 @@
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  orderBy,
+  query,
+  limit,
+  where,
+} from "firebase/firestore";
 import { db } from "../../config/firebase.js";
 
-const getMessages = async (groupID) => {
+const getMessages = async (groupID, time) => {
   const messages = [];
   const messagesCol = collection(db, "groups", groupID, "messages");
+  const q = query(
+    messagesCol,
+    orderBy("time", "asc"),
+    limit(20),
+    where("time", "<=", time)
+  );
   try {
-    const messagesDocs = await getDocs(messagesCol);
+    const messagesDocs = await getDocs(q);
     messagesDocs.forEach((element) => {
       const { message, time, user } = element.data();
-      messages.push({ message, time, user: user.id });
+      messages.push({ message, time, userID: user.id });
     });
     return messages;
   } catch (error) {

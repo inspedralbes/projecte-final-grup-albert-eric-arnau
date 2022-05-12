@@ -1,8 +1,3 @@
-const referencesToId = (arrayWithReferences) => {
-  arrayWithReferences.forEach((element, index, array) => {
-    array[index] = element.id;
-  });
-  return arrayWithReferences;
-};
-
+const referencesToId = (refs) =>
+  refs.reduce((prev, curr) => [...prev, curr.id], []);
 export default referencesToId;
