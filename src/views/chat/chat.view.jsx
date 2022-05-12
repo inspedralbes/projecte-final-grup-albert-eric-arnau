@@ -2,7 +2,6 @@ import { createStyles, Grid, Group, Paper } from "@mantine/core";
 import React, { useEffect, useRef, useState } from "react";
 import { ChatInput } from "../../components/chat/index";
 import { ChatMessage } from "../../components/chat/index";
-import { SideBar } from "../../components/sidebar/index";
 
 // const socket = new WebSocket("wss://groupem.herokuapp.com");
 const socket = new WebSocket("ws://192.168.210.155:8001");
