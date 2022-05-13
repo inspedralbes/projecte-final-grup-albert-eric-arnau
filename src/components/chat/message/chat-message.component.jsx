@@ -1,12 +1,13 @@
-import React from "react";
 import { Text, Avatar, Group, Paper } from "@mantine/core";
 
 import { useStyles } from "./chat-message.styles";
+
 function ChatMessage({ messageData = null }) {
   const { classes } = useStyles();
   //! change for user
   const isLocal = process.env.REACT_APP_USER_ID === messageData.userID;
   console.log(process.env.REACT_APP_USER_ID, messageData.userID);
+
   return (
     messageData && (
       <Group
@@ -30,6 +31,7 @@ function ChatMessage({ messageData = null }) {
               </Text>
             </Group>
           )}
+
           <Text
             size="xs"
             color="dimmed"

@@ -1,11 +1,9 @@
-import { createStyles, Grid, Group, Paper } from "@mantine/core";
-import React, { useEffect, useRef, useState } from "react";
+import { createStyles, Grid } from "@mantine/core";
+import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { ChatInput } from "../../components/chat/index";
 import { ChatMessage } from "../../components/chat/index";
-import { SideBar } from "../../components/sidebar/index";
 import useWebSocket from "../../hooks/useWebSocket";
-
 // const socket = new WebSocket("wss://groupem.herokuapp.com");
 // const socket = new WebSocket("ws://groupem.api.alumnes.inspedralbes.cat:7895/");
 
@@ -51,8 +49,9 @@ function Chat() {
   const { messages } = chat;
   const { initializeWebsocket, loadGroupMessages, sendMessage } =
     useWebSocket();
-  const messagesEndRef = useRef(null);
 
+  const { classes } = useStyles();
+  const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
     console.log(messagesEndRef);
     messagesEndRef.current.scrollIntoView({ block: "end", behavior: "smooth" });
@@ -60,13 +59,11 @@ function Chat() {
 
   useEffect(() => {
     scrollToBottom();
-    console.log("scrolled");
   }, [chat.messages]);
 
-  const { classes } = useStyles();
   useEffect(() => {
     initializeWebsocket();
-    loadGroupMessages("uJZNitszHdqWRqceyXXn");
+    // loadGroupMessages("uJZNitszHdqWRqceyXXn");
   }, []);
   console.log(messages);
 
