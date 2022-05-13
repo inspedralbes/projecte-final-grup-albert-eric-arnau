@@ -1,22 +1,33 @@
-import { addDoc, collection } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../config/firebase.js";
+import { getUserDocument } from "./index.js";
 
-async function createUser(email, name, username) {
-  try {
-    const user = await addDoc(db, collection("users"), {
-      email,
-      name,
-      username,
-      color,
-    });
+async function createUser(uid, email, name, username, color) {
+  const userRef = doc(db, "users", uid);
+  const userExists = await getUserDocument(uid);
 
-    return user;
-  } catch (error) {
-    return {
-      message: error.message,
-      status: 500,
-    };
+  if (userExists.status) {
+    try {
+      await setDoc(userRef, {
+        email,
+        name,
+        username,
+        favourites: [],
+        color,
+      });
+
+      return { uid, email, name, username, color };
+    } catch (error) {
+      return {
+        message: error.message,
+        status: 500,
+      };
+    }
   }
+  return {
+    message: "User already exists",
+    status: 400,
+  };
 }
 
 export default createUser;

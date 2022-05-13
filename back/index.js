@@ -2,8 +2,8 @@ import { default as app } from "./server/index.js";
 import initializeServer from "./server/initializeServer.js";
 import initializeWebsocket from "./websocket/initializeWebsocket.js";
 
-const apiPort = +process.env.PORT || 8000;
-const wsPort = +process.env.PORT + 1 || 8001;
+const apiPort = +process.env.PORT || 7894;
+const wsPort = +process.env.PORT + 1 || 7895;
 
 (async () => {
   try {

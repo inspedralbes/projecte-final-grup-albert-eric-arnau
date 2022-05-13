@@ -1,6 +1,6 @@
 const keys = {
   // group keys
-  createGroup: ["admin", "name", "description", "limit", "password"],
+  createGroup: ["admin", "name", "imgLink", "description", "limit", "password"],
   joinGroup: ["userID", "groupID", "password"],
   getPreviousMessages: ["groupID"],
 

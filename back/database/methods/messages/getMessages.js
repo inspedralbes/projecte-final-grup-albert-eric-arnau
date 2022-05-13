@@ -8,13 +8,13 @@ import {
 } from "firebase/firestore";
 import { db } from "../../config/firebase.js";
 
-const getMessages = async (groupID, time) => {
+const getMessages = async (groupID, time, messagesLimit) => {
   const messages = [];
   const messagesCol = collection(db, "groups", groupID, "messages");
   const q = query(
     messagesCol,
     orderBy("time", "asc"),
-    limit(20),
+    limit(messagesLimit),
     where("time", "<=", time)
   );
   try {
