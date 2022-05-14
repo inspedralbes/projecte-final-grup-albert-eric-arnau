@@ -5,7 +5,7 @@ const keys = {
   leaveGroup: ["userID"],
 
   // user keys
-  register: ["name", "email", "username"],
+  register: ["userID", "email", "name", "username", "color"],
 };
 
 export default keys;

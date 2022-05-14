@@ -6,28 +6,29 @@ async function createUser(uid, email, name, username, color) {
   const userRef = doc(db, "users", uid);
   const userExists = await getUserDocument(uid);
 
-  if (userExists.status) {
-    try {
-      await setDoc(userRef, {
-        email,
-        name,
-        username,
-        favourites: [],
-        color,
-      });
-
-      return { uid, email, name, username, color };
-    } catch (error) {
-      return {
-        message: error.message,
-        status: 500,
-      };
-    }
+  if (!userExists.status) {
+    return {
+      message: "User already exists",
+      status: 400,
+    };
   }
-  return {
-    message: "User already exists",
-    status: 400,
-  };
+
+  try {
+    await setDoc(userRef, {
+      email,
+      name,
+      username,
+      favourites: [],
+      color,
+    });
+
+    return { uid, email, name, username, color };
+  } catch (error) {
+    return {
+      message: error.message,
+      status: 500,
+    };
+  }
 }
 
 export default createUser;
