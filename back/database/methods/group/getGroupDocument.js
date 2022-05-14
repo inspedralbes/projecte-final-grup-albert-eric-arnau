@@ -13,9 +13,6 @@ const getGroupDocument = async (groupID) => {
       throw new Error("Group does not exist");
     }
 
-    groupData.admin = groupData.admin.id;
-    groupData.members = referencesToId(groupData.members);
-
     return groupData;
   } catch (error) {
     return {

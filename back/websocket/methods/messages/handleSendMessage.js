@@ -11,9 +11,12 @@ const handleSendMessage = async (ws, data, activeGroups) => {
   const { groupID, userID, message, name, username } = data;
 
   const groupExists = await checkGroupExists(groupID);
+
+  if (!groupExists) return;
+
   const userInGroup = await checkUserInGroup(groupID, userID);
 
-  if (!groupExists || !userInGroup) return;
+  if (!userInGroup) return;
 
   if (!checkRoomExists(groupID, activeGroups)) {
     await createRoom(ws, username, groupID, activeGroups);
