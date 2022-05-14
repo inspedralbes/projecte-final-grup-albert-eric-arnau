@@ -1,4 +1,4 @@
-import { addDoc, collection, CollectionReference } from "firebase/firestore";
+import { addDoc, collection, doc, DocumentReference } from "firebase/firestore";
 import { db } from "../../config/firebase.js";
 import getUserDocument from "../user/getUserDocument.js";
 
@@ -11,18 +11,16 @@ const saveGroup = async ({
   password = "",
 }) => {
   try {
-    const adminDoc = await getUserDocument(admin);
-    const adminRef = new CollectionReference(adminDoc);
+    const adminDoc = doc(db, `users/${admin}`);
     const newGroup = await addDoc(collection(db, "groups"), {
-      admin,
+      admin: adminDoc,
       description,
       imgLink,
       limit,
       name,
       password,
-      members: [adminRef],
+      members: [adminDoc],
     });
-    console.log();
 
     return newGroup;
   } catch (error) {
