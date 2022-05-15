@@ -2,8 +2,17 @@ import { WebSocketServer } from "ws";
 import { activeGroups } from "./groups.js";
 import { handleSendMessage } from "./methods/messages/index.js";
 import { handleJoinRoom } from "./methods/rooms/index.js";
-import { handleCreateRoom } from "./methods/rooms/index.js";
-import { checkParameters } from "./methods/checkers/index.js";
+import {
+  handleCreateRoom,
+  createAndJoinRoom,
+  joinRoom,
+} from "./methods/rooms/index.js";
+import {
+  checkParameters,
+  checkRoomExists,
+  checkUserInRoom,
+} from "./methods/checkers/index.js";
+import { getAllUserGroupsInDatabase } from "../database/methods/user/index.js";
 
 const initializeWebsocket = (port) =>
   new Promise((resolve, reject) => {
@@ -13,19 +22,43 @@ const initializeWebsocket = (port) =>
 
     wss.on("connection", (ws) => {
       try {
-        ws.on("message", (receivedData) => {
+        ws.on("message", async (receivedData) => {
           let data = JSON.parse(receivedData);
 
-          if (data.meta === "connection") return;
+          if (data.meta === "connection") {
+            const { userID, username } = data;
 
-          if (data.meta && !checkParameters(data)) {
-            console.log("Invalid parameters provided");
+            const allUserGroupsID = await getAllUserGroupsInDatabase(userID);
+
+            allUserGroupsID.forEach(async (groupID) => {
+              if (!checkRoomExists(groupID, activeGroups)) {
+                await createAndJoinRoom(ws, username, groupID, activeGroups);
+              } else if (!checkUserInRoom(groupID, username, activeGroups)) {
+                await joinRoom(ws, groupID, username, activeGroups);
+              }
+            });
+
+            ws.send(
+              JSON.stringify({
+                meta: "info",
+                message: activeGroups,
+              })
+            );
+
+            return;
+          } else if (!checkParameters(data)) {
+            ws.send(
+              JSON.stringify({
+                meta: "error",
+                message: "Unsupported parameters",
+              })
+            );
             return;
           }
 
           switch (data.meta) {
             case "send_message":
-              handleSendMessage(ws, data, activeGroups);
+              handleSendMessage(data, activeGroups);
               break;
 
             case "join_room":
@@ -48,6 +81,12 @@ const initializeWebsocket = (port) =>
           }
         });
         ws.on("close", () => {
+          ws.send(
+            JSON.stringify({
+              meta: "error",
+              message: "Closing connection",
+            })
+          );
           ws.terminate();
         });
       } catch (error) {
