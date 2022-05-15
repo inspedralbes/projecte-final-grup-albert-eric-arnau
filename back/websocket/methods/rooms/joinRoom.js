@@ -1,10 +1,8 @@
 // ES ASYNC PARA QUE EN EL HANDLE ESPERE A QUE TERMINE PARA CONTINUAR
-const joinRoom = async (ws, groupID, userID, activeGroups) => {
+const joinRoom = async (ws, groupID, username, activeGroups) => {
   let obj = {};
-  obj[userID] = ws;
+  obj[username] = ws;
   activeGroups[groupID].push(obj);
-  ws["groupID"] = groupID;
-  ws["userID"] = userID;
 
   return;
 };

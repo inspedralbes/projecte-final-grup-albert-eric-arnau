@@ -1,8 +1,8 @@
-import { createRoom } from "./index.js";
+import { createAndJoinRoom } from "./index.js";
 
 const handleCreateRoom = async (ws, data, activeGroups) => {
   const { groupID, username } = data;
-  createRoom(ws, username, groupID, activeGroups);
+  createAndJoinRoom(ws, username, groupID, activeGroups);
 
   return;
 };

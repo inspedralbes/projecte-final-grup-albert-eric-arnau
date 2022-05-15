@@ -3,26 +3,12 @@ import {
   checkUserInGroup,
 } from "../../../database/methods/checkers/index.js";
 import { saveMessage } from "../../../database/methods/messages/index.js";
-import { checkRoomExists, checkUserInRoom } from "../checkers/index.js";
-import { joinRoom, createRoom } from "../rooms/index.js";
+// import { checkRoomExists, checkUserInRoom } from "../checkers/index.js";
+// import { joinRoom, createAndJoinRoom } from "../rooms/index.js";
 import { handleBroadcastMessage } from "./index.js";
 
-const handleSendMessage = async (ws, data, activeGroups) => {
+const handleSendMessage = async (data, activeGroups) => {
   const { groupID, userID, message, name, username } = data;
-
-  const groupExists = await checkGroupExists(groupID);
-
-  if (!groupExists) return;
-
-  const userInGroup = await checkUserInGroup(groupID, userID);
-
-  if (!userInGroup) return;
-
-  if (!checkRoomExists(groupID, activeGroups)) {
-    await createRoom(ws, username, groupID, activeGroups);
-  } else if (!checkUserInRoom(groupID, username, activeGroups)) {
-    await joinRoom(ws, groupID, username, activeGroups);
-  }
 
   const time = Date.now();
   const savedMessage = await saveMessage(groupID, userID, message, time);
