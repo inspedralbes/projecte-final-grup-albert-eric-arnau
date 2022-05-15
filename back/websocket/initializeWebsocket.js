@@ -1,9 +1,11 @@
 import { WebSocketServer } from "ws";
+
 import { activeGroups } from "./groups.js";
 import { handleSendMessage } from "./methods/messages/index.js";
-import { handleJoinRoom } from "./methods/rooms/index.js";
 import {
   handleCreateRoom,
+  handleJoinRoom,
+  handleLogout,
   createAndJoinRoom,
   joinRoom,
 } from "./methods/rooms/index.js";
@@ -46,6 +48,17 @@ const initializeWebsocket = (port) =>
             );
 
             return;
+          } else if (data.meta === "logout") {
+            const { username } = data;
+
+            await handleLogout(username, activeGroups);
+            console.log(
+              "activeGroups después de logout completo:",
+              activeGroups
+            );
+            // ws.close();
+
+            return;
           } else if (!checkParameters(data)) {
             ws.send(
               JSON.stringify({
@@ -58,15 +71,15 @@ const initializeWebsocket = (port) =>
 
           switch (data.meta) {
             case "send_message":
-              handleSendMessage(data, activeGroups);
+              await handleSendMessage(data, activeGroups);
               break;
 
             case "join_room":
-              handleJoinRoom(ws, data, activeGroups);
+              await handleJoinRoom(ws, data, activeGroups);
               break;
 
             case "create_room":
-              handleCreateRoom(ws, data, activeGroups);
+              await handleCreateRoom(ws, data, activeGroups);
               break;
 
             default:
@@ -83,7 +96,7 @@ const initializeWebsocket = (port) =>
         ws.on("close", () => {
           ws.send(
             JSON.stringify({
-              meta: "error",
+              meta: "info",
               message: "Closing connection",
             })
           );
