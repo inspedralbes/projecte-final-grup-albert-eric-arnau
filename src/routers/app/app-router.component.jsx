@@ -5,12 +5,12 @@ import {
   Navigate,
 } from "react-router-dom";
 import PATHS from "../paths";
-import { Landing, Chat, NotFound, UserProfile } from "../../views";
+import { Landing, Chat, NotFound, UserProfile, Register } from "../../views";
 import PrivateRoutes from "./private-routes.component";
 import PublicRoutes from "./public-routes.component";
 
 function AppRouter() {
-  const logged = true;
+  const logged = false;
   return (
     <Router>
       <Routes>
@@ -29,7 +29,7 @@ function AppRouter() {
         <Route
           path={PATHS.REGISTER}
           element={
-            <PublicRoutes isLogged={logged}>{/* <Register /> */}</PublicRoutes>
+            <PublicRoutes isLogged={logged}>{<Register />}</PublicRoutes>
           }
         />
 
