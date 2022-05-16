@@ -1,10 +1,11 @@
 const keys = {
   // group keys
-  createGroup: ["admin", "name", "description", "limit", "password"],
-  joinGroup: ["userID", "groupID", "password"],
+  createGroup: ["admin", "name", "imgLink", "description", "limit", "password"],
+  joinGroup: ["userID", "password"],
+  leaveGroup: ["userID"],
 
   // user keys
-  register: ["name", "email", "username"],
+  register: ["userID", "email", "name", "username", "color"],
 };
 
 export default keys;

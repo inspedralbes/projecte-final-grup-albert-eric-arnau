@@ -1,9 +1,19 @@
 import express from "express";
 
-import { createGroup, joinGroup } from "../../controllers/group/index.js";
+import {
+  getGroupInfo,
+  createGroupInDatabase,
+  joinGroupInDatabase,
+  leaveGroupInDatabase,
+  getPreviousMessages,
+} from "../../controllers/group/index.js";
 const router = express.Router();
 
-router.post("/create", createGroup);
-router.post("/join", joinGroup);
+router.get("/:idGroup", getGroupInfo);
+
+router.post("/create", createGroupInDatabase);
+router.post("/:idGroup/join", joinGroupInDatabase);
+router.delete("/:idGroup/leave", leaveGroupInDatabase);
+router.get("/:idGroup/messages", getPreviousMessages);
 
 export default router;

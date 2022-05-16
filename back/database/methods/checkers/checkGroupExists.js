@@ -1,4 +1,4 @@
-import { getGroupDocument } from "./index.js";
+import { getGroupDocument } from "../group/index.js";
 
 const checkGroupExists = async (groupID) => {
   const data = await getGroupDocument(groupID);
