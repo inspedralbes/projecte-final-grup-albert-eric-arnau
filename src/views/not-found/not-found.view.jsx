@@ -9,9 +9,11 @@ import {
 } from "@mantine/core";
 import { ReactComponent as ErrorImage } from "./assets/image.svg";
 import { useStyles } from "./not-found.styles";
+import { useNavigate } from "react-router-dom";
 
 function NotFound() {
   const { classes } = useStyles();
+  const navigate = useNavigate();
 
   return (
     <Container className={classes.root}>
@@ -31,7 +33,12 @@ function NotFound() {
             variant="outline"
             size="md"
             mt="xl"
-            className={classes.control}>
+            className={classes.control}
+            onClick={() =>
+              navigate({
+                pathname: "/",
+              })
+            }>
             Get back to home page
           </Button>
         </div>
