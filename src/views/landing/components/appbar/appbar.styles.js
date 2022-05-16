@@ -11,7 +11,7 @@ export const useStyles = createStyles((theme) => ({
   login: {
     width: "150px",
     [theme.fn.smallerThan("sm")]: {
-      display: "none",
+      width: "100px",
     },
   },
 
@@ -28,6 +28,15 @@ export const useStyles = createStyles((theme) => ({
     },
   },
 
+  mobileBarContainer: {
+    width: "100vw",
+    textAlign: "center",
+    zIndex: 1,
+    [theme.fn.largerThan("sm")]: {
+      display: "none",
+    },
+  },
+
   burger: {
     [theme.fn.largerThan("sm")]: {
       display: "none",
@@ -37,8 +46,6 @@ export const useStyles = createStyles((theme) => ({
   link: {
     display: "block",
     lineHeight: 1,
-    padding: "8px 12px",
-    borderRadius: theme.radius.sm,
     textDecoration: "none",
     color:
       theme.colorScheme === "dark"
@@ -52,6 +59,13 @@ export const useStyles = createStyles((theme) => ({
         theme.colorScheme === "dark"
           ? theme.colors.dark[6]
           : theme.colors.gray[0],
+    },
+    [theme.fn.smallerThan("sm")]: {
+      marginInline: "auto",
+      marginBlock: "10px",
+      fontSize: "1.2rem",
+      height: "50px",
+      width: "60%",
     },
   },
 
