@@ -1,4 +1,3 @@
-import React from "react";
 import { Text, Avatar, Group, Paper } from "@mantine/core";
 
 import { useStyles } from "./chat-message.styles";
@@ -6,9 +5,9 @@ import { useStyles } from "./chat-message.styles";
 function ChatMessage({ messageData = null }) {
   const { classes } = useStyles();
   //! change for user
-  const isLocal = "12345" === messageData.userID;
+  const isLocal = process.env.REACT_APP_USER_ID === messageData.userID;
+  console.log(process.env.REACT_APP_USER_ID, messageData.userID);
 
-  console.log(isLocal);
   return (
     messageData && (
       <Group
@@ -22,7 +21,7 @@ function ChatMessage({ messageData = null }) {
           src={messageData.image}
           alt={messageData.name}
           radius="xl"
-          sx={{ alignSelf: "flex-start", margin: "0.5rem" }}
+          sx={{ alignSelf: "flex-end", marginInline: "0.5rem" }}
         />
         <Paper className={isLocal ? classes.localMessage : classes.message}>
           {!isLocal && (
@@ -30,11 +29,15 @@ function ChatMessage({ messageData = null }) {
               <Text weight={700} size="sm">
                 {messageData.name}
               </Text>
-              <Text size="xs" color="dimmed">
-                {messageData.time || "Hoy 10:30 pm"}
-              </Text>
             </Group>
           )}
+
+          <Text
+            size="xs"
+            color="dimmed"
+            className={isLocal && classes.timeLocalMessage}>
+            {messageData.time || "Hoy 10:30 pm"}
+          </Text>
           <Text className={classes.body} size="sm">
             {messageData.message}
           </Text>

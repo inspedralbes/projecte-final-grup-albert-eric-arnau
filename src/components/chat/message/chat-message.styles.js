@@ -14,4 +14,9 @@ export const useStyles = createStyles({
     color: "#fff",
     overflowWrap: "break-word",
   },
+  timeLocalMessage: {
+    display: "flex",
+    color: "#fff",
+    justifyContent: "flex-end",
+  },
 });
