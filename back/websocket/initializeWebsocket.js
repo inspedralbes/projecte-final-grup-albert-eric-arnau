@@ -51,7 +51,7 @@ const initializeWebsocket = (port) =>
           } else if (data.meta === "logout") {
             const { username } = data;
 
-            await handleLogout(username, activeGroups);
+            handleLogout(username, activeGroups);
             console.log(
               "activeGroups después de logout completo:",
               activeGroups
