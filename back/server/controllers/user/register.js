@@ -2,10 +2,11 @@ import { createUser } from "../../../database/methods/user/index.js";
 import { checkParameters, keys } from "../../methods/parameters/index.js";
 
 const register = async (req, res) => {
-  if (!checkParameters(req.body, keys.register))
+  const body = JSON.parse(req.body);
+  if (!checkParameters(body, keys.register))
     return res.status(400).json({ message: "Missing parameters" });
 
-  const { userID, email, name, username, color } = req.body;
+  const { userID, email, name, username, color } = body;
 
   const user = await createUser(userID, email, name, username, color);
 

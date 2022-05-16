@@ -6,11 +6,12 @@ import { leaveGroup } from "../../../database/methods/group/index.js";
 import { checkParameters, keys } from "../../methods/parameters/index.js";
 
 const leaveGroupInDatabase = async (req, res) => {
-  if (!checkParameters(req.body, keys.leaveGroup))
+  const body = JSON.parse(req.body);
+  if (!checkParameters(body, keys.leaveGroup))
     return res.status(400).json({ message: "Wrong parameters" });
 
   const groupID = req.params.idGroup;
-  const { userID } = req.body;
+  const { userID } = body;
 
   const groupExists = await checkGroupExists(groupID);
 

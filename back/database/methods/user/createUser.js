@@ -15,6 +15,7 @@ async function createUser(uid, email, name, username, color) {
 
   try {
     await setDoc(userRef, {
+      uid,
       email,
       name,
       username,

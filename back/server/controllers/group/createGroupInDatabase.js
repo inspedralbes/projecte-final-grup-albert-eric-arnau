@@ -2,7 +2,7 @@ import { createGroup } from "../../../database/methods/group/index.js";
 import { checkParameters, keys } from "../../methods/parameters/index.js";
 
 const createGroupInDatabase = async (req, res) => {
-  const data = req.body;
+  const data = JSON.parse(req.body);
 
   if (!checkParameters(data, keys.createGroup))
     return res.status(400).json({ message: "Missing parameters" });
