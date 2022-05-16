@@ -1,2 +1,2 @@
-export { login, logout } from "./auth-creates";
-export { sendMessage } from "./chat-creates";
+export { loginAction, logoutAction } from "./auth-creates";
+export { sendMessageAction } from "./chat-creates";

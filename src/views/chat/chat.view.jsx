@@ -1,19 +1,11 @@
-import { createStyles, Grid, Group, Paper } from "@mantine/core";
-import React, { useEffect, useRef, useState } from "react";
+import { createStyles, Grid } from "@mantine/core";
+import { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import { ChatInput } from "../../components/chat/index";
 import { ChatMessage } from "../../components/chat/index";
-
+import useWebSocket from "../../hooks/useWebSocket";
 // const socket = new WebSocket("wss://groupem.herokuapp.com");
-const socket = new WebSocket("ws://192.168.210.155:8001");
 // const socket = new WebSocket("ws://groupem.api.alumnes.inspedralbes.cat:7895/");
-
-socket.onopen = () => {
-  console.log("Connected to server");
-  let message = JSON.stringify({
-    type: "connection",
-  });
-  socket.send(message);
-};
 
 // const RenderNewMessage = (user, message) => (
 //   <ChatMessage
@@ -53,11 +45,13 @@ const useStyles = createStyles({
 
 function Chat() {
   //!\ CUIDAO LOCO
-  const userID = "12345";
+  const chat = useSelector((state) => state.chat);
+  const { messages } = chat;
+  const { initializeWebsocket, loadGroupMessages, sendMessage } =
+    useWebSocket();
 
-  const [messages, setMessages] = useState([]);
+  const { classes } = useStyles();
   const messagesEndRef = useRef(null);
-
   const scrollToBottom = () => {
     console.log(messagesEndRef);
     messagesEndRef.current.scrollIntoView({ block: "end", behavior: "smooth" });
@@ -65,59 +59,24 @@ function Chat() {
 
   useEffect(() => {
     scrollToBottom();
-    console.log("scrolled");
-  }, [messages]);
+  }, [chat.messages]);
 
-  const { classes } = useStyles();
   useEffect(() => {
-    setMessages((messages) => [
-      ...messages,
-      {
-        name: "GunteR_",
-        username: "GunteR_",
-        message:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque eos ducimus cum quos illum a ipsum corporis deserunt, porro fuga unde ea, earum eum rem, maiores harum animi iusto minima",
-        time: "2342378492042534053",
-      },
-    ]);
+    initializeWebsocket();
+    // loadGroupMessages("uJZNitszHdqWRqceyXXn");
   }, []);
   console.log(messages);
-  socket.onmessage = (event) => {
-    const { meta, name, username, time, message } = JSON.parse(event.data);
-    const newMessage = {
-      name,
-      username,
-      time,
+
+  const handleMessage = (message) => {
+    let newMessage = {
+      meta: "send_message",
+      name: "GunteR_",
+      username: "GunteR_",
+      groupID: "uJZNitszHdqWRqceyXXn",
+      userID: process.env.REACT_APP_USER_ID || "",
       message,
     };
-
-    switch (meta) {
-      case "receive_message":
-        setMessages((prevMessages) => [...prevMessages, newMessage]);
-        break;
-      default:
-        console.log("default");
-    }
-  };
-  const handleMessage = (message) => {
-    setMessages((messages) => [
-      ...messages,
-      {
-        user: "GunteR_",
-        userID,
-        message,
-      },
-    ]);
-    socket.send(
-      JSON.stringify({
-        meta: "send_message",
-        name: "GunteR_",
-        username: "GunteR_",
-        groupID: "uJZNitszHdqWRqceyXXn",
-        userID: "x3NKtQfvOd0g5ylKMBqi",
-        message,
-      })
-    );
+    sendMessage(newMessage);
   };
 
   return (

@@ -1,26 +1,26 @@
-import { chatTypes } from "../action-types";
+import { chatTypes } from "../actions";
 
-const initialState = [];
+const initialState = {
+  activeGroupID: null,
+
+  messages: [],
+};
 
 const chatReducer = (state = initialState, action) => {
-  switch (action.type) {
+  let newState;
+  const { type, payload } = action;
+
+  switch (type) {
     case chatTypes.MESSAGE_SEND:
-      return {
-        payload: action.payload,
-      };
-    case chatTypes.MESSAGE_RECEIVE:
-      return {
-        user: state.user,
-        message: state.message,
-        time: state.time,
-        imgLink: state.imgLink,
-      };
-    case chatTypes.RECEIVE_MESSAGES:
-      return {
-        ...state,
-      };
-    case chatTypes.default:
-      return state;
+      newState = { ...state, messages: [...state.messages, payload] };
+      break;
+    case chatTypes.MESSAGE_LOAD_GROUP_MESSAGES:
+      newState = { ...state, messages: [...payload] };
+      break;
+    default:
+      newState = { ...state };
+      break;
   }
+  return newState;
 };
 export default chatReducer;
