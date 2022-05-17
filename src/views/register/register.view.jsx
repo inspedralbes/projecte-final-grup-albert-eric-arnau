@@ -1,17 +1,19 @@
 import { Button, Group, Stepper, Center, Box, Title } from "@mantine/core";
 import { useState } from "react";
-import { Form } from "./components";
-
+import { AppareanceForm, Form } from "./components";
 function Register() {
   const [active, setActive] = useState(1);
   const nextStep = () =>
-    setActive((current) => (current < 3 ? current + 1 : current));
+    setActive((current) => (current < 2 ? current + 1 : current));
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
 
   return (
-    <Center sx={{ width: "100vw", height: "100vh" }} p={10}>
-      <Box sx={{ width: 700, minHeight: 600 }}>
+    <Center>
+      <Box sx={{ width: "370px", height: "100%" }} my={50}>
+        <Center>
+          <img src="Icon.svg" alt="Logo empresa" width={100} />
+        </Center>
         <Title order={1} align="center" p={30}>
           REGISTER
         </Title>
@@ -20,10 +22,7 @@ function Register() {
             <Form next={nextStep} />
           </Stepper.Step>
           <Stepper.Step allowStepSelect={active > 1}>
-            Step 2 content: Verify email
-          </Stepper.Step>
-          <Stepper.Step allowStepSelect={active > 2}>
-            Step 3 content: Get full access
+            <AppareanceForm />
           </Stepper.Step>
           <Stepper.Completed>
             Completed, click back button to get to previous step

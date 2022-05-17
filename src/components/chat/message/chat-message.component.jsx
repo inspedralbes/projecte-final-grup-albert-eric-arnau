@@ -6,7 +6,6 @@ function ChatMessage({ messageData = null }) {
   const { classes } = useStyles();
   //! change for user
   const isLocal = process.env.REACT_APP_USER_ID === messageData.userID;
-  console.log(process.env.REACT_APP_USER_ID, messageData.userID);
 
   return (
     messageData && (
@@ -26,7 +25,10 @@ function ChatMessage({ messageData = null }) {
         <Paper className={isLocal ? classes.localMessage : classes.message}>
           {!isLocal && (
             <Group>
-              <Text weight={700} size="sm">
+              <Text
+                weight={700}
+                size="sm"
+                color={messageData.color ? messageData.color : "#000000"}>
                 {messageData.name}
               </Text>
             </Group>
