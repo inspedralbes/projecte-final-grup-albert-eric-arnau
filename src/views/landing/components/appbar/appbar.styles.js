@@ -1,6 +1,13 @@
 import { createStyles } from "@mantine/core";
 
 export const useStyles = createStyles((theme) => ({
+  header: {
+    backgroundColor:
+      theme.colorScheme === "dark"
+        ? theme.colors.dark[6]
+        : theme.colors.gray[0],
+  },
+
   logo: {
     width: "150px",
     [theme.fn.smallerThan("sm")]: {
@@ -56,7 +63,7 @@ export const useStyles = createStyles((theme) => ({
       backgroundColor:
         theme.colorScheme === "dark"
           ? theme.colors.dark[6]
-          : theme.colors.gray[0],
+          : theme.colors.gray[1],
     },
     [theme.fn.smallerThan("sm")]: {
       marginInline: "auto",

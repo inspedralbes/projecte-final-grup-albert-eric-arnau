@@ -38,7 +38,7 @@ function Appbar() {
   ));
 
   return (
-    <Header height={60} sx={{ borderBottom: 0 }} fixed>
+    <Header height={60} className={classes.header} fixed>
       <Container className={classes.inner} fluid>
         <Group>
           <Burger
