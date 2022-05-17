@@ -8,19 +8,19 @@ function HeroHeader() {
       <Container size="lg">
         <div className={classes.inner}>
           <div className={classes.content}>
-            <Title className={classes.title}>
+            <Title order={1} className={classes.title}>
               ¡Únete a nuestra comunidad{" "}
               <Text
                 component="span"
                 inherit
                 variant="gradient"
-                gradient={{ from: "pink", to: "yellow" }}>
+                gradient={{ from: "red", to: "yellow" }}>
                 para chatear
               </Text>{" "}
               con quien quieras donde quieras!
             </Title>
 
-            <Text className={classes.description} mt={30}>
+            <Text component="p" className={classes.description} mt={30}>
               Tendrás la capacidad de crear una cuenta y comenzar a chatear con
               tus amigos. Podrás también crear grupos de chat para hablar de lo
               que quieras.
@@ -28,7 +28,7 @@ function HeroHeader() {
 
             <Button
               variant="gradient"
-              gradient={{ from: "pink", to: "yellow" }}
+              gradient={{ from: "red", to: "yellow" }}
               size="xl"
               className={classes.control}
               mt={40}>

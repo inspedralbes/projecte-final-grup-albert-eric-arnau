@@ -47,12 +47,10 @@ export const useStyles = createStyles((theme) => ({
     display: "block",
     lineHeight: 1,
     textDecoration: "none",
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[0]
-        : theme.colors.gray[7],
+    color: "black",
     fontSize: theme.fontSizes.sm,
     fontWeight: 500,
+    minWidth: "120px",
 
     "&:hover": {
       backgroundColor:

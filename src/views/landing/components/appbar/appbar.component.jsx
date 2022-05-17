@@ -1,7 +1,14 @@
 import { useStyles } from "./appbar.styles";
-import { Header, Container, Group, Button, Burger, Paper } from "@mantine/core";
+import {
+  Header,
+  Container,
+  Group,
+  Button,
+  Burger,
+  Paper,
+  Center,
+} from "@mantine/core";
 import { NavLink } from "react-router-dom";
-import Logo from "../../../../assets/Logo.svg";
 import { useBooleanToggle } from "@mantine/hooks";
 
 function Appbar() {
@@ -19,20 +26,19 @@ function Appbar() {
     },
   ];
   const items = links.map((link, index) => (
-    <Button
-      className={classes.link}
-      variant="subtle"
-      radius="xl"
-      key={index}
-      onClick={opened ? () => toggleOpened(false) : undefined}>
-      <NavLink to={link.link} style={{ textDecoration: "none" }}>
+    <NavLink to={link.link} key={index} style={{ textDecoration: "none" }}>
+      <Button
+        className={classes.link}
+        variant="subtle"
+        radius="xl"
+        onClick={opened ? () => toggleOpened(false) : undefined}>
         {link.label}
-      </NavLink>
-    </Button>
+      </Button>
+    </NavLink>
   ));
 
   return (
-    <Header height={60} sx={{ borderBottom: 0 }}>
+    <Header height={60} sx={{ borderBottom: 0 }} fixed>
       <Container className={classes.inner} fluid>
         <Group>
           <Burger
@@ -41,19 +47,23 @@ function Appbar() {
             className={classes.burger}
             size="sm"
           />
-          <img src={Logo} alt="logo" className={classes.logo} />
+          <img src="/Logo.svg" alt="logo" className={classes.logo} />
         </Group>
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>
         <NavLink to="/login">
-          <Button className={classes.login} radius="xl">
+          <Button
+            className={classes.login}
+            variant="gradient"
+            gradient={{ from: "red", to: "yellow" }}
+            radius="xl">
             Login
           </Button>
         </NavLink>
       </Container>
       {opened && (
-        <Group direction="column">
+        <Center direction="column">
           <Paper
             className={classes.mobileBarContainer}
             shadow="xl"
@@ -62,7 +72,7 @@ function Appbar() {
             withBorder>
             {items}
           </Paper>
-        </Group>
+        </Center>
       )}
     </Header>
   );

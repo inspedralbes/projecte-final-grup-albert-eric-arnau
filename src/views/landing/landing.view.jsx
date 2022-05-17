@@ -1,4 +1,5 @@
 import { Appbar } from "./components/appbar";
+import { HeroCards } from "./components/hero-cards";
 import { HeroHeader } from "./components/hero-header";
 
 function Landing() {
@@ -10,6 +11,7 @@ function Landing() {
         <Appbar />
       </div>
       <HeroHeader />
+      <HeroCards />
     </>
   );
 }
