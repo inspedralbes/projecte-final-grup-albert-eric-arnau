@@ -1,9 +1,15 @@
+import { Appbar } from "./components/appbar";
+import { HeroHeader } from "./components/hero-header";
+
 function Landing() {
+  // Header
+
   return (
     <>
       <div>
-        <h1>Landing</h1>
+        <Appbar />
       </div>
+      <HeroHeader />
     </>
   );
 }
