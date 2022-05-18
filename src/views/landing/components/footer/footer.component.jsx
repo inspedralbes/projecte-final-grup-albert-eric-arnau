@@ -1,12 +1,12 @@
 import {
   Text,
   Container,
-  ActionIcon,
   Group,
   Tooltip,
   Paper,
 } from "@mantine/core";
-import { Link, AppWindow } from "tabler-icons-react";
+import { NavLink } from "react-router-dom";
+import { Link } from "tabler-icons-react";
 import { useStyles } from "./footer.styles";
 
 function Footer() {
@@ -34,18 +34,19 @@ function Footer() {
             color="orange"
             transition="fade"
             transitionDuration={200}
+            closeDelay={200}
             withArrow>
-            <a
+            <NavLink
               target="_blank"
               rel="noreferrer"
-              href="https://www.institutpedralbes.cat">
+              to="https://www.institutpedralbes.cat">
               <img
                 src="/LogoPedralbes.png"
                 alt="Institut Pedralbes"
                 width={40}
                 height={40}
               />
-            </a>
+            </NavLink>
           </Tooltip>
         </Group>
       </Container>

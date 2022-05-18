@@ -2,6 +2,8 @@ import { createStyles } from "@mantine/core";
 
 export const useStyles = createStyles((theme) => ({
   footer: {
+    marginTop: "auto",
+    position: "relative",
     paddingTop: theme.spacing.xl,
     paddingBottom: theme.spacing.xl,
     backgroundColor:
