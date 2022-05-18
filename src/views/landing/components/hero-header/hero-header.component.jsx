@@ -1,5 +1,6 @@
 import { useStyles } from "./hero-header.styles";
 import { Container, Title, Text, Button } from "@mantine/core";
+import { NavLink } from "react-router-dom";
 
 function HeroHeader() {
   const { classes } = useStyles();
@@ -8,32 +9,33 @@ function HeroHeader() {
       <Container size="lg">
         <div className={classes.inner}>
           <div className={classes.content}>
-            <Title className={classes.title}>
-              ¡Únete a nuestra comunidad{" "}
+            <Title order={1} className={classes.title}>
+              Get in our community and{" "}
               <Text
                 component="span"
                 inherit
                 variant="gradient"
-                gradient={{ from: "pink", to: "yellow" }}>
-                para chatear
+                gradient={{ from: "red", to: "yellow" }}>
+                chat
               </Text>{" "}
-              con quien quieras donde quieras!
+              with anyone!
             </Title>
 
-            <Text className={classes.description} mt={30}>
-              Tendrás la capacidad de crear una cuenta y comenzar a chatear con
-              tus amigos. Podrás también crear grupos de chat para hablar de lo
-              que quieras.
+            <Text component="p" className={classes.description} mt={30}>
+              You are able to pick your own username and begin to chat with your
+              friends. Also create groups and let others read your thoughts!
             </Text>
 
-            <Button
-              variant="gradient"
-              gradient={{ from: "pink", to: "yellow" }}
-              size="xl"
-              className={classes.control}
-              mt={40}>
-              Empezar a chatear
-            </Button>
+            <NavLink to="/chat">
+              <Button
+                variant="gradient"
+                gradient={{ from: "red", to: "yellow" }}
+                size="xl"
+                className={classes.control}
+                mt={40}>
+                Begin group'em
+              </Button>
+            </NavLink>
           </div>
         </div>
       </Container>
