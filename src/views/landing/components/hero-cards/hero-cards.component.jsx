@@ -1,11 +1,5 @@
 import useStyles from "./hero-cards.styles";
-import {
-  Text,
-  Title,
-  Container,
-  SimpleGrid,
-  useMantineTheme,
-} from "@mantine/core";
+import { Title, Container, SimpleGrid, useMantineTheme } from "@mantine/core";
 import {
   MessageShare,
   DeviceMobileMessage,

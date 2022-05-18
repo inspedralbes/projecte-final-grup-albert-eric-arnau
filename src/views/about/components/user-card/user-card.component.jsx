@@ -1,5 +1,4 @@
-import { Avatar, Text, Group, Paper } from '@mantine/core';
-import { NavLink } from 'react-router-dom';
+import { Text, Group, Paper, Avatar } from "@mantine/core";
 
 const usersData = [
   {
@@ -19,8 +18,8 @@ const usersData = [
     email: "orts.brichs.arnau@gmail.com",
     role: "Frontend",
     url: "https://www.linkedin.com/in/arnau-orts-7bb7261b8/",
-  }
-]
+  },
+];
 
 function UserCard() {
   return (
@@ -29,31 +28,30 @@ function UserCard() {
       position="center"
       spacing={100}
       withBorder
-      p="lg"
       sx={(theme) => ({
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
+        backgroundColor:
+          theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
         marginTop: theme.spacing.xl * 5,
-      })}
-    >
-      {
-        usersData.map((user) => (
-          <Paper>
-            <Text align="center" size="lg" weight={500} mt="md">
-              {user.name}
+        marginBottom: theme.spacing.xl * 3,
+      })}>
+      {usersData.map((user) => (
+        <Paper>
+          <Avatar src="/LogoPedralbes.png" size={100} radius={100} mx="auto" />
+          <Text align="center" size="lg" weight={500} mt="md">
+            {user.name}
+          </Text>
+          <Text align="center" color="dimmed" size="sm" mb="lg">
+            {user.email} · {user.role}
+          </Text>
+          <a href={user.url} target="_blank" rel="noreferrer">
+            <Text align="center" color="dimmed" size="md">
+              {user.name} on LinkedIn
             </Text>
-            <Text align="center" color="dimmed" size="sm" mb="lg">
-              {user.email} · {user.role}
-            </Text>
-            <NavLink to={user.url} target="_blank" rel='noreferrer'>
-              <Text align="center" color="dimmed" size="md">
-                {user.name} on LinkedIn
-              </Text>
-            </NavLink>
-          </Paper>
-        ))
-      }
+          </a>
+        </Paper>
+      ))}
     </Group>
   );
 }
 
-export default UserCard
+export default UserCard;
