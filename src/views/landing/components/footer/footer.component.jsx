@@ -1,50 +1,52 @@
-import { Text, Container, ActionIcon, Group, Tooltip } from "@mantine/core";
-import { BrandTwitter, BrandYoutube, AppWindow } from "tabler-icons-react";
+import {
+  Text,
+  Container,
+  ActionIcon,
+  Group,
+  Tooltip,
+  Paper,
+} from "@mantine/core";
+import { Link, AppWindow } from "tabler-icons-react";
 import { useStyles } from "./footer.styles";
-
-const data = [
-  {
-    links: [
-      {
-        link: "/",
-        label: "Home",
-      },
-    ],
-  },
-];
 
 function Footer() {
   const { classes } = useStyles();
   return (
     <footer className={classes.footer}>
-      <Container className={classes.inner}>
-        <div className={classes.logo}>
-          <Text size="xs" color="dimmed" className={classes.description}>
-            Build fully functional accessible web applications faster than ever
-          </Text>
-        </div>
-      </Container>
       <Container className={classes.afterFooter}>
-        <Text color="dimmed" size="sm">
-          © 2022 Institut Pedralbes. All rights reserved.
-        </Text>
+        <Paper className={classes.rightsContainer}>
+          <Text color="dimmed" size="lg">
+            © 2022 Group'em. All rights reserved.
+          </Text>
+          <Text color="dimmed" size="lg">
+            © 2022 Institut Pedralbes. All rights reserved.
+          </Text>
+        </Paper>
 
         <Group spacing={0} className={classes.social} position="right" noWrap>
           <Tooltip
-            label="Institut Pedralbes"
+            label={
+              <>
+                <Link size={16} style={{ marginRight: "5px" }} />
+                Institut pedralbes
+              </>
+            }
             color="orange"
             transition="fade"
             transitionDuration={200}
             withArrow>
-            <ActionIcon size="lg">
-              <a href="https://www.institutpedralbes.cat">
-                <AppWindow size={18} />
-              </a>
-            </ActionIcon>
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://www.institutpedralbes.cat">
+              <img
+                src="/LogoPedralbes.png"
+                alt="Institut Pedralbes"
+                width={40}
+                height={40}
+              />
+            </a>
           </Tooltip>
-          <ActionIcon size="lg">
-            <BrandYoutube size={18} />
-          </ActionIcon>
         </Group>
       </Container>
     </footer>

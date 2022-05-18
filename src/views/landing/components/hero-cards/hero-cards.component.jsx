@@ -16,13 +16,13 @@ import { Feature } from "./feature";
 
 const featuresData = [
   {
-    icon: DeviceMobileMessage,
+    icon: MessageShare,
     title: "Chat with anyone",
     description:
       "Use our chat to communicate with your friends or connect with new people.",
   },
   {
-    icon: MessageShare,
+    icon: DeviceMobileMessage,
     title: "Mobile friendly",
     description: "Our app have the best user experience for mobile users too.",
   },
@@ -41,11 +41,8 @@ function HeroCards({ data = featuresData }) {
   return (
     <Container className={classes.wrapper}>
       <Title order={2} className={classes.title}>
-        Our objective
+        Our objective is to provide a platform for everyone
       </Title>
-      <Text component="p" size="md" className={classes.description}>
-        Our objective is to provide a platform for everyone to connect with
-      </Text>
 
       <SimpleGrid
         mt={60}

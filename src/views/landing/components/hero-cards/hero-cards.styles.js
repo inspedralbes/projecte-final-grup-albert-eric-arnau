@@ -2,8 +2,8 @@ import { createStyles } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
-    paddingTop: theme.spacing.xl * 4,
-    paddingBottom: theme.spacing.xl * 4,
+    paddingTop: theme.spacing.xl * 2,
+    paddingBottom: theme.spacing.xl * 6,
   },
 
   title: {
