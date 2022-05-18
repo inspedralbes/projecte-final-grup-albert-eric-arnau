@@ -1,12 +1,6 @@
-import {
-  Text,
-  Container,
-  ActionIcon,
-  Group,
-  Tooltip,
-  Paper,
-} from "@mantine/core";
-import { Link, AppWindow } from "tabler-icons-react";
+import { Text, Container, Group, Tooltip, Paper } from "@mantine/core";
+import { NavLink } from "react-router-dom";
+import { Link } from "tabler-icons-react";
 import { useStyles } from "./footer.styles";
 
 function Footer() {
@@ -34,6 +28,7 @@ function Footer() {
             color="orange"
             transition="fade"
             transitionDuration={200}
+            closeDelay={200}
             withArrow>
             <a
               target="_blank"
