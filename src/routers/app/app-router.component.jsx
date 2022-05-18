@@ -5,7 +5,15 @@ import {
   Navigate,
 } from "react-router-dom";
 import PATHS from "../paths";
-import { Landing, Chat, NotFound, UserProfile, ProfileEdit, About } from "../../views";
+import {
+  Landing,
+  Chat,
+  NotFound,
+  UserProfile,
+  ProfileEdit,
+  About,
+  GroupFinder,
+} from "../../views";
 import PrivateRoutes from "./private-routes.component";
 import PublicRoutes from "./public-routes.component";
 
@@ -69,7 +77,7 @@ function AppRouter() {
           path={PATHS.GROUP_FINDER}
           element={
             <PrivateRoutes isLogged={logged}>
-              {/* <GroupFinder /> */}
+              <GroupFinder />
             </PrivateRoutes>
           }
         />
