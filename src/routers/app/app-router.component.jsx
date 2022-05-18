@@ -5,7 +5,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import PATHS from "../paths";
-import { Landing, Chat, NotFound, UserProfile, About } from "../../views";
+import { Landing, Chat, NotFound, UserProfile, ProfileEdit, About } from "../../views";
 import PrivateRoutes from "./private-routes.component";
 import PublicRoutes from "./public-routes.component";
 
@@ -53,7 +53,7 @@ function AppRouter() {
           path={PATHS.PROFILE_EDIT}
           element={
             <PrivateRoutes isLogged={logged}>
-              {/* <ProfileEdit /> */}
+              <ProfileEdit />
             </PrivateRoutes>
           }
         />
