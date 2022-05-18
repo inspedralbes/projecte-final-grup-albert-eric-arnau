@@ -10,15 +10,17 @@ const useWebSocket = () => {
 
   function initializeWebsocket() {
     if (socket) return;
-    socket = new WebSocket(
-      process.env.REACT_APP_WEBSOCKET_CONNECTION_URL ?? ""
-    );
-    //  socket = new WebSocket("wss://groupem.herokuapp.com");
+    // socket = new WebSocket(
+    //   process.env.REACT_APP_WEBSOCKET_CONNECTION_URL
+    // );
+    socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_CONNECTION_URL);
 
     socket.onopen = () => {
       console.log("Connected to server");
       let message = JSON.stringify({
         meta: "connection",
+        userID: process.env.REACT_APP_USER_ID || "",
+        username: "GunteR_",
       });
       socket.send(message);
     };
