@@ -11,9 +11,11 @@ import {
 } from "../../views";
 import PrivateRoutes from "./private-routes.component";
 import PublicRoutes from "./public-routes.component";
+import { useSelector } from "react-redux";
 
 function AppRouter() {
-  const logged = false;
+  const user = useSelector((state) => state.auth);
+
   return (
     <Router>
       <Routes>
@@ -24,12 +26,18 @@ function AppRouter() {
         {/* Public routes */}
         <Route
           path={PATHS.LOGIN}
-          element={<PublicRoutes isLogged={logged}>{<Login />}</PublicRoutes>}
+          element={
+            <PublicRoutes isLogged={user.isAuthenticated}>
+              {<Login />}
+            </PublicRoutes>
+          }
         />
         <Route
           path={PATHS.REGISTER}
           element={
-            <PublicRoutes isLogged={logged}>{<Register />}</PublicRoutes>
+            <PublicRoutes isLogged={user.isAuthenticated}>
+              {<Register />}
+            </PublicRoutes>
           }
         />
 
@@ -37,7 +45,7 @@ function AppRouter() {
         <Route
           path={PATHS.CHAT}
           element={
-            <PrivateRoutes isLogged={logged} navbarType={"chat"}>
+            <PrivateRoutes isLogged={user.isAuthenticated} navbarType={"chat"}>
               <Chat />
             </PrivateRoutes>
           }
@@ -45,7 +53,7 @@ function AppRouter() {
         <Route
           path={PATHS.PROFILE_USER}
           element={
-            <PrivateRoutes isLogged={logged}>
+            <PrivateRoutes isLogged={user.isAuthenticated}>
               <UserProfile />
             </PrivateRoutes>
           }
@@ -53,7 +61,7 @@ function AppRouter() {
         <Route
           path={PATHS.PROFILE_EDIT}
           element={
-            <PrivateRoutes isLogged={logged}>
+            <PrivateRoutes isLogged={user.isAuthenticated}>
               {/* <ProfileEdit /> */}
             </PrivateRoutes>
           }
@@ -61,7 +69,7 @@ function AppRouter() {
         <Route
           path={PATHS.SETTINGS}
           element={
-            <PrivateRoutes isLogged={logged}>
+            <PrivateRoutes isLogged={user.isAuthenticated}>
               {/* <Settings /> */}
             </PrivateRoutes>
           }
@@ -69,7 +77,7 @@ function AppRouter() {
         <Route
           path={PATHS.GROUP_FINDER}
           element={
-            <PrivateRoutes isLogged={logged}>
+            <PrivateRoutes isLogged={user.isAuthenticated}>
               {/* <GroupFinder /> */}
             </PrivateRoutes>
           }
@@ -77,7 +85,7 @@ function AppRouter() {
         <Route
           path={PATHS.GROUP_CREATE}
           element={
-            <PrivateRoutes isLogged={logged}>
+            <PrivateRoutes isLogged={user.isAuthenticated}>
               {/* <GroupCreate /> */}
             </PrivateRoutes>
           }
@@ -85,7 +93,7 @@ function AppRouter() {
         <Route
           path={PATHS.GROUP_DETAILS}
           element={
-            <PrivateRoutes isLogged={logged}>
+            <PrivateRoutes isLogged={user.isAuthenticated}>
               {/* <GroupDetails /> */}
             </PrivateRoutes>
           }
@@ -93,7 +101,7 @@ function AppRouter() {
         <Route
           path={PATHS.GROUP_EDIT}
           element={
-            <PrivateRoutes isLogged={logged}>
+            <PrivateRoutes isLogged={user.isAuthenticated}>
               {/* <GroupEdit /> */}
             </PrivateRoutes>
           }
