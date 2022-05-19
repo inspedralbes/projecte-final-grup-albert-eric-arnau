@@ -22,6 +22,9 @@ const useStyles = createStyles({
     border: "1px solid black",
     borderRadius: "15px",
     overflowY: "auto",
+    display: "flex",
+    justifyContent: "flex-end",
+    flexDirection: "column",
     "&::-webkit-scrollbar": {
       border: "10px solid transparent",
       width: "10px",
@@ -63,7 +66,7 @@ function Chat() {
 
   useEffect(() => {
     initializeWebsocket();
-    // loadGroupMessages("uJZNitszHdqWRqceyXXn");
+    loadGroupMessages("uJZNitszHdqWRqceyXXn");
   }, []);
   console.log(messages);
 

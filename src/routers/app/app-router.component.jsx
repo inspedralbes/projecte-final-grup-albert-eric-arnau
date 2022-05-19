@@ -1,16 +1,19 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PATHS from "../paths";
-import { Landing, Chat, NotFound, UserProfile, ProfileEdit, About } from "../../views";
+import {
+  Landing,
+  Chat,
+  NotFound,
+  UserProfile,
+  Register,
+  Login,
+  About,
+} from "../../views";
 import PrivateRoutes from "./private-routes.component";
 import PublicRoutes from "./public-routes.component";
 
 function AppRouter() {
-  const logged = true;
+  const logged = false;
   return (
     <Router>
       <Routes>
@@ -21,14 +24,12 @@ function AppRouter() {
         {/* Public routes */}
         <Route
           path={PATHS.LOGIN}
-          element={
-            <PublicRoutes isLogged={logged}>{/* <Login /> */}</PublicRoutes>
-          }
+          element={<PublicRoutes isLogged={logged}>{<Login />}</PublicRoutes>}
         />
         <Route
           path={PATHS.REGISTER}
           element={
-            <PublicRoutes isLogged={logged}>{/* <Register /> */}</PublicRoutes>
+            <PublicRoutes isLogged={logged}>{<Register />}</PublicRoutes>
           }
         />
 
@@ -53,7 +54,7 @@ function AppRouter() {
           path={PATHS.PROFILE_EDIT}
           element={
             <PrivateRoutes isLogged={logged}>
-              <ProfileEdit />
+              {/* <ProfileEdit /> */}
             </PrivateRoutes>
           }
         />
