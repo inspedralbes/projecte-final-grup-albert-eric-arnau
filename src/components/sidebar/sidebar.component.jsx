@@ -14,7 +14,7 @@ function Sidebar({ navbarType }) {
       </Routes> */}
       <Navbar.Section className={classes.section}>
         <UserButton
-          image="https://i.imgur.com/fGxgcDF.png"
+          image="/Icon.svg"
           name="Group'em"
           icon={<Selector size={14} />}
         />

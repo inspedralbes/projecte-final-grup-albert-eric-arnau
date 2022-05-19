@@ -19,8 +19,7 @@ const useWebSocket = () => {
       console.log("Connected to server");
       let message = JSON.stringify({
         meta: "connection",
-        userID: process.env.REACT_APP_USER_ID || "",
-        username: "GunteR_",
+        userID: process.env.REACT_APP_USER_ID,
       });
       socket.send(message);
     };
@@ -36,7 +35,7 @@ const useWebSocket = () => {
           receiveMessage(message);
           break;
         default:
-          console.log("Message from server:" + event.data);
+          console.log("Message from server:" + event.message);
           break;
       }
     };

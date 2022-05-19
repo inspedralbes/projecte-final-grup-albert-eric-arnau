@@ -7,6 +7,7 @@ import {
   UserProfile,
   Register,
   Login,
+  About,
 } from "../../views";
 import PrivateRoutes from "./private-routes.component";
 import PublicRoutes from "./public-routes.component";
@@ -18,8 +19,7 @@ function AppRouter() {
       <Routes>
         {/* Generic routes */}
         <Route path={PATHS.HOME} element={<Landing />} />
-        {/* <Route path={PATHS.ABOUT} element={<About />} />
-        <Route path={PATHS.CONTACT} element={<Contact />} /> */}
+        <Route path={PATHS.ABOUT} element={<About />} />
 
         {/* Public routes */}
         <Route
