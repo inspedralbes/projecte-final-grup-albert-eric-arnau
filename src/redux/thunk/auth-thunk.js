@@ -22,9 +22,8 @@ export const loginThunk = (email, password) => {
         `${process.env.REACT_APP_API_URL}/user/${firebaseUser.uid}`
       );
       const user = await response.json();
-      console.log(user);
-      // dispatch(loginAction(user));
-      // console.log(user);
+
+      dispatch(loginAction(user));
     } catch (err) {
       console.log(err);
     }
