@@ -9,7 +9,7 @@ import {
   About,
   GroupFinder,
   Register,
-  Login
+  Login,
 } from "../../views";
 import PrivateRoutes from "./private-routes.component";
 import PublicRoutes from "./public-routes.component";
@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 
 function AppRouter() {
   const { isAuthenticated } = useSelector((state) => state.auth);
-
+  console.log("is auth: " + isAuthenticated);
   return (
     <Router>
       <Routes>
@@ -62,7 +62,7 @@ function AppRouter() {
           path={PATHS.PROFILE_EDIT}
           element={
             <PrivateRoutes isLogged={isAuthenticated}>
-              {/* <ProfileEdit /> */}
+              <ProfileEdit />
             </PrivateRoutes>
           }
         />

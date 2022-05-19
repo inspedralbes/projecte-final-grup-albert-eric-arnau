@@ -5,8 +5,8 @@ import { useStyles } from "./main-links.styles";
 import PATHS from "../../../../routers/paths";
 const links = [
   { icon: Message, label: "Chat", to: PATHS.CHAT },
-  { icon: User, label: "Perfil", to: PATHS.CHAT },
-  { icon: Settings, label: "Ajustes", to: PATHS.CHAT },
+  { icon: User, label: "Perfil", to: PATHS.PROFILE_USER },
+  { icon: Settings, label: "Ajustes", to: PATHS.PROFILE_EDIT },
 ];
 function MainLinks() {
   const { classes } = useStyles();
