@@ -1,11 +1,12 @@
 import { Text, Avatar, Group, Paper } from "@mantine/core";
+import { useSelector } from "react-redux";
 
 import { useStyles } from "./chat-message.styles";
 
 function ChatMessage({ messageData = null }) {
   const { classes } = useStyles();
-  //! change for user
-  const isLocal = process.env.REACT_APP_USER_ID === messageData.userID;
+  const auth = useSelector((store) => store.auth);
+  const isLocal = auth.userID === messageData.userID;
 
   return (
     messageData && (
