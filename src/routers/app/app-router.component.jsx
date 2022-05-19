@@ -8,12 +8,13 @@ import {
   Register,
   Login,
   About,
+  ProfileEdit,
 } from "../../views";
 import PrivateRoutes from "./private-routes.component";
 import PublicRoutes from "./public-routes.component";
 
 function AppRouter() {
-  const logged = false;
+  const logged = true;
   return (
     <Router>
       <Routes>
@@ -54,7 +55,7 @@ function AppRouter() {
           path={PATHS.PROFILE_EDIT}
           element={
             <PrivateRoutes isLogged={logged}>
-              {/* <ProfileEdit /> */}
+              <ProfileEdit />
             </PrivateRoutes>
           }
         />

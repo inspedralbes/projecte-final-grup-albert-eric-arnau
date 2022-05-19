@@ -9,6 +9,7 @@ import {
   Paper,
   Textarea,
   Indicator,
+  ColorPicker,
 } from "@mantine/core";
 import { InfoCircle, Edit } from "tabler-icons-react";
 import { useStyles } from "./userSettings.styles";
@@ -90,14 +91,6 @@ function UserSettings() {
         </Grid.Col>
         <Grid.Col span={6}>
           <div className={classes.container}>
-            <Textarea
-              placeholder="Your description"
-              label="Short description"
-            />
-          </div>
-        </Grid.Col>
-        <Grid.Col span={6}>
-          <div className={classes.container}>
             <TextInput
               rightSection={username}
               label="@username"
@@ -109,8 +102,6 @@ function UserSettings() {
               placeholder="example_123"
             />
           </div>
-        </Grid.Col>
-        <Grid.Col span={6}>
           <div className={classes.container}>
             <TextInput
               rightSection={email}
@@ -124,12 +115,50 @@ function UserSettings() {
             />
           </div>
         </Grid.Col>
+        {/* <Grid.Col span={6}></Grid.Col> */}
         <Grid.Col span={12}>
-          <center>
+          <div className={classes.container}>
+            <Textarea
+              minRows={7}
+              placeholder="Your description"
+              label="Short description"
+            />
+          </div>
+        </Grid.Col>
+        <Grid.Col span={12}>
+          <Center>
+            <ColorPicker
+              sx={{ minWidth: 600 }}
+              defaultValue="#000000"
+              withPicker={false}
+              swatchesPerRow={14}
+              format="hex"
+              swatches={[
+                "#25262b",
+                "#868e96",
+                "#fa5252",
+                "#e64980",
+                "#be4bdb",
+                "#7950f2",
+                "#4c6ef5",
+                "#228be6",
+                "#15aabf",
+                "#12b886",
+                "#40c057",
+                "#82c91e",
+                "#fab005",
+                "#fd7e14",
+              ]}
+              // {...form.getInputProps("color")}
+            />
+          </Center>
+        </Grid.Col>
+        <Grid.Col span={12}>
+          <Center>
             <Button variant="gradient" gradient={{ from: "orange", to: "red" }}>
               Submit
             </Button>
-          </center>
+          </Center>
         </Grid.Col>
       </Grid>
     </Paper>
