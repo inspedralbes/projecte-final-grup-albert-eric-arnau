@@ -21,9 +21,11 @@ export const loginThunk = (email, password) => {
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/user/${firebaseUser.uid}`
       );
-      const user = await response.json();
-
-      dispatch(loginAction(user));
+      if (response.ok) {
+        const user = await response.json();
+        dispatch(loginAction(user));
+      }
+      return response.status;
     } catch (err) {
       console.log(err);
     }
@@ -77,9 +79,11 @@ export const registerThunk = (
           body: JSON.stringify(newUser),
         }
       );
-
-      const user = await response.json();
-      dispatch(loginAction(user));
+      if (response.ok) {
+        const user = await response.json();
+        dispatch(loginAction(user));
+      }
+      return response.status;
     } catch (err) {
       console.log(err);
     }
