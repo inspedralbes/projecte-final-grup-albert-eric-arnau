@@ -6,7 +6,6 @@ import { UserButton } from "../user-button";
 
 function Sidebar({ navbarType }) {
   const { classes } = useStyles();
-
   return (
     <Navbar height={700} width={{ sm: 300 }} px="md" className={classes.navbar}>
       {/* <Routes>
