@@ -5,9 +5,11 @@ import {
   Chat,
   NotFound,
   UserProfile,
-  Register,
-  Login,
+  ProfileEdit,
   About,
+  GroupFinder,
+  Register,
+  Login
 } from "../../views";
 import PrivateRoutes from "./private-routes.component";
 import PublicRoutes from "./public-routes.component";
@@ -76,7 +78,7 @@ function AppRouter() {
           path={PATHS.GROUP_FINDER}
           element={
             <PrivateRoutes isLogged={isAuthenticated}>
-              {/* <GroupFinder /> */}
+              <GroupFinder />
             </PrivateRoutes>
           }
         />

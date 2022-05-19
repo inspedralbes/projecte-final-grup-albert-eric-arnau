@@ -1,1 +1,1 @@
-export { default } from "./about.component";
+export { default } from "./about.view";
