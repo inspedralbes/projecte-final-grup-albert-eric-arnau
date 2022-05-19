@@ -6,15 +6,25 @@ import { auth } from "../../firebase/firebaseConfig";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
 export const loginThunk = (email, password) => {
   return async (dispatch) => {
     try {
-      const { uid } = await signInWithEmailAndPassword(auth, email, password);
-      const response = await fetch(`${process.env.API_URL}/user/${uid}`);
+      const { user: firebaseUser } = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/user/${firebaseUser.uid}`
+      );
       const user = await response.json();
-      dispatch(loginAction(user));
+      console.log(user);
+      // dispatch(loginAction(user));
+      // console.log(user);
     } catch (err) {
       console.log(err);
     }
@@ -24,7 +34,9 @@ export const loginThunk = (email, password) => {
 export const autoLoginThunk = ({ uid }) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${process.env.API_URL}/user/${uid}`);
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/user/${uid}`
+      );
       const user = await response.json();
       dispatch(loginAction(user));
     } catch (err) {
@@ -42,18 +54,20 @@ export const registerThunk = (
 ) => {
   return async (dispatch) => {
     try {
-      const { uid } = await createUserWithEmailAndPassword(
+      const { user: firebaseUser } = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
+
       const newUser = {
         name: displayName,
-        userID: uid,
+        userID: firebaseUser.uid,
         username,
         email,
         color,
       };
+
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/user/register`,
         {
@@ -61,12 +75,11 @@ export const registerThunk = (
           headers: {
             "Content-Type": "application/json",
           },
-          body: newUser,
+          body: JSON.stringify(newUser),
         }
       );
 
       const user = await response.json();
-      console.log(user);
       dispatch(loginAction(user));
     } catch (err) {
       console.log(err);
@@ -77,7 +90,7 @@ export const registerThunk = (
 export const logoutThunk = () => {
   return async (dispatch) => {
     try {
-      await auth.signOut();
+      await signOut(auth);
       dispatch(logoutAction());
     } catch (err) {
       console.log(err);

@@ -1,11 +1,13 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PATHS from "../paths";
-import { Landing, Chat, NotFound, UserProfile, Register } from "../../views";
+import {
+  Landing,
+  Chat,
+  NotFound,
+  UserProfile,
+  Register,
+  Login,
+} from "../../views";
 import PrivateRoutes from "./private-routes.component";
 import PublicRoutes from "./public-routes.component";
 
@@ -22,9 +24,7 @@ function AppRouter() {
         {/* Public routes */}
         <Route
           path={PATHS.LOGIN}
-          element={
-            <PublicRoutes isLogged={logged}>{/* <Login /> */}</PublicRoutes>
-          }
+          element={<PublicRoutes isLogged={logged}>{<Login />}</PublicRoutes>}
         />
         <Route
           path={PATHS.REGISTER}

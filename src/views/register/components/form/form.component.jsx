@@ -1,4 +1,6 @@
 import { TextInput, Button, PasswordInput, Group, Text } from "@mantine/core";
+import { Link } from "react-router-dom";
+import PATHS from "../../../../routers/paths";
 function Form({ form, next }) {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,39 +20,23 @@ function Form({ form, next }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* <====================== USERNAME =======================> */}
-      <TextInput
-        label="Username"
-        placeholder="Your username (ej. mangoloco)"
-        {...form.getInputProps("username")}
-      />
       {/* <====================== EMAIL =======================> */}
       <TextInput
         label="Email"
         placeholder="your@email.com"
         {...form.getInputProps("email")}
       />
+      {/* <====================== USERNAME =======================> */}
+      <TextInput
+        label="Username"
+        placeholder="Your username (ej. mangoloco)"
+        {...form.getInputProps("username")}
+      />
       {/* <====================== PASSWORD =======================> */}
       <Group position="apart" mb={5}>
         <Text component="label" htmlFor="password" size="sm" weight={500}>
           Password
         </Text>
-        {/* 
-        <Anchor
-          component="a"
-          href="#"
-          onClick={(event) => event.preventDefault()}
-          sx={(theme) => ({
-            paddingTop: 2,
-            color:
-              theme.colors[theme.primaryColor][
-                theme.colorScheme === "dark" ? 4 : 6
-              ],
-            fontWeight: 500,
-            fontSize: theme.fontSizes.xs,
-          })}>
-          Forgot your password?
-        </Anchor> */}
       </Group>
       <PasswordInput
         placeholder="********"
@@ -70,6 +56,9 @@ function Form({ form, next }) {
       <Button type="submit" fullWidth mt={10}>
         Continue
       </Button>
+      <Text weight={500} size="sm" mt={10}>
+        Already have an account? <Link to={PATHS.LOGIN}>Log in!</Link>
+      </Text>
     </form>
   );
 }

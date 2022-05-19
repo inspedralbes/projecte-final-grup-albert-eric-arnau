@@ -33,7 +33,7 @@ function Register() {
           return "Username can only contain letters, numbers and underscores";
       },
       email: (value) =>
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)
+        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)
           ? null
           : "Invalid email",
       password: (value, { confirmPassword }) => {
