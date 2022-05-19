@@ -3,15 +3,23 @@ import { useStyles } from "./sidebar.styles.js";
 import { Navbar, Group } from "@mantine/core";
 import { Selector, Logout } from "tabler-icons-react";
 import { UserButton } from "../user-button";
+import { useSelector } from "react-redux";
+import PATHS from "../../routers/paths";
+import { useNavigate } from "react-router-dom";
 
 function Sidebar({ navbarType }) {
   const { classes } = useStyles();
+  const { user } = useSelector((store) => store.auth);
+  const navigate = useNavigate();
+  function handleClick() {
+    navigate(PATHS.GROUP_FINDER, { replace: true });
+  }
   return (
     <Navbar height={700} width={{ sm: 300 }} px="md" className={classes.navbar}>
       {/* <Routes>
         <Route path={PATHS.CHAT2} element={<FavGroups />}></Route>
       </Routes> */}
-      <Navbar.Section className={classes.section}>
+      <Navbar.Section className={classes.section} onClick={handleClick}>
         <UserButton
           image="/Icon.svg"
           name="Group'em"
@@ -37,9 +45,9 @@ function Sidebar({ navbarType }) {
         style={{ marginTop: "auto", position: "relative" }}>
         <Group>
           <UserButton
-            image="https://www.disponalencasa.com/pub/media/catalog/product/cache/4025f56c98cb88143bb53de4d18da868/m/o/monster-juice-mango-loco.jpg"
-            name="MangoLoco"
-            email="@Arnau"
+            image={user.imgLink}
+            name={user.username}
+            email={user.name}
             icon={<Selector size={14} />}
           />
           <Logout
