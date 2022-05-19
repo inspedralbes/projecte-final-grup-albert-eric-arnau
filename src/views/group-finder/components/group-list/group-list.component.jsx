@@ -5,54 +5,64 @@ import { GroupItem } from "../group-item";
 const data = [
   {
     avatar:
-      "https://images.unsplash.com/photo-1624298357597-fd92dfbec01d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
-    name: "Robert Wolfkisser",
-    job: "Engineer",
-    email: "rob_wolf@gmail.com",
-    rate: 22,
+      "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
+    name: "Grupo 1",
+    password: true,
+    description:
+      "Esta es la descripción de este grupo, por lo tanto debe ser extensa para comprobar cómo se comporta dentro del GroupItem",
   },
   {
     avatar:
       "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
-    name: "Jill Jailbreaker",
-    job: "Engineer",
-    email: "jj@breaker.com",
-    rate: 45,
+    name: "Grupo 12",
+    description:
+      "Esta es la descripción de este grupo, por lo tanto debe ser extensa para comprobar cómo se comporta dentro del GroupItem",
   },
   {
     avatar:
-      "https://images.unsplash.com/photo-1632922267756-9b71242b1592?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
-    name: "Henry Silkeater",
-    job: "Designer",
-    email: "henry@silkeater.io",
-    rate: 76,
+      "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
+    name: "Grupo 11",
+    description:
+      "Esta es la descripción de este grupo, por lo tanto debe ser extensa para comprobar cómo se comporta dentro del GroupItem",
   },
   {
     avatar:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
-    name: "Bill Horsefighter",
-    job: "Designer",
-    email: "bhorsefighter@gmail.com",
-    rate: 15,
+      "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
+    name: "Grupo 1324",
+    description:
+      "Esta es la descripción de este grupo, por lo tanto debe ser extensa para comprobar cómo se comporta dentro del GroupItem",
   },
   {
     avatar:
-      "https://images.unsplash.com/photo-1630841539293-bd20634c5d72?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
-    name: "Jeremy Footviewer",
-    job: "Manager",
-    email: "jeremy@foot.dev",
-    rate: 98,
+      "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
+    name: "Grupo dsfdf",
+    description:
+      "Esta es la descripción de este grupo, por lo tanto debe ser extensa para comprobar cómo se comporta dentro del GroupItem",
+  },
+  {
+    avatar:
+      "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
+    name: "Grupo fasdfasasdf",
+    description:
+      "Esta es la descripción de este grupo, por lo tanto debe ser extensa para comprobar cómo se comporta dentro del GroupItem",
+  },
+  {
+    avatar:
+      "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
+    name: "Grupo 1aaa",
+    description:
+      "Esta es la descripción de este grupo, por lo tanto debe ser extensa para comprobar cómo se comporta dentro del GroupItem",
   },
 ];
 
 function GroupList() {
   // TODO: useSelector with the groups state
   return (
-    <ScrollArea>
-      <Table sx={{ minWidth: 800 }} verticalSpacing="md">
+    <ScrollArea style={{ height: "85vh" }} offsetScrollbars>
+      <Table sx={{ minWidth: 800 }} verticalSpacing="lg" highlightOnHover>
         <tbody>
-          {data.map((item) => (
-            <GroupItem item={item} />
+          {data.map((item, index) => (
+            <GroupItem key={index} group={item} />
           ))}
         </tbody>
       </Table>

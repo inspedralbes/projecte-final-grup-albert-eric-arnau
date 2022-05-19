@@ -1,34 +1,78 @@
-import { Avatar, Group, Text, ActionIcon, Button } from "@mantine/core";
-import {
-  Pencil,
-  Messages,
-  Note,
-  ReportAnalytics,
-  Trash,
-} from "tabler-icons-react";
+import { Avatar, Group, Text, Button, TextInput } from "@mantine/core";
+import { useModals } from "@mantine/modals";
+import { useState } from "react";
 
-function GroupItem({ item }) {
+function GroupItem({ group }) {
+  const modals = useModals();
+  const [groupPassword, setGroupPassword] = useState("");
+
+  const handleCloseModal = (modal) => {
+    // TODO: execute api call to join group
+
+    modals.closeModal(modal);
+  };
+
+  const openConfirmModal = () => {
+    const modal = modals.openModal({
+      title: "Group information",
+      children: (
+        <>
+          <Group mb={50} direction="column">
+            <Group spacing={10}>
+              <Avatar size={40} src={group.avatar} radius={40} mr={10} />
+              <Text>{group.name}</Text>
+            </Group>
+            <Text>{group.description}</Text>
+          </Group>
+          {group.password && (
+            <TextInput
+              type="text"
+              value={groupPassword}
+              onChange={(e) => setGroupPassword(e.target.value)}
+              placeholder="Confirmation word"
+              label="Enter the confirmation word:"
+              mb={10}
+            />
+          )}
+          <Button
+            variant="gradient"
+            gradient={{ from: "orange", to: "red" }}
+            fullWidth
+            onClick={() => handleCloseModal(modal)}>
+            Join group
+          </Button>
+        </>
+      ),
+    });
+  };
+
   return (
-    <tr key={item.name}>
+    <tr>
       <td>
         <Group spacing="sm">
-          <Avatar size={40} src={item.avatar} radius={40} />
+          <Avatar size={40} src={group.avatar} radius={40} />
           <div>
             <Text size="sm" weight={500}>
-              {item.name}
+              {group.name}
+            </Text>
+            <Text color="dimmed" size="xs">
+              Group name
             </Text>
           </div>
         </Group>
       </td>
       <td>
-        <Text size="sm">{item.email}</Text>
+        <Text size="sm">{group.description}</Text>
         <Text size="xs" color="dimmed">
-          Email
+          Description
         </Text>
       </td>
       <td>
         <Group spacing={0} position="right">
-          <Button>
+          <Button
+            variant="gradient"
+            gradient={{ from: "orange", to: "red" }}
+            onClick={() => openConfirmModal()}>
             Group info
           </Button>
         </Group>
