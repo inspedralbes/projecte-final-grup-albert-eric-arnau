@@ -27,15 +27,14 @@ function UserCard() {
       radius="md"
       position="center"
       spacing={100}
-      withBorder
       sx={(theme) => ({
         backgroundColor:
           theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
         marginTop: theme.spacing.xl * 5,
         marginBottom: theme.spacing.xl * 3,
       })}>
-      {usersData.map((user) => (
-        <Paper>
+      {usersData.map((user, index) => (
+        <Paper key={index}>
           <Avatar src="/LogoPedralbes.png" size={100} radius={100} mx="auto" />
           <Text align="center" size="lg" weight={500} mt="md">
             {user.name}

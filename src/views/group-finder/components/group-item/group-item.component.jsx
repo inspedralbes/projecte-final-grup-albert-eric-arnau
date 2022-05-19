@@ -13,6 +13,8 @@ function GroupItem({ group }) {
   };
 
   const openConfirmModal = () => {
+    const inputValue = groupPassword;
+    const setInputValue = (e) => setGroupPassword(e.target.value);
     const modal = modals.openModal({
       title: "Group information",
       children: (
@@ -27,8 +29,8 @@ function GroupItem({ group }) {
           {group.password && (
             <TextInput
               type="text"
-              value={groupPassword}
-              onChange={(e) => setGroupPassword(e.target.value)}
+              value={inputValue}
+              onChange={setInputValue}
               placeholder="Confirmation word"
               label="Enter the confirmation word:"
               mb={10}
