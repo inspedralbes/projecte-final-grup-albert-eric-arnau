@@ -4,7 +4,9 @@ import {
 } from "../actions/action-creates/auth-creates";
 import { auth } from "../../firebase/firebaseConfig";
 import {
+  browserLocalPersistence,
   createUserWithEmailAndPassword,
+  setPersistence,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
@@ -12,6 +14,8 @@ import {
 export const loginThunk = (email, password) => {
   return async (dispatch) => {
     try {
+      await setPersistence(auth, browserLocalPersistence);
+
       const { user: firebaseUser } = await signInWithEmailAndPassword(
         auth,
         email,
@@ -39,6 +43,7 @@ export const autoLoginThunk = ({ uid }) => {
         `${process.env.REACT_APP_API_URL}/user/${uid}`
       );
       const user = await response.json();
+      console.log(user);
       dispatch(loginAction(user));
     } catch (err) {
       console.log(err);

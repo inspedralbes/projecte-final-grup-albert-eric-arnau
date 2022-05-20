@@ -1,4 +1,4 @@
-import { AppShell, Header } from "@mantine/core";
+import { AppShell } from "@mantine/core";
 import { SideBar } from "../components/sidebar";
 
 function Layout({ children, navbarType }) {

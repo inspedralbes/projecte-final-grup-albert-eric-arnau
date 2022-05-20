@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
+import { useEffect, useState } from "react";
 import PATHS from "../paths";
 import {
   Landing,
@@ -13,11 +19,24 @@ import {
 } from "../../views";
 import PrivateRoutes from "./private-routes.component";
 import PublicRoutes from "./public-routes.component";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { auth } from "../../firebase/firebaseConfig";
+import { autoLoginThunk } from "../../redux/thunk/auth-thunk";
+import { onAuthStateChanged } from "firebase/auth";
 
 function AppRouter() {
   const { isAuthenticated } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   console.log("is auth: " + isAuthenticated);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      dispatch(autoLoginThunk(user));
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, [dispatch]);
+
   return (
     <Router>
       <Routes>
