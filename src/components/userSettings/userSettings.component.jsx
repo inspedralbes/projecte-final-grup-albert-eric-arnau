@@ -8,26 +8,27 @@ import {
   Button,
   Paper,
   Textarea,
+  Group,
   Indicator,
   ColorPicker,
 } from "@mantine/core";
+import { useForm } from "@mantine/form";
+import { useSelector } from "react-redux";
 import { InfoCircle, Edit } from "tabler-icons-react";
 import { useStyles } from "./userSettings.styles";
 function UserSettings() {
+  const { user } = useSelector((store) => store.auth);
   const { classes } = useStyles();
-  const username = (
-    <Tooltip
-      label="Your unique username"
-      placement="end"
-      withArrow
-      transition="pop-bottom-right">
-      <Text color="dimmed" sx={{ cursor: "help" }}>
-        <Center>
-          <InfoCircle size={18} />
-        </Center>
-      </Text>
-    </Tooltip>
-  );
+
+  const form = useForm({
+    initialValues: {
+      username: user.username,
+      description: user.description ?? "PATATA",
+      color: user.color ?? "#000000",
+    },
+    validate: {},
+  });
+
   const displayName = (
     <Tooltip
       label="The name other useres will see"
@@ -44,19 +45,6 @@ function UserSettings() {
   const email = (
     <Tooltip
       label="Email address"
-      placement="end"
-      withArrow
-      transition="pop-bottom-right">
-      <Text color="dimmed" sx={{ cursor: "help" }}>
-        <Center>
-          <InfoCircle size={18} />
-        </Center>
-      </Text>
-    </Tooltip>
-  );
-  const password = (
-    <Tooltip
-      label="Your password"
       placement="end"
       withArrow
       transition="pop-bottom-right">
@@ -91,39 +79,49 @@ function UserSettings() {
         </Grid.Col>
         <Grid.Col span={6}>
           <div className={classes.container}>
-            <TextInput
-              rightSection={username}
-              label="@username"
-              placeholder="@example"
-            />
+            <Text component="label" size="sm" weight={500}>
+              User ID :
+            </Text>
+            <Text component="p" size="sm" mt={0}>
+              {user.name}
+            </Text>
+            <Text component="label" size="sm" weight={500}>
+              Email :
+            </Text>
+            <Text component="p" size="sm" mt={0}>
+              {user.email}
+            </Text>
             <TextInput
               rightSection={displayName}
               label="Display name"
               placeholder="example_123"
-            />
-          </div>
-          <div className={classes.container}>
-            <TextInput
-              rightSection={email}
-              label="Email"
-              placeholder="123@example.com"
-            />
-            <TextInput
-              rightSection={password}
-              label="Password"
-              placeholder="******"
+              {...form.getInputProps("username")}
             />
           </div>
         </Grid.Col>
-        {/* <Grid.Col span={6}></Grid.Col> */}
         <Grid.Col span={12}>
           <div className={classes.container}>
             <Textarea
               minRows={7}
               placeholder="Your description"
               label="Short description"
+              {...form.getInputProps("description")}
             />
           </div>
+        </Grid.Col>
+        <Grid.Col span={12}>
+          <Center>
+            <Text weight={500} component="p" size="">
+              PREVIEW:{" "}
+              <Text
+                component="span"
+                size="lg"
+                weight={500}
+                color={form.values.color}>
+                {form.values.username}
+              </Text>
+            </Text>
+          </Center>
         </Grid.Col>
         <Grid.Col span={12}>
           <Center>
@@ -149,7 +147,7 @@ function UserSettings() {
                 "#fab005",
                 "#fd7e14",
               ]}
-              // {...form.getInputProps("color")}
+              {...form.getInputProps("color")}
             />
           </Center>
         </Grid.Col>

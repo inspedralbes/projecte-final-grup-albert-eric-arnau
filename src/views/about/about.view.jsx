@@ -1,4 +1,3 @@
-import { Text } from "@mantine/core";
 import { Appbar } from "../landing/components/appbar";
 import { Footer } from "../landing/components/footer";
 import { TitleText } from "./components/title-text";

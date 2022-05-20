@@ -6,9 +6,11 @@ import {
   joinGroupInDatabase,
   leaveGroupInDatabase,
   getPreviousMessages,
+  getAllGroups,
 } from "../../controllers/group/index.js";
 const router = express.Router();
 
+router.get("/all-groups", getAllGroups);
 router.get("/:idGroup", getGroupInfo);
 
 router.post("/create", createGroupInDatabase);

@@ -9,7 +9,6 @@ function MenuLink({ data }) {
 
   function handleClick() {
     navigate(to, { replace: true });
-    console.log(to);
   }
   return (
     <UnstyledButton

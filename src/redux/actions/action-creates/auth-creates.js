@@ -1,12 +1,9 @@
 import { authTypes } from "../action-types";
 
-export const loginAction = (email, password) => {
+export const loginAction = (user) => {
   return {
     type: authTypes.LOGIN,
-    payload: {
-      email,
-      password,
-    },
+    payload: user,
   };
 };
 
