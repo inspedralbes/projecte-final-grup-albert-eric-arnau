@@ -76,10 +76,16 @@ function UserSettings() {
             <center>
               <Indicator
                 position="bottom-end"
-                color="orange"
                 inline
-                label={<Edit className={classes.editButton} />}
-                size={30}>
+                label={
+                  <Button
+                    variant="gradient"
+                    gradient={{ from: "orange", to: "red" }}
+                    leftIcon={<Edit />}>
+                    Edit
+                  </Button>
+                }
+                size={0}>
                 <Image
                   src="https://www.disponalencasa.com/pub/media/catalog/product/cache/4025f56c98cb88143bb53de4d18da868/m/o/monster-juice-mango-loco.jpg"
                   className={classes.image}

@@ -39,7 +39,7 @@ function AllGroups() {
     <Navbar.Section className={classes.section}>
       <Group className={classes.groupsHeader} position="apart">
         <Text size="s" weight={500} color="dimmed">
-          Todos tus grupos
+          All your groups
         </Text>
       </Group>
       <div className={classes.groups}>{groupLinks}</div>
