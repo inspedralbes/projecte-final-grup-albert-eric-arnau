@@ -25,7 +25,7 @@ const initializeWebsocket = (port) =>
     wss.on("connection", (ws) => {
       try {
         ws.on("message", async (receivedData) => {
-          let data = JSON.parse(receivedData);
+          let data = receivedData;
 
           if (data.meta === "connection") {
             const { userID, username } = data;
