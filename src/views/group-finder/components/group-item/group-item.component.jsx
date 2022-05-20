@@ -1,20 +1,18 @@
 import { Avatar, Group, Text, Button, TextInput } from "@mantine/core";
 import { useModals } from "@mantine/modals";
-import { useState } from "react";
+import { useRef } from "react";
 
 function GroupItem({ group }) {
   const modals = useModals();
-  const [groupPassword, setGroupPassword] = useState("");
-
-  const handleCloseModal = (modal) => {
+  const passwordRef = useRef();
+  
+  const handleCloseModal = (modal, password = "") => {
     // TODO: execute api call to join group
-
+    
     modals.closeModal(modal);
   };
-
+  
   const openConfirmModal = () => {
-    const inputValue = groupPassword;
-    const setInputValue = (e) => setGroupPassword(e.target.value);
     const modal = modals.openModal({
       title: "Group information",
       children: (
@@ -28,9 +26,8 @@ function GroupItem({ group }) {
           </Group>
           {group.password && (
             <TextInput
+              ref={passwordRef}
               type="text"
-              value={inputValue}
-              onChange={setInputValue}
               placeholder="Confirmation word"
               label="Enter the confirmation word:"
               mb={10}
@@ -40,7 +37,7 @@ function GroupItem({ group }) {
             variant="gradient"
             gradient={{ from: "orange", to: "red" }}
             fullWidth
-            onClick={() => handleCloseModal(modal)}>
+            onClick={() => handleCloseModal(modal, passwordRef?.current?.value)}>
             Join group
           </Button>
         </>
