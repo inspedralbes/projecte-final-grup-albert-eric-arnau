@@ -13,6 +13,7 @@ import {
   ColorPicker,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { InfoCircle, Edit } from "tabler-icons-react";
 import { useStyles } from "./userSettings.styles";
@@ -20,10 +21,34 @@ function UserSettings() {
   const { user } = useSelector((store) => store.auth);
   const { classes } = useStyles();
 
+  //Validate Changes on user info
+  var changes = false;
+  function updateUserData() {
+    if (form.values.username != user.username) {
+      changes = true;
+      console.log("username changed" + form.values.username);
+    }
+    if (form.values.description != user.description) {
+      changes = true;
+      console.log("description changed" + form.values.description);
+      console.log(form.values.description);
+      console.log(user.description);
+    }
+    if (form.values.color != user.color) {
+      changes = true;
+      console.log("color changed" + form.values.color);
+    }
+    if (changes) {
+      console.log("changes");
+    } else {
+      console.log("no changes");
+    }
+  }
+
   const form = useForm({
     initialValues: {
       username: user.username,
-      description: user.description ?? "PATATA",
+      description: user.description,
       color: user.color ?? "#000000",
     },
     validate: {},
@@ -32,19 +57,6 @@ function UserSettings() {
   const displayName = (
     <Tooltip
       label="The name other useres will see"
-      placement="end"
-      withArrow
-      transition="pop-bottom-right">
-      <Text color="dimmed" sx={{ cursor: "help" }}>
-        <Center>
-          <InfoCircle size={18} />
-        </Center>
-      </Text>
-    </Tooltip>
-  );
-  const email = (
-    <Tooltip
-      label="Email address"
       placement="end"
       withArrow
       transition="pop-bottom-right">
@@ -64,10 +76,16 @@ function UserSettings() {
             <center>
               <Indicator
                 position="bottom-end"
-                color="orange"
                 inline
-                label={<Edit className={classes.editButton} />}
-                size={30}>
+                label={
+                  <Button
+                    variant="gradient"
+                    gradient={{ from: "orange", to: "red" }}
+                    leftIcon={<Edit />}>
+                    Edit
+                  </Button>
+                }
+                size={0}>
                 <Image
                   src="https://www.disponalencasa.com/pub/media/catalog/product/cache/4025f56c98cb88143bb53de4d18da868/m/o/monster-juice-mango-loco.jpg"
                   className={classes.image}
@@ -153,7 +171,10 @@ function UserSettings() {
         </Grid.Col>
         <Grid.Col span={12}>
           <Center>
-            <Button variant="gradient" gradient={{ from: "orange", to: "red" }}>
+            <Button
+              variant="gradient"
+              gradient={{ from: "orange", to: "red" }}
+              onClick={updateUserData}>
               Submit
             </Button>
           </Center>

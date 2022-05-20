@@ -6,7 +6,7 @@ import { leaveGroup } from "../../../database/methods/group/index.js";
 import { checkParameters, keys } from "../../methods/parameters/index.js";
 
 const leaveGroupInDatabase = async (req, res) => {
-  const body = JSON.parse(req.body);
+  const body = req.body;
   if (!checkParameters(body, keys.leaveGroup))
     return res.status(400).json({ message: "Wrong parameters" });
 

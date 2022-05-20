@@ -40,9 +40,9 @@ function FavGroups() {
     <Navbar.Section className={classes.section}>
       <Group className={classes.groupsHeader} position="apart">
         <Text size="s" weight={500} color="dimmed">
-          Grupos Favoritos
+          Fav Groups
         </Text>
-        <Tooltip label="Grupos favoritos" withArrow position="right">
+        <Tooltip label="Favorite Groups" withArrow position="right">
           <ThemeIcon variant="filed" size={20} color="dark">
             <Star size={12} />
           </ThemeIcon>

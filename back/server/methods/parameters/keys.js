@@ -6,6 +6,7 @@ const keys = {
 
   // user keys
   register: ["userID", "email", "name", "username", "color"],
+  setFavouriteGroup: ["userID", "groupID"],
 };
 
 export default keys;

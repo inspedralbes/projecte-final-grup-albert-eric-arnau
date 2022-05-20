@@ -4,6 +4,7 @@ import {
   register,
   getProfileInfo,
   updateProfileInfo,
+  setFavouriteGroup,
 } from "../../controllers/user/index.js";
 const router = express.Router();
 
@@ -12,6 +13,7 @@ router.post("/register", register);
 
 // PROFILE
 router.get("/:id", getProfileInfo);
-router.put("/update-profile", updateProfileInfo);
+router.put("/:id/set-favourite-group", setFavouriteGroup);
+// router.put("/update-profile", updateProfileInfo);
 
 export default router;
