@@ -1,4 +1,4 @@
-import { UserSettings } from "../../components/userSettings";
+import { UserSettings } from "../../components/user-settings";
 
 function ProfileEdit() {
   return <UserSettings />;

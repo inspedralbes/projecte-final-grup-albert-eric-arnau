@@ -16,7 +16,7 @@ import { useForm } from "@mantine/form";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { InfoCircle, Edit } from "tabler-icons-react";
-import { useStyles } from "./userSettings.styles";
+import { useStyles } from "./user-settings.styles";
 function UserSettings() {
   const { user } = useSelector((store) => store.auth);
   const { classes } = useStyles();
