@@ -85,4 +85,10 @@ export const useStyles = createStyles((theme) => ({
       cursor: "pointer",
     },
   },
+  returnButton: {
+    width: "100%",
+    marginBottom: "10px",
+    textDecoration: "none",
+    color: "white",
+  },
 }));

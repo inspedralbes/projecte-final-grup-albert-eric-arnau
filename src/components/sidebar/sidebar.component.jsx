@@ -1,19 +1,27 @@
 import { FavGroups, MainLinks, AllGroups } from "./components/index";
 import { useStyles } from "./sidebar.styles.js";
-import { Navbar, Group } from "@mantine/core";
+import { Navbar, Group, Button } from "@mantine/core";
 import { Selector, Logout } from "tabler-icons-react";
 import { UserButton } from "../user-button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PATHS from "../../routers/paths";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { logoutThunk } from "../../redux/thunk/auth-thunk";
 
 function Sidebar({ navbarType }) {
   const { classes } = useStyles();
   const { user } = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  function handleClick() {
+  const handleClick = () => {
     navigate(PATHS.GROUP_FINDER, { replace: true });
-  }
+  };
+
+  const handleLogout = () => {
+    dispatch(logoutThunk());
+    navigate(PATHS.LOGIN, { replace: true });
+  };
+
   return (
     <Navbar height={700} width={{ sm: 300 }} px="md" className={classes.navbar}>
       {/* <Routes>
@@ -27,18 +35,26 @@ function Sidebar({ navbarType }) {
         />
       </Navbar.Section>
 
-      {/* Main Links */}
-      {navbarType !== "chat" && (
+      {navbarType === "chat" ? (
+        // All Groups
+        <>
+          <NavLink to={PATHS.PROFILE_USER} className={classes.returnButton}>
+            <Button
+              variant="gradient"
+              gradient={{ from: "orange", to: "red" }}
+              style={{ width: "100%" }}>
+              Return to dashboard
+            </Button>
+          </NavLink>
+          <AllGroups />
+        </>
+      ) : (
+        // Main Links
         <>
           <MainLinks />
           <FavGroups />
         </>
       )}
-      {/* Main Links */}
-
-      {/* All Groups */}
-      {navbarType === "chat" && <AllGroups />}
-      {/* All Groups */}
 
       <Navbar.Section
         className={classes.section}
@@ -51,6 +67,7 @@ function Sidebar({ navbarType }) {
             icon={<Selector size={14} />}
           />
           <Logout
+            onClick={handleLogout}
             className={classes.user}
             size={20}
             style={{ position: "absolute", right: 10 }}
