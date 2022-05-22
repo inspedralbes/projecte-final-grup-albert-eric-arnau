@@ -1,6 +1,6 @@
 import { updateUser } from "../../../database/methods/user/index.js";
-import checkParameters from "../../methods/parameters/checkParameters";
-import keys from "../../methods/parameters/keys";
+import { checkParameters } from "../../methods/parameters/index.js";
+import keys from "../../methods/parameters/keys.js";
 
 const updateProfileInfo = async (req, res) => {
   if (!checkParameters(req.body, keys.updateUser))
