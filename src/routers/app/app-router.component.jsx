@@ -16,6 +16,7 @@ import {
   GroupFinder,
   Register,
   Login,
+  CreateGroup,
 } from "../../views";
 import PrivateRoutes from "./private-routes.component";
 import PublicRoutes from "./public-routes.component";
@@ -105,7 +106,7 @@ function AppRouter() {
           path={PATHS.GROUP_CREATE}
           element={
             <PrivateRoutes isLogged={isAuthenticated}>
-              {/* <GroupCreate /> */}
+              <CreateGroup />
             </PrivateRoutes>
           }
         />

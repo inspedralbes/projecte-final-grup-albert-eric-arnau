@@ -8,3 +8,4 @@ export { default as Login } from "./login";
 export { default as Register } from "./register";
 export { default as ProfileEdit } from "./profile-edit";
 export { default as GroupFinder } from "./group-finder";
+export { default as CreateGroup } from "./create-group";

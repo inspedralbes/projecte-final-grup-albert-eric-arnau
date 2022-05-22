@@ -6,6 +6,15 @@ const keys = {
 
   // user keys
   register: ["userID", "email", "name", "username", "color"],
+  updateUser: [
+    "userID",
+    "email",
+    "name",
+    "username",
+    "description",
+    "avatar",
+    "color",
+  ],
   setFavouriteGroup: ["userID", "groupID"],
 };
 

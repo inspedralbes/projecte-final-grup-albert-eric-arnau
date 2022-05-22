@@ -43,7 +43,7 @@ function Sidebar({ navbarType }) {
               variant="gradient"
               gradient={{ from: "orange", to: "red" }}
               style={{ width: "100%" }}>
-              Return to dashboard
+              Dashboard
             </Button>
           </NavLink>
           <AllGroups />

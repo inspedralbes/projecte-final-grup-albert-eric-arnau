@@ -19,6 +19,7 @@ async function createUser(uid, email, name, username, color) {
       email,
       name,
       username,
+      avatar: "",
       description: "",
       favourites: [],
       color,
