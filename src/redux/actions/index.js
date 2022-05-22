@@ -1,3 +1,3 @@
 // auth actions
 export * from "./action-creates";
-export { authTypes, chatTypes } from "./action-types";
+export { authTypes, chatTypes, groupTypes } from "./action-types";
