@@ -63,19 +63,40 @@ export const deleteGroupThunk = (idGroup, UserID) => {
   };
 };
 
-export const createGroupThunk = (name, UserID) => {
+export const createGroupThunk = (
+  admin,
+  name,
+  password,
+  limit,
+  imgLink,
+  description
+) => {
   return async (dispatch) => {
     try {
-      await fetch(`${process.env.REACT_APP_API_URL}/group`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: name,
-          userID: UserID,
-        }),
-      });
+      const newGroup = {
+        admin,
+        name,
+        password,
+        limit,
+        imgLink,
+        description,
+      };
+      const respose = await fetch(
+        `${process.env.REACT_APP_API_URL}/group/create`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newGroup),
+        }
+      );
+      if (respose.ok) {
+        const group = await respose.json();
+        console.log("group", group);
+        //dispatch(createGroup(group));
+      }
+      return respose.status;
     } catch (err) {}
   };
 };
