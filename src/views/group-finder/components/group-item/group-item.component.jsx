@@ -21,7 +21,7 @@ function GroupItem({ group }) {
         <>
           <Group mb={50} direction="column">
             <Group spacing={10}>
-              <Avatar size={40} src={group.avatar} radius={40} mr={10} />
+              <Avatar size={40} src={group.imgLink} radius={40} mr={10} />
               <Text>{group.name}</Text>
             </Group>
             <Text>{group.description}</Text>
@@ -53,7 +53,7 @@ function GroupItem({ group }) {
     <tr>
       <td>
         <Group spacing="sm">
-          <Avatar size={40} src={group.avatar} radius={40} />
+          <Avatar size={40} src={group.imgLink} radius={40} />
           <div>
             <Text size="sm" weight={500}>
               {group.name}

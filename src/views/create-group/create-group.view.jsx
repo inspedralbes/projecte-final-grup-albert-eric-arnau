@@ -19,6 +19,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { CloudUpload } from "tabler-icons-react";
 import { createGroupThunk } from "../../redux/thunk/group-thunk";
 import { useStyles } from "./create-group.styles";
+import {
+  getDownloadURL,
+  ref,
+  uploadBytes,
+  uploadBytesResumable,
+} from "firebase/storage";
+import { storage } from "../../firebase/firebaseConfig";
 
 function CreateGroup() {
   const { classes } = useStyles();
@@ -29,6 +36,9 @@ function CreateGroup() {
 
   const handleCreateGroup = () => {
     const { name, description, limit, isPublic, image } = form.values;
+
+    // TODO: subir imagen a firebase
+
     let { password } = form.values;
 
     if (!name || !description || !limit) {
@@ -74,10 +84,13 @@ function CreateGroup() {
           </Center>
           <Dropzone
             openRef={dropzoneRef}
-            onDrop={(image) => {
+            onDrop={async (image) => {
               const [file] = image;
               if (file) {
-                form.setFieldValue("image", URL.createObjectURL(file));
+                const storageRef = ref(storage, `groups/${file.name}`);
+                await uploadBytes(storageRef, file);
+                const imageURL = await getDownloadURL(storageRef);
+                form.setFieldValue("image", imageURL);
               }
             }}
             onReject={() => {

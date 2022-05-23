@@ -6,6 +6,7 @@ import {
   GoogleAuthProvider,
   FacebookAuthProvider, // not used for now
 } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -23,9 +24,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth();
+const storage = getStorage();
 
 // exports for use in other files
-export { auth, db, GoogleAuthProvider };
+export { auth, db, GoogleAuthProvider, storage };
 
 // TODO - create more actions
 // TODO - create more reducers
