@@ -4,7 +4,13 @@ import { userRoutes, groupRoutes } from "./routes/index.js";
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://groupem.alumnes.inspedralbes.cat",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+  })
+);
 app.use(express.json());
 
 app.use("/user", userRoutes);
