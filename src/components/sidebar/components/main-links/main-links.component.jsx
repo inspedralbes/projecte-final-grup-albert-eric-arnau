@@ -1,4 +1,10 @@
-import { Message, User, Settings, ClipboardPlus } from "tabler-icons-react";
+import {
+  Message,
+  User,
+  Settings,
+  ClipboardPlus,
+  ClipboardList,
+} from "tabler-icons-react";
 import { MenuLink } from "../index";
 import { Navbar } from "@mantine/core";
 import { useStyles } from "./main-links.styles";
@@ -12,6 +18,7 @@ function MainLinks() {
     return [
       { icon: Message, label: "Chat", to: PATHS.CHAT },
       { icon: User, label: "Profile", to: `/profile/${user.uid}` },
+      { icon: ClipboardList, label: "Group finder", to: PATHS.GROUP_FINDER },
       { icon: ClipboardPlus, label: "Create group", to: PATHS.GROUP_CREATE },
       { icon: Settings, label: "Settings", to: PATHS.PROFILE_EDIT },
     ];
