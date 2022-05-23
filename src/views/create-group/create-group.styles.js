@@ -17,6 +17,7 @@ export const useStyles = createStyles((theme) => ({
 
   submit: {
     marginBlock: "20px",
+    minWidth: "220px",
   },
 
   button: {

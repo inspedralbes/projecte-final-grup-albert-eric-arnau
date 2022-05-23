@@ -11,11 +11,13 @@ const getAllUserGroupsInDatabase = async (userID) => {
   );
 
   const groups = await getDocs(q);
-  let groupsID = [];
+
+  let allUserGroups = [];
   groups.forEach((group) => {
-    groupsID.push(group.id);
+    allUserGroups.push(group.data());
   });
-  return groupsID;
+
+  return allUserGroups;
 };
 
 export default getAllUserGroupsInDatabase;
