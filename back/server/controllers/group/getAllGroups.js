@@ -8,7 +8,11 @@ const getAllGroups = async (req, res) => {
 
     let allUserGroups = [];
     groups.forEach((group) => {
-      allUserGroups.push(group.data());
+      const newGroup = {
+        id: group.id,
+        ...group.data(),
+      };
+      allUserGroups.push(newGroup);
     });
 
     return res.status(200).json(allUserGroups);
