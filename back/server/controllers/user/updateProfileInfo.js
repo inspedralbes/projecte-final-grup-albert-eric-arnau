@@ -19,7 +19,7 @@ const updateProfileInfo = async (req, res) => {
     color
   );
 
-  if (userExists.status) {
+  if (updatedUser.status) {
     return res.status(500).json({
       message: error.message,
       status: 500,

@@ -7,8 +7,6 @@ const createGroupInDatabase = async (req, res) => {
   if (!checkParameters(data, keys.createGroup))
     return res.status(400).json({ message: "Missing parameters" });
 
-  // TODO check for security issues (sanear el body)
-
   const createdGroup = await createGroup(data);
 
   if (createdGroup.status)

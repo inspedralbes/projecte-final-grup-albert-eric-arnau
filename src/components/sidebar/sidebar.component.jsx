@@ -38,7 +38,7 @@ function Sidebar({ navbarType }) {
       {navbarType === "chat" ? (
         // All Groups
         <>
-          <NavLink to={PATHS.PROFILE_USER} className={classes.returnButton}>
+          <NavLink to={`/profile/${user.uid}`} className={classes.returnButton}>
             <Button
               variant="gradient"
               gradient={{ from: "orange", to: "red" }}

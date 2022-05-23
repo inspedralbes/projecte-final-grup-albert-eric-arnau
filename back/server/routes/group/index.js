@@ -14,7 +14,7 @@ router.get("/all-groups", getAllGroups);
 router.get("/:idGroup", getGroupInfo);
 
 router.post("/create", createGroupInDatabase);
-router.post("/:idGroup/join", joinGroupInDatabase);
+router.put("/:idGroup/join", joinGroupInDatabase);
 router.delete("/:idGroup/leave", leaveGroupInDatabase);
 router.get("/:idGroup/messages", getPreviousMessages);
 
