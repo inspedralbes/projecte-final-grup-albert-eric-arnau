@@ -8,12 +8,10 @@ import {
   Button,
   Paper,
   Textarea,
-  Group,
   Indicator,
   ColorPicker,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { InfoCircle, Edit } from "tabler-icons-react";
 import { useStyles } from "./user-settings.styles";
@@ -24,17 +22,17 @@ function UserSettings() {
   //Validate Changes on user info
   var changes = false;
   function updateUserData() {
-    if (form.values.username != user.username) {
+    if (form.values.username !== user.username) {
       changes = true;
       console.log("username changed" + form.values.username);
     }
-    if (form.values.description != user.description) {
+    if (form.values.description !== user.description) {
       changes = true;
       console.log("description changed" + form.values.description);
       console.log(form.values.description);
       console.log(user.description);
     }
-    if (form.values.color != user.color) {
+    if (form.values.color !== user.color) {
       changes = true;
       console.log("color changed" + form.values.color);
     }

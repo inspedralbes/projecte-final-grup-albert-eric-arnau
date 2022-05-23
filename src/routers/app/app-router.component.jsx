@@ -1,10 +1,5 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
-import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 import PATHS from "../paths";
 import {
   Landing,
@@ -24,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../../firebase/firebaseConfig";
 import { autoLoginThunk } from "../../redux/thunk/auth-thunk";
 import { onAuthStateChanged } from "firebase/auth";
+import { loadAllGroupsThunk } from "../../redux/thunk/group-thunk";
 
 function AppRouter() {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -32,6 +28,7 @@ function AppRouter() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       dispatch(autoLoginThunk(user));
+      dispatch(loadAllGroupsThunk());
     });
     return () => {
       unsubscribe();

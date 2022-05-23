@@ -1,9 +1,15 @@
 export const loadAllGroupsThunk = (UserID) => {
   return async (dispatch) => {
     try {
-      await fetch(
+      const response = await fetch(
         `${process.env.REACT_APP_API_URL}/user/${UserID}/load-groups`
       );
+      if (response.ok) {
+        const groups = await response.json();
+        // dispatch(loadAllGroups(groups));
+        console.log(groups);
+      }
+      return response.status;
     } catch (err) {}
   };
 };
