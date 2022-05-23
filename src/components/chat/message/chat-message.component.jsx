@@ -5,8 +5,8 @@ import { useStyles } from "./chat-message.styles";
 
 function ChatMessage({ messageData = null }) {
   const { classes } = useStyles();
-  const auth = useSelector((store) => store.auth);
-  const isLocal = auth.userID === messageData.userID;
+  const { user } = useSelector((store) => store.auth);
+  const isLocal = user.name === messageData.userID;
 
   return (
     messageData && (
