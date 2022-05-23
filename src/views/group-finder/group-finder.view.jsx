@@ -1,6 +1,6 @@
 import { GroupList } from "./components/group-list";
 import { TextInput, ActionIcon } from "@mantine/core";
-import { Search, ArrowRight, ArrowLeft } from "tabler-icons-react";
+import { Search, ArrowRight } from "tabler-icons-react";
 import { useState } from "react";
 import { ModalsProvider } from "@mantine/modals";
 
