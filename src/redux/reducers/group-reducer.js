@@ -15,6 +15,7 @@ const groupReducer = (state = initialState, action) => {
       break;
     case groupTypes.GROUP_SET_ACTIVE:
       newState = { ...state, activeGroup: payload };
+      break;
     default:
       newState = { ...state };
       break;

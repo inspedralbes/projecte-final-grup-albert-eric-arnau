@@ -36,15 +36,22 @@ export const loginThunk = (email, password) => {
   };
 };
 
-export const autoLoginThunk = ({ uid }) => {
+export const autoLoginThunk = (user) => {
   return async (dispatch) => {
     try {
+      if (user === null) {
+        return;
+      }
+      const { uid } = user;
+
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/user/${uid}`
       );
-      const user = await response.json();
-      console.log(user);
-      dispatch(loginAction(user));
+      if (response.ok) {
+        const user = await response.json();
+        dispatch(loginAction(user));
+      }
+      return response.status;
     } catch (err) {
       console.log(err);
     }
