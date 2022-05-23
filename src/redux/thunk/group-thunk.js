@@ -1,3 +1,5 @@
+import { getDownloadURL, uploadBytes } from "firebase/storage";
+
 export const loadAllUserGroupsThunk = (UserID) => {
   return async (dispatch) => {
     try {
@@ -77,17 +79,21 @@ export const createGroupThunk = (
   name,
   password,
   limit,
-  imgLink,
-  description
+  description,
+  imageRef,
+  imageToUpload
 ) => {
   return async (dispatch) => {
     try {
+      await uploadBytes(imageRef, imageToUpload);
+      const imageURL = await getDownloadURL(imageRef);
+
       const newGroup = {
         admin,
         name,
         password,
         limit,
-        imgLink,
+        imgLink: imageURL,
         description,
       };
       const respose = await fetch(

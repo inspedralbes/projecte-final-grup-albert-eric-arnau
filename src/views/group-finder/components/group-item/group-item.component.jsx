@@ -25,6 +25,7 @@ function GroupItem({ group }) {
               <Text>{group.name}</Text>
             </Group>
             <Text>{group.description}</Text>
+            <Text size="sm">{`Members: ${group.members.length} / ${group.limit}`}</Text>
           </Group>
           {group.password && (
             <TextInput
@@ -68,6 +69,12 @@ function GroupItem({ group }) {
         <Text size="sm">{group.description}</Text>
         <Text size="xs" color="dimmed">
           Description
+        </Text>
+      </td>
+      <td>
+        <Text size="sm">{`${group.members.length} / ${group.limit}`}</Text>
+        <Text size="xs" color="dimmed">
+          Members limit
         </Text>
       </td>
       <td>

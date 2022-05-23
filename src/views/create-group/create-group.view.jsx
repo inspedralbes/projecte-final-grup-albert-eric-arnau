@@ -19,26 +19,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { CloudUpload } from "tabler-icons-react";
 import { createGroupThunk } from "../../redux/thunk/group-thunk";
 import { useStyles } from "./create-group.styles";
-import {
-  getDownloadURL,
-  ref,
-  uploadBytes,
-  uploadBytesResumable,
-} from "firebase/storage";
-import { storage } from "../../firebase/firebaseConfig";
+import { getStorage, ref } from "firebase/storage";
 
 function CreateGroup() {
   const { classes } = useStyles();
   const { user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
-  const dropzoneRef = useRef();
   const [error, setError] = useState(false);
+  const [storageReference, setStorageReference] = useState(null);
+  const [storageImage, setStorageImage] = useState(null);
+  const storage = getStorage();
 
   const handleCreateGroup = () => {
-    const { name, description, limit, isPublic, image } = form.values;
-
-    // TODO: subir imagen a firebase
-
+    const { name, description, limit, isPublic } = form.values;
     let { password } = form.values;
 
     if (!name || !description || !limit) {
@@ -52,9 +45,25 @@ function CreateGroup() {
     }
 
     dispatch(
-      createGroupThunk(user.uid, name, password, limit, image, description)
+      createGroupThunk(
+        user.uid,
+        name,
+        password,
+        limit,
+        description,
+        storageReference,
+        storageImage
+      )
     );
-    form.reset();
+
+    form.setFieldValue("name", "");
+    form.setFieldValue("description", "");
+    form.setFieldValue("limit", "");
+    form.setFieldValue("password", "");
+    form.setFieldValue("isPublic", false);
+    form.setFieldValue("image", "/LogoPedralbes.png");
+    setStorageReference(null);
+    setStorageImage(null);
   };
 
   const form = useForm({
@@ -83,14 +92,16 @@ function CreateGroup() {
             />
           </Center>
           <Dropzone
-            openRef={dropzoneRef}
             onDrop={async (image) => {
               const [file] = image;
               if (file) {
-                const storageRef = ref(storage, `groups/${file.name}`);
-                await uploadBytes(storageRef, file);
-                const imageURL = await getDownloadURL(storageRef);
-                form.setFieldValue("image", imageURL);
+                form.setFieldValue("image", URL.createObjectURL(file));
+                const storageRef = ref(
+                  storage,
+                  `groups/${file.name + Date.now()}`
+                );
+                setStorageReference(storageRef);
+                setStorageImage(file);
               }
             }}
             onReject={() => {
@@ -167,7 +178,7 @@ function CreateGroup() {
           <Center>
             <Group direction="column">
               {error && (
-                <Text color="red">Fill name, limit and description</Text>
+                <Text color="red">Fill name, limit, description and image</Text>
               )}
               <Button
                 className={classes.submit}
