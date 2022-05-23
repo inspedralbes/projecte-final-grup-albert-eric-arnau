@@ -1,6 +1,7 @@
 import {
   loginAction,
   logoutAction,
+  updateUserAction,
 } from "../actions/action-creates/auth-creates";
 import { auth } from "../../firebase/firebaseConfig";
 import {
@@ -10,6 +11,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { getDownloadURL, uploadBytes } from "firebase/storage";
 
 export const loginThunk = (email, password) => {
   return async (dispatch) => {
@@ -94,6 +96,52 @@ export const registerThunk = (
       if (response.ok) {
         const user = await response.json();
         dispatch(loginAction(user));
+      }
+      return response.status;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const updateUserThunk = (
+  userID,
+  email,
+  displayName,
+  username,
+  description,
+  color,
+  avatarReference,
+  avatarToUpload
+) => {
+  return async (dispatch) => {
+    try {
+      await uploadBytes(avatarReference, avatarToUpload);
+      const imageURL = await getDownloadURL(avatarReference);
+
+      const newUser = {
+        userID,
+        email,
+        name: displayName,
+        username,
+        description,
+        avatar: imageURL,
+        color,
+      };
+
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/user/update-profile`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        }
+      );
+      if (response.ok) {
+        const user = await response.json();
+        dispatch(updateUserAction(user));
       }
       return response.status;
     } catch (err) {

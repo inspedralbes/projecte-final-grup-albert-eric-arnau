@@ -14,7 +14,7 @@ import {
 } from "@mantine/core";
 import { Dropzone, MIME_TYPES } from "@mantine/dropzone";
 import { useForm } from "@mantine/form";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CloudUpload } from "tabler-icons-react";
 import { createGroupThunk } from "../../redux/thunk/group-thunk";
@@ -107,7 +107,6 @@ function CreateGroup() {
             onReject={() => {
               console.log("rejected");
             }}
-            className={classes.dropzone}
             radius="md"
             accept={[
               MIME_TYPES.jpeg,

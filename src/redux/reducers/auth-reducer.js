@@ -15,6 +15,12 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: true,
       };
       break;
+    case authTypes.UPDATE_USER:
+      newState = {
+        ...state,
+        user: payload,
+      };
+      break;
     case authTypes.LOGOUT:
       newState = {
         user: null,

@@ -10,34 +10,56 @@ import {
   Textarea,
   Indicator,
   ColorPicker,
+  Group,
+  Avatar,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useSelector } from "react-redux";
-import { InfoCircle, Edit } from "tabler-icons-react";
+import { Dropzone, MIME_TYPES } from "@mantine/dropzone";
+
+import { useDispatch, useSelector } from "react-redux";
+import { InfoCircle, Edit, CloudUpload } from "tabler-icons-react";
+import { updateUserThunk } from "../../redux/thunk/auth-thunk";
 import { useStyles } from "./user-settings.styles";
+import { useState } from "react";
+import { getStorage, ref } from "firebase/storage";
+
 function UserSettings() {
   const { user } = useSelector((store) => store.auth);
   const { classes } = useStyles();
+  const dispatch = useDispatch();
+  const [storageReference, setStorageReference] = useState(null);
+  const [storageImage, setStorageImage] = useState(null);
+  const storage = getStorage();
 
   //Validate Changes on user info
   var changes = false;
   function updateUserData() {
-    if (form.values.username !== user.username) {
+    if (form.values.name !== user.name) {
       changes = true;
-      console.log("username changed" + form.values.username);
     }
     if (form.values.description !== user.description) {
       changes = true;
-      console.log("description changed" + form.values.description);
-      console.log(form.values.description);
-      console.log(user.description);
     }
     if (form.values.color !== user.color) {
       changes = true;
-      console.log("color changed" + form.values.color);
+    }
+    if (form.values.image !== user.avatar) {
+      changes = true;
     }
     if (changes) {
-      console.log("changes");
+      // userID, email, name, username, description, avatar, color;
+      dispatch(
+        updateUserThunk(
+          user.uid,
+          user.email,
+          form.values.name,
+          user.username,
+          form.values.description,
+          form.values.color,
+          storageReference,
+          storageImage
+        )
+      );
     } else {
       console.log("no changes");
     }
@@ -45,9 +67,10 @@ function UserSettings() {
 
   const form = useForm({
     initialValues: {
-      username: user.username,
+      name: user.name,
       description: user.description,
       color: user.color ?? "#000000",
+      image: user.avatar,
     },
     validate: {},
   });
@@ -76,16 +99,39 @@ function UserSettings() {
                 position="bottom-end"
                 inline
                 label={
-                  <Button
-                    variant="gradient"
-                    gradient={{ from: "orange", to: "red" }}
-                    leftIcon={<Edit />}>
-                    Edit
-                  </Button>
+                  <Dropzone
+                    onDrop={async (image) => {
+                      const [file] = image;
+                      if (file) {
+                        form.setFieldValue("image", URL.createObjectURL(file));
+                        const storageRef = ref(
+                          storage,
+                          `users/${file.name + Date.now()}`
+                        );
+                        setStorageReference(storageRef);
+                        setStorageImage(file);
+                      }
+                    }}
+                    onReject={() => {
+                      console.log("rejected");
+                    }}
+                    accept={[
+                      MIME_TYPES.jpeg,
+                      MIME_TYPES.png,
+                      MIME_TYPES.gif,
+                      MIME_TYPES.webp,
+                    ]}
+                    maxSize={1000000}>
+                    {(status) => (
+                      <Button sx={{ width: "100%" }}>
+                        <CloudUpload size={24} />
+                      </Button>
+                    )}
+                  </Dropzone>
                 }
                 size={0}>
                 <Image
-                  src="https://www.disponalencasa.com/pub/media/catalog/product/cache/4025f56c98cb88143bb53de4d18da868/m/o/monster-juice-mango-loco.jpg"
+                  src={form.values.image}
                   className={classes.image}
                   radius="xl"
                 />
@@ -96,13 +142,13 @@ function UserSettings() {
         <Grid.Col span={6}>
           <div className={classes.container}>
             <Text component="label" size="sm" weight={500}>
-              User ID :
+              User ID:
             </Text>
             <Text component="p" size="sm" mt={0}>
-              {user.name}
+              {user.username}
             </Text>
             <Text component="label" size="sm" weight={500}>
-              Email :
+              Email:
             </Text>
             <Text component="p" size="sm" mt={0}>
               {user.email}
@@ -111,7 +157,7 @@ function UserSettings() {
               rightSection={displayName}
               label="Display name"
               placeholder="example_123"
-              {...form.getInputProps("username")}
+              {...form.getInputProps("name")}
             />
           </div>
         </Grid.Col>
@@ -134,7 +180,7 @@ function UserSettings() {
                 size="lg"
                 weight={500}
                 color={form.values.color}>
-                {form.values.username}
+                {form.values.name}
               </Text>
             </Text>
           </Center>

@@ -26,7 +26,7 @@ const updateProfileInfo = async (req, res) => {
     });
   }
 
-  return res.status(200).json({ uid: userID, email, name, username, color });
+  return res.status(200).json(updatedUser);
 };
 
 export default updateProfileInfo;

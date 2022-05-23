@@ -12,3 +12,10 @@ export const logoutAction = () => {
     type: authTypes.LOGOUT,
   };
 };
+
+export const updateUserAction = (user) => {
+  return {
+    type: authTypes.UPDATE_USER,
+    payload: user,
+  };
+};

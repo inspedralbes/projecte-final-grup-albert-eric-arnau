@@ -1,6 +1,5 @@
-import { doc, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../config/firebase.js";
-import { getUserDocument } from "./index.js";
 
 async function updateUser(
   uid,
@@ -12,20 +11,32 @@ async function updateUser(
   color
 ) {
   const userRef = doc(db, "users", uid);
-  const userExists = await getUserDocument(uid);
+  const usersCollection = collection(db, "users");
+  const userDocRef = doc(usersCollection, uid);
+  const userDoc = await getDoc(userDocRef);
+  const userData = userDoc.data();
 
-  if (!userExists.status) {
+  if (!userData.status) {
     try {
       await setDoc(userRef, {
+        ...userData,
+        name,
+        avatar,
+        description,
+        color,
+      });
+
+      const newUser = {
+        uid,
         email,
         name,
         username,
         avatar,
         description,
         color,
-      });
+      };
 
-      return { uid, email, name, username, avatar, description, color };
+      return newUser;
     } catch (error) {
       return {
         message: error.message,
