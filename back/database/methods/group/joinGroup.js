@@ -1,15 +1,21 @@
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../config/firebase.js";
 import { getGroupDocument } from "./index.js";
 
 const joinGroup = async (groupID, userID, password) => {
   const group = await getGroupDocument(groupID);
+  let arrayMembers = [];
 
   if (!group.status) {
+    for (const member of group.members) {
+      const newMember = await getDoc(member);
+      arrayMembers.push(newMember.data().uid);
+    }
+
     if (group.password !== password)
       return { status: 401, message: "Wrong password" };
 
-    if (group.members.includes(userID))
+    if (arrayMembers.includes(userID))
       return { status: 409, message: "User already in group" };
 
     if (group.members.length >= group.limit)

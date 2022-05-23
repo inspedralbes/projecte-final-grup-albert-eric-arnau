@@ -4,7 +4,12 @@ import { checkParameters, keys } from "../../methods/parameters/index.js";
 const createGroupInDatabase = async (req, res) => {
   const data = req.body;
 
-  if (!checkParameters(data, keys.createGroup))
+  if (
+    !checkParameters(data, keys.createGroup) ||
+    data.name === "" ||
+    data.description === "" ||
+    data.limit === ""
+  )
     return res.status(400).json({ message: "Missing parameters" });
 
   const createdGroup = await createGroup(data);

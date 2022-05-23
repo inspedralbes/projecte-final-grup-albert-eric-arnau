@@ -10,10 +10,11 @@ import {
   UnstyledButton,
   Stack,
   Group,
+  Image,
 } from "@mantine/core";
 import { Dropzone, MIME_TYPES } from "@mantine/dropzone";
 import { useForm } from "@mantine/form";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CloudUpload } from "tabler-icons-react";
 import { createGroupThunk } from "../../redux/thunk/group-thunk";
@@ -24,13 +25,26 @@ function CreateGroup() {
   const { user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const dropzoneRef = useRef();
+  const [error, setError] = useState(false);
 
   const handleCreateGroup = () => {
-    const { name, description, limit, password = "", isPublic } = form.values;
-    const imgLink = "";
+    const { name, description, limit, isPublic, image } = form.values;
+    let { password } = form.values;
+
+    if (!name || !description || !limit) {
+      setError(true);
+      return;
+    } else {
+      setError(false);
+    }
+    if (isPublic) {
+      password = "";
+    }
+
     dispatch(
-      createGroupThunk(user.uid, name, password, limit, imgLink, description)
+      createGroupThunk(user.uid, name, password, limit, image, description)
     );
+    form.reset();
   };
 
   const form = useForm({
@@ -38,7 +52,7 @@ function CreateGroup() {
       name: "",
       description: "",
       limit: "",
-      image: "",
+      image: "/LogoPedralbes.png",
       isPublic: false,
       password: "",
     },
@@ -48,9 +62,27 @@ function CreateGroup() {
     <Paper shadow="xl" radius="md" className={classes.paper}>
       <Grid gutter={40} className={classes.wrapper}>
         <Grid.Col span={4}>
+          <Center mb={20}>
+            <Image
+              width={200}
+              height={200}
+              radius="99999px"
+              src={form.values.image}
+              alt="new-group-image"
+              onLoad={() => URL.revokeObjectURL(form.values.image)}
+            />
+          </Center>
           <Dropzone
             openRef={dropzoneRef}
-            onDrop={() => {}}
+            onDrop={(image) => {
+              const [file] = image;
+              if (file) {
+                form.setFieldValue("image", URL.createObjectURL(file));
+              }
+            }}
+            onReject={() => {
+              console.log("rejected");
+            }}
             className={classes.dropzone}
             radius="md"
             accept={[
@@ -59,7 +91,7 @@ function CreateGroup() {
               MIME_TYPES.gif,
               MIME_TYPES.webp,
             ]}
-            maxSize={30 * 1024 ** 2}>
+            maxSize={1000000}>
             {(status) => (
               <div style={{ pointerEvents: "none" }}>
                 <Group position="center">
@@ -67,7 +99,7 @@ function CreateGroup() {
                 </Group>
                 <Text align="center" weight={700} size="lg" mt="xl">
                   {status.accepted
-                    ? "Drop files here"
+                    ? "Accepted"
                     : status.rejected
                     ? "File too heavy"
                     : "Upload image"}
@@ -120,13 +152,18 @@ function CreateGroup() {
             ) : null}
           </Stack>
           <Center>
-            <Button
-              className={classes.submit}
-              onClick={handleCreateGroup}
-              variant="gradient"
-              gradient={{ from: "orange", to: "red" }}>
-              Create group
-            </Button>
+            <Group direction="column">
+              {error && (
+                <Text color="red">Fill name, limit and description</Text>
+              )}
+              <Button
+                className={classes.submit}
+                onClick={handleCreateGroup}
+                variant="gradient"
+                gradient={{ from: "orange", to: "red" }}>
+                Create group
+              </Button>
+            </Group>
           </Center>
         </Grid.Col>
       </Grid>
