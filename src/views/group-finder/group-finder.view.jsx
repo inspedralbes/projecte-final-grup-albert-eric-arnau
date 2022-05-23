@@ -3,17 +3,18 @@ import { TextInput, ActionIcon } from "@mantine/core";
 import { Search, ArrowRight } from "tabler-icons-react";
 import { useState } from "react";
 import { ModalsProvider } from "@mantine/modals";
+import { useDebouncedValue } from "@mantine/hooks";
 
 function GroupFinder() {
   const [search, setSearch] = useState("");
-
+  const [debouncedSearch] = useDebouncedValue(search, 200);
   return (
     <div>
       <ModalsProvider>
         <TextInput
           type="text"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.currentTarget.value)}
           my={20}
           icon={<Search size={18} />}
           radius="xl"
@@ -26,7 +27,7 @@ function GroupFinder() {
           placeholder="Search groups"
           rightSectionWidth={42}
         />
-        <GroupList />
+        <GroupList search={debouncedSearch} />
       </ModalsProvider>
     </div>
   );

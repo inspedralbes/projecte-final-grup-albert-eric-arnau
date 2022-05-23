@@ -19,7 +19,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../../firebase/firebaseConfig";
 import { autoLoginThunk } from "../../redux/thunk/auth-thunk";
 import { onAuthStateChanged } from "firebase/auth";
-import { loadAllGroupsThunk } from "../../redux/thunk/group-thunk";
 
 function AppRouter() {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -28,7 +27,6 @@ function AppRouter() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       dispatch(autoLoginThunk(user));
-      dispatch(loadAllGroupsThunk());
     });
     return () => {
       unsubscribe();

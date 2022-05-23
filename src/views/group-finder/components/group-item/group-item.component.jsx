@@ -1,17 +1,19 @@
 import { Avatar, Group, Text, Button, TextInput } from "@mantine/core";
 import { useModals } from "@mantine/modals";
 import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { joinGroupThunk } from "../../../../redux/thunk/group-thunk";
 
 function GroupItem({ group }) {
   const modals = useModals();
   const passwordRef = useRef();
-  
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const handleCloseModal = (modal, password = "") => {
-    // TODO: execute api call to join group
-    
+    dispatch(joinGroupThunk(group.id, user.uid, password));
     modals.closeModal(modal);
   };
-  
+
   const openConfirmModal = () => {
     const modal = modals.openModal({
       title: "Group information",
@@ -37,7 +39,9 @@ function GroupItem({ group }) {
             variant="gradient"
             gradient={{ from: "orange", to: "red" }}
             fullWidth
-            onClick={() => handleCloseModal(modal, passwordRef?.current?.value)}>
+            onClick={() =>
+              handleCloseModal(modal, passwordRef?.current?.value)
+            }>
             Join group
           </Button>
         </>

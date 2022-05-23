@@ -1,4 +1,4 @@
-export const loadAllGroupsThunk = (UserID) => {
+export const loadAllUserGroupsThunk = (UserID) => {
   return async (dispatch) => {
     try {
       const response = await fetch(
@@ -17,17 +17,26 @@ export const loadAllGroupsThunk = (UserID) => {
 export const joinGroupThunk = (idGroup, UserID, password) => {
   return async (dispatch) => {
     try {
-      await fetch(`${process.env.REACT_APP_API_URL}/group/${idGroup}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userID: UserID,
-          password: password,
-        }),
-      });
-    } catch (err) {}
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/group/${idGroup}/join`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userID: UserID,
+            password: password,
+          }),
+        }
+      );
+      if (response.ok) {
+        console.log("Group joined");
+      }
+      return response.status;
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 
