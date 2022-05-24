@@ -1,10 +1,6 @@
 import useStyles from "./hero-cards.styles";
 import { Title, Container, SimpleGrid, useMantineTheme } from "@mantine/core";
-import {
-  MessageShare,
-  DeviceMobileMessage,
-  BrandFirebase,
-} from "tabler-icons-react";
+import { MessageShare, Pencil, BrandFirebase } from "tabler-icons-react";
 
 import { Feature } from "./feature";
 
@@ -16,9 +12,9 @@ const featuresData = [
       "Use our chat to communicate with your friends or connect with new people.",
   },
   {
-    icon: DeviceMobileMessage,
+    icon: Pencil,
     title: "Totally customizable",
-    description: "Our app have .",
+    description: "We have a lot of customizable settings for your profile.",
   },
   {
     icon: BrandFirebase,

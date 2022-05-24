@@ -23,3 +23,7 @@ export const receiveMessageAction = (message) => ({
   type: chatTypes.MESSAGE_RECEIVE,
   payload: message,
 });
+
+export const chatLogoutAction = () => ({
+  type: chatTypes.CHAT_LOGOUT,
+});

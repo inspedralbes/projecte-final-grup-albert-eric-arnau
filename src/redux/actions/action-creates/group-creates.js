@@ -29,3 +29,7 @@ export const exitGroup = (group) => ({
   type: groupTypes.GROUP_EXIT,
   payload: group,
 });
+
+export const groupLogoutAction = () => ({
+  type: groupTypes.GROUP_LOGOUT,
+});

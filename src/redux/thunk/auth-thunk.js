@@ -13,6 +13,8 @@ import {
 } from "firebase/auth";
 import { getDownloadURL, uploadBytes } from "firebase/storage";
 import { loadAllUserGroupsThunk } from "./group-thunk";
+import { chatLogoutAction } from "../actions/action-creates/chat-creates";
+import { groupLogoutAction } from "../actions/action-creates/group-creates";
 
 export const loginThunk = (email, password) => {
   return async (dispatch) => {
@@ -157,6 +159,8 @@ export const logoutThunk = () => {
     try {
       await signOut(auth);
       dispatch(logoutAction());
+      dispatch(chatLogoutAction());
+      dispatch(groupLogoutAction());
     } catch (err) {
       console.log(err);
     }

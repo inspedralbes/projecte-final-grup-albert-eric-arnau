@@ -2,7 +2,6 @@ import { chatTypes } from "../actions";
 
 const initialState = {
   activeGroupID: null,
-
   messages: [],
 };
 
@@ -22,6 +21,9 @@ const chatReducer = (state = initialState, action) => {
       break;
     case chatTypes.MESSAGE_RECEIVE:
       newState = { ...state, messages: [...state.messages, payload] };
+      break;
+    case chatTypes.CHAT_LOGOUT:
+      newState = initialState;
       break;
     default:
       newState = { ...state };

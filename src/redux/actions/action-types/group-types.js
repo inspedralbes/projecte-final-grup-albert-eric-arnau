@@ -3,6 +3,7 @@ const groupTypes = {
   GROUP_SET_ACTIVE: "GROUP_SET_ACTIVE",
   GROUP_ADD: "GROUP_ADD",
   GROUP_UPDATE: "GROUP_UPDATE",
+  GROUP_LOGOUT: "GROUP_LOGOUT",
 };
 
 export default groupTypes;
