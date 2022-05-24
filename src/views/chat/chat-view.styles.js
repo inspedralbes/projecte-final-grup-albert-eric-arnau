@@ -7,7 +7,6 @@ export const useStyles = createStyles({
     borderRadius: "15px",
     overflowY: "auto",
     display: "flex",
-    justifyContent: "flex-end",
     flexDirection: "column",
     "&::-webkit-scrollbar": {
       border: "10px solid transparent",

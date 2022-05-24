@@ -18,7 +18,7 @@ function ChatMessage({ messageData = null }) {
             : { marginTop: 10, marginBottom: 10 }
         }>
         <Avatar
-          src={messageData.image}
+          src={messageData.imgLink}
           alt={messageData.name}
           radius="xl"
           sx={{ alignSelf: "flex-end", marginInline: "0.5rem" }}
