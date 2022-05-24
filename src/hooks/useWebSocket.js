@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { sendMessageAction } from "../redux/actions";
+import { sendMessageAction, receiveMessageAction } from "../redux/actions";
 import { loadGroupMessagesThunk } from "../redux/thunk/chat-thunk";
 
 let socket = null;
@@ -29,11 +29,9 @@ const useWebSocket = () => {
     socket.onmessage = (event) => {
       const { data } = event;
 
-      const message = JSON.parse(data);
-      console.log("Message received: ", message);
-      switch (message.meta) {
+      const { message, meta } = JSON.parse(data);
+      switch (meta) {
         case "receive_message":
-          console.table(message);
           receiveMessage(message);
           break;
         default:
@@ -51,8 +49,10 @@ const useWebSocket = () => {
     socket.send(JSON.stringify(messageData));
   }
   function receiveMessage(messageData) {
-    dispatch(sendMessageAction(messageData));
-    socket.send(JSON.stringify(messageData));
+    console.log("receiveMessage", messageData);
+    dispatch(receiveMessageAction(messageData));
+    // dispatch(sendMessageAction(messageData));
+    // socket.send(JSON.stringify(messageData));
   }
 
   function createGroup(groupData) {
