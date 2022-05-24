@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 function AllGroups() {
   const { classes } = useStyles();
-  const groups = useSelector((state) => state.groups.groups[0]);
+  const { groups } = useSelector((state) => state.groups);
 
   return (
     <Navbar.Section className={classes.section}>

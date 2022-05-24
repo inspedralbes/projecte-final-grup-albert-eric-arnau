@@ -11,7 +11,7 @@ const groupReducer = (state = initialState, action) => {
 
   switch (type) {
     case groupTypes.GROUP_LOAD_ALL:
-      newState = { ...state, groups: [payload] };
+      newState = { ...state, groups: payload };
       break;
     case groupTypes.GROUP_ADD:
       newState = { ...state, groups: [...state.groups, payload] };
@@ -23,6 +23,7 @@ const groupReducer = (state = initialState, action) => {
       newState = { ...state };
       break;
   }
+  console.log(newState, payload);
   return newState;
 };
 export default groupReducer;

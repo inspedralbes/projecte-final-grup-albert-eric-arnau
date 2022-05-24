@@ -29,22 +29,6 @@ function Form({ form, executeLogin }) {
         <Text component="label" htmlFor="password" size="sm" weight={500}>
           Password
         </Text>
-
-        <Anchor
-          component="a"
-          href="#"
-          onClick={(event) => event.preventDefault()}
-          sx={(theme) => ({
-            paddingTop: 2,
-            color:
-              theme.colors[theme.primaryColor][
-                theme.colorScheme === "dark" ? 4 : 6
-              ],
-            fontWeight: 500,
-            fontSize: theme.fontSizes.xs,
-          })}>
-          Forgot your password?
-        </Anchor>
       </Group>
       <PasswordInput
         placeholder="********"

@@ -35,6 +35,7 @@ export const joinGroupThunk = (group, UserID, password) => {
           }),
         }
       );
+      console.log(response.ok, group);
       if (response.ok) {
         dispatch(addGroup(group));
       }
