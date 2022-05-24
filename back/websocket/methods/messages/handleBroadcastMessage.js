@@ -6,6 +6,7 @@ const handleBroadcastMessage = (
   message,
   time,
   imgLink,
+  color,
   activeGroups
 ) => {
   try {
@@ -23,6 +24,7 @@ const handleBroadcastMessage = (
           username,
           imgLink,
           message,
+          color,
         })
       );
     });

@@ -22,7 +22,7 @@ function Chat() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [chat.messages]);
+  }, [messages]);
 
   useEffect(() => {
     initializeWebsocket();

@@ -35,9 +35,9 @@ export const joinGroupThunk = (group, UserID, password) => {
           }),
         }
       );
-      console.log(response.ok, group);
       if (response.ok) {
-        dispatch(addGroup(group));
+        const groupJoined = await response.json();
+        dispatch(addGroup(groupJoined));
       }
       return response.status;
     } catch (err) {
@@ -112,6 +112,7 @@ export const createGroupThunk = (
       );
       if (respose.ok) {
         const group = await respose.json();
+        console.log(group);
         dispatch(addGroup(group));
       }
       return respose.status;

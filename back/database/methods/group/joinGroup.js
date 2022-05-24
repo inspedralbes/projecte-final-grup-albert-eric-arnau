@@ -4,6 +4,7 @@ import { getGroupDocument } from "./index.js";
 
 const joinGroup = async (groupID, userID, password) => {
   let group = await getGroupDocument(groupID);
+  let groupDoc = null;
   let arrayMembers = [];
 
   if (!group.status) {
@@ -27,11 +28,16 @@ const joinGroup = async (groupID, userID, password) => {
       members: [...group.members, doc(db, `users/${userID}`)],
     };
 
-    const groupDoc = doc(db, `groups/${groupID}`);
+    groupDoc = doc(db, `groups/${groupID}`);
     await setDoc(groupDoc, updatedGroup);
   }
 
-  return group;
+  if (groupDoc !== null) {
+    groupDoc = await getGroupDocument(groupID);
+    groupDoc.uid = groupID;
+  }
+
+  return groupDoc;
 };
 
 export default joinGroup;

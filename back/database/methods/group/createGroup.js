@@ -29,7 +29,10 @@ const saveGroup = async ({
 
     const createdGroup = await getDoc(newGroup);
 
-    return createdGroup.data();
+    let groupToSend = createdGroup.data();
+    groupToSend.uid = createdGroup.id;
+
+    return groupToSend;
   } catch (error) {
     return {
       message: error.message,

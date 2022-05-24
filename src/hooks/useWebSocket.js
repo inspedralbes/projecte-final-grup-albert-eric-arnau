@@ -47,7 +47,9 @@ const useWebSocket = () => {
     socket.send(JSON.stringify(messageData));
   }
   function receiveMessage(messageData) {
-    console.log("messageData", messageData);
+    delete messageData.meta;
+    delete messageData.groupID;
+
     dispatch(receiveMessageAction(messageData));
   }
 

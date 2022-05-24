@@ -26,6 +26,7 @@ const handleSendMessage = async (data, activeGroups) => {
     message,
     time,
     imgLink,
+    color,
     activeGroups
   );
 };

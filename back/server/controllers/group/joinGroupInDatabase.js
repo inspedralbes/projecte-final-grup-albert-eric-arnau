@@ -13,7 +13,7 @@ const joinGroupInDatabase = async (req, res) => {
   if (joined.status)
     return res.status(joined.status).send({ message: joined.message });
 
-  return res.status(200).json({ message: "Joined successfully" });
+  return res.status(200).json(joined);
 };
 
 export default joinGroupInDatabase;
