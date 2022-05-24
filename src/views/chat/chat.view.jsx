@@ -38,6 +38,7 @@ function Chat() {
       userID: user.uid || "",
       imgLink: user.avatar,
       color: user.color,
+      time: new Date().getTime(),
       message,
     };
     sendMessage(newMessage);

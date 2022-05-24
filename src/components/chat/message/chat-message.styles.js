@@ -10,7 +10,7 @@ export const useStyles = createStyles({
     width: "fit-content",
     maxWidth: "70%",
     padding: "10px",
-    backgroundColor: "#3ddbc1",
+    background: "linear-gradient(90deg, #fd7e14 0%, #fa5252 100%)",
     color: "#fff",
     overflowWrap: "break-word",
   },

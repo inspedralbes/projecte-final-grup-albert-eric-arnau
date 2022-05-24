@@ -24,7 +24,7 @@ export const useStyles = createStyles({
     "&::-webkit-scrollbar-thumb": {
       border: "1px solid #e1e1e1",
       borderRadius: "10px",
-      backgroundColor: "#3ddbc1",
+      background: "linear-gradient(90deg, #fd7e14 0%, #fa5252 100%)",
     },
   },
 });
