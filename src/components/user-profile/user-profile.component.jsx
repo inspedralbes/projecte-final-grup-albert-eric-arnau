@@ -1,32 +1,37 @@
-import { Text, Title, Image } from "@mantine/core";
+import { Avatar, Group, Text, Box } from "@mantine/core";
+import { At, Mail } from "tabler-icons-react";
+
 import { useStyles } from "./user-profile.styles";
-import { Mail } from "tabler-icons-react";
-function PublicUserProfile({ avatar, name, username, email, description }) {
+function PublicUserProfile({ avatar, name, username, email }) {
   const { classes } = useStyles();
   return (
-    <div className={classes.wrapper}>
-      <div className={classes.body}>
-        <Image src={avatar} radius="xl" className={classes.image} />
+    <Box
+      sx={{
+        width: "100%",
+        display: "flex",
+      }}>
+      <Group noWrap sx={{ height: "auto" }}>
+        <Avatar src={avatar} size={160} radius="md" />
         <div>
-          <Title className={classes.title}>{name}</Title>
-          <Text weight={500} size="lg" mb={5}>
-            @{username}
+          <Text size="xl" weight={500}>
+            {name}
           </Text>
-          <Text size="sm">{email}</Text>
-          <Text size="sm" color="dimmed" className={classes.text}>
-            {description}
-          </Text>
-        </div>
+          <Group noWrap spacing={10} mt={3}>
+            <At size={16} className={classes.icon} />
+            <Text size="lg" weight={700} color="dimmed">
+              {username}
+            </Text>
+          </Group>
 
-        {/* <div className={classes.controls}>
-          <TextInput
-            placeholder="Your email"
-            classNames={{ input: classes.input, root: classes.inputWrapper }}
-          />
-          <Button className={classes.control}>Subscribe</Button>
-        </div> */}
-      </div>
-    </div>
+          <Group noWrap spacing={10} mt={3}>
+            <Mail size={16} className={classes.icon} />
+            <Text size="lg" color="dimmed">
+              {email}
+            </Text>
+          </Group>
+        </div>
+      </Group>
+    </Box>
   );
 }
 
