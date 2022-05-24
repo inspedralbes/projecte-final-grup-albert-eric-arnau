@@ -23,7 +23,6 @@ import { onAuthStateChanged } from "firebase/auth";
 function AppRouter() {
   const { isAuthenticated } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  console.log("is auth: " + isAuthenticated);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       dispatch(autoLoginThunk(user));

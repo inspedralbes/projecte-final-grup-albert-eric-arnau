@@ -104,9 +104,7 @@ function CreateGroup() {
                 setStorageImage(file);
               }
             }}
-            onReject={() => {
-              console.log("rejected");
-            }}
+            onReject={() => {}}
             radius="md"
             accept={[
               MIME_TYPES.jpeg,

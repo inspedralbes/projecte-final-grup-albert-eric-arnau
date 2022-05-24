@@ -57,8 +57,6 @@ function UserSettings() {
           storageImage
         )
       );
-    } else {
-      console.log("no changes");
     }
   }
 
@@ -109,9 +107,7 @@ function UserSettings() {
                         setStorageImage(file);
                       }
                     }}
-                    onReject={() => {
-                      console.log("rejected");
-                    }}
+                    onReject={() => {}}
                     accept={[
                       MIME_TYPES.jpeg,
                       MIME_TYPES.png,

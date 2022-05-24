@@ -16,7 +16,6 @@ function Chat() {
   const { classes } = useStyles();
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
-    console.log(messagesEndRef);
     messagesEndRef.current.scrollIntoView({ block: "end", behavior: "smooth" });
   };
 

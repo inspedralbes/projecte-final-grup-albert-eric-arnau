@@ -26,7 +26,6 @@ const groupReducer = (state = initialState, action) => {
       newState = { ...state };
       break;
   }
-  console.log(newState, payload);
   return newState;
 };
 export default groupReducer;

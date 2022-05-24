@@ -16,12 +16,8 @@ function GroupLink({ data }) {
   const dispatch = useDispatch();
 
   const handleSelectGroup = () => {
-    console.log(window.location.pathname);
-
     dispatch(setActiveGroup(data));
-
     dispatch(setActiveChatGroupAction(uid));
-    console.log(data);
   };
   function handleClick() {
     navigate(PATHS.CHAT, { replace: true });

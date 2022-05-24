@@ -112,7 +112,6 @@ export const createGroupThunk = (
       );
       if (respose.ok) {
         const group = await respose.json();
-        console.log(group);
         dispatch(addGroup(group));
       }
       return respose.status;

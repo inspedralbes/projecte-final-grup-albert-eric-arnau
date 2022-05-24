@@ -23,17 +23,14 @@ const useWebSocket = () => {
     };
 
     socket.onmessage = (event) => {
-      console.log(event);
       let { data } = event;
       data = JSON.parse(data);
-      console.log(data);
       const { meta } = data;
       switch (meta) {
         case "receive_message":
           receiveMessage(data);
           break;
         default:
-          console.log("Message from server:" + event.message);
           break;
       }
     };
