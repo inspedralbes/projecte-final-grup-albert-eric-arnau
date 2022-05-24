@@ -6,16 +6,13 @@ function PublicUserProfile({ avatar, name, username, email, description }) {
   return (
     <div className={classes.wrapper}>
       <div className={classes.body}>
-        <Image src={avatar} className={classes.image} />
+        <Image src={avatar} radius="xl" className={classes.image} />
         <div>
           <Title className={classes.title}>{name}</Title>
           <Text weight={500} size="lg" mb={5}>
-            {username}
+            @{username}
           </Text>
-          <Text size="sm">
-            <Mail size={16} className={classes.icon} />
-            {email}
-          </Text>
+          <Text size="sm">{email}</Text>
           <Text size="sm" color="dimmed" className={classes.text}>
             {description}
           </Text>
