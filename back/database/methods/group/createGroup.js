@@ -1,6 +1,11 @@
-import { addDoc, collection, doc, DocumentReference } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  DocumentReference,
+  getDoc,
+} from "firebase/firestore";
 import { db } from "../../config/firebase.js";
-import getUserDocument from "../user/getUserDocument.js";
 
 const saveGroup = async ({
   admin,
@@ -22,7 +27,9 @@ const saveGroup = async ({
       members: [adminDoc],
     });
 
-    return newGroup;
+    const createdGroup = await getDoc(newGroup);
+
+    return createdGroup.data();
   } catch (error) {
     return {
       message: error.message,

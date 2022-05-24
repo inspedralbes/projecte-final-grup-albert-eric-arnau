@@ -17,6 +17,9 @@ const chatReducer = (state = initialState, action) => {
     case chatTypes.MESSAGE_LOAD_GROUP_MESSAGES:
       newState = { ...state, messages: [...payload] };
       break;
+    case chatTypes.GROUP_SET_ACTIVE:
+      newState = { ...state, activeGroupID: payload };
+      break;
     default:
       newState = { ...state };
       break;

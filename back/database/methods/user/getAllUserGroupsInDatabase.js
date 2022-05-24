@@ -14,7 +14,7 @@ const getAllUserGroupsInDatabase = async (userID) => {
 
   let allUserGroups = [];
   groups.forEach((group) => {
-    allUserGroups.push(group.data());
+    allUserGroups.push({ ...group.data(), uid: group.id });
   });
 
   return allUserGroups;

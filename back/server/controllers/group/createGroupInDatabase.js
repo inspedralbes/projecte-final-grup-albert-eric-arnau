@@ -19,9 +19,7 @@ const createGroupInDatabase = async (req, res) => {
       message: createdGroup.message,
     });
 
-  return res.status(201).json({
-    message: "Group created successfully",
-  });
+  return res.status(201).json(createdGroup);
 };
 
 export default createGroupInDatabase;

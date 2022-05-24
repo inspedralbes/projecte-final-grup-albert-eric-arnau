@@ -26,7 +26,7 @@ function HeroHeader() {
               friends. Also create groups and let others read your thoughts!
             </Text>
 
-            <NavLink to="/chat">
+            <NavLink to="/group-finder">
               <Button
                 variant="gradient"
                 gradient={{ from: "red", to: "yellow" }}

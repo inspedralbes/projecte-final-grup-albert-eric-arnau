@@ -12,6 +12,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { getDownloadURL, uploadBytes } from "firebase/storage";
+import { loadAllUserGroupsThunk } from "./group-thunk";
 
 export const loginThunk = (email, password) => {
   return async (dispatch) => {
@@ -52,6 +53,7 @@ export const autoLoginThunk = (user) => {
       if (response.ok) {
         const user = await response.json();
         dispatch(loginAction(user));
+        dispatch(loadAllUserGroupsThunk(uid));
       }
       return response.status;
     } catch (err) {

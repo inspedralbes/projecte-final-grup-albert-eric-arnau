@@ -3,7 +3,7 @@ import { db } from "../../config/firebase.js";
 import { getGroupDocument } from "./index.js";
 
 const joinGroup = async (groupID, userID, password) => {
-  const group = await getGroupDocument(groupID);
+  let group = await getGroupDocument(groupID);
   let arrayMembers = [];
 
   if (!group.status) {

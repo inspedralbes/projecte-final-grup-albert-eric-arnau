@@ -1,5 +1,8 @@
 import { getDownloadURL, uploadBytes } from "firebase/storage";
-import { addGroup } from "../actions/action-creates/group-creates";
+import {
+  addGroup,
+  loadAllGroups,
+} from "../actions/action-creates/group-creates";
 
 export const loadAllUserGroupsThunk = (UserID) => {
   return async (dispatch) => {
@@ -9,7 +12,7 @@ export const loadAllUserGroupsThunk = (UserID) => {
       );
       if (response.ok) {
         const groups = await response.json();
-        // dispatch(loadAllGroups(groups));
+        dispatch(loadAllGroups(groups));
         console.log(groups);
       }
       return response.status;
