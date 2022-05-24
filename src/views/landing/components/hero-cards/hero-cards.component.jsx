@@ -17,8 +17,8 @@ const featuresData = [
   },
   {
     icon: DeviceMobileMessage,
-    title: "Mobile friendly",
-    description: "Our app have the best user experience for mobile users too.",
+    title: "Totally customizable",
+    description: "Our app have .",
   },
   {
     icon: BrandFirebase,

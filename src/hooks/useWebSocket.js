@@ -10,10 +10,6 @@ const useWebSocket = () => {
   const { user } = useSelector((store) => store.auth); // this is the state of the user reducer
 
   function initializeWebsocket() {
-    if (socket) return;
-    // socket = new WebSocket(
-    //   process.env.REACT_APP_WEBSOCKET_CONNECTION_URL
-    // );
     socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_CONNECTION_URL);
 
     socket.onopen = () => {
