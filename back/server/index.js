@@ -6,9 +6,7 @@ const app = express();
 
 app.use(
   cors({
-    // TODO: esto de aqui se cambia
-    // origin: "http://groupem.alumnes.inspedralbes.cat",
-    origin: "http://localhost:3000",
+    origin: "http://groupem.alumnes.inspedralbes.cat",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
   })

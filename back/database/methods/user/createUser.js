@@ -19,7 +19,8 @@ async function createUser(uid, email, name, username, color) {
       email,
       name,
       username,
-      avatar: "",
+      avatar:
+        "https://firebasestorage.googleapis.com/v0/b/group-em.appspot.com/o/users%2Fdefault.png?alt=media&token=2a3561cf-e8c7-4e49-b643-5db1114a847b",
       description: "",
       favourites: [],
       color,
