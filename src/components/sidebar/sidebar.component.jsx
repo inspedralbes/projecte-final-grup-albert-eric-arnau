@@ -52,7 +52,8 @@ function Sidebar({ navbarType }) {
         // Main Links
         <>
           <MainLinks />
-          <FavGroups />
+          <AllGroups />
+          {/* <FavGroups /> */}
         </>
       )}
 

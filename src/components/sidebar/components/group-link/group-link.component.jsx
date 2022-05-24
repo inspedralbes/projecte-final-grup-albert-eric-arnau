@@ -8,14 +8,16 @@ import {
 // import { notificationNumberDisplay } from "../../../../helpers/notificationNumberDisplay";
 
 function GroupLink({ data }) {
-  const { name, imgLink, id } = data;
+  const { name, imgLink, uid } = data;
   const { classes } = useStyles();
   const dispatch = useDispatch();
 
   const handleSelectGroup = () => {
+    console.log(window.location.pathname);
+
     dispatch(setActiveGroup(data));
 
-    dispatch(setActiveChatGroupAction());
+    dispatch(setActiveChatGroupAction(uid));
     console.log(data);
   };
 

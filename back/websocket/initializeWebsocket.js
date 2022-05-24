@@ -25,27 +25,21 @@ const initializeWebsocket = (port) =>
     wss.on("connection", (ws) => {
       try {
         ws.on("message", async (receivedData) => {
-          let data = receivedData;
+          let data = JSON.parse(receivedData);
 
           if (data.meta === "connection") {
             const { userID, username } = data;
 
-            const allUserGroupsID = await getAllUserGroupsInDatabase(userID);
+            const allUserGroups = await getAllUserGroupsInDatabase(userID);
 
-            allUserGroupsID.forEach(async (groupID) => {
-              if (!checkRoomExists(groupID, activeGroups)) {
-                await createAndJoinRoom(ws, username, groupID, activeGroups);
-              } else if (!checkUserInRoom(groupID, username, activeGroups)) {
-                await joinRoom(ws, groupID, username, activeGroups);
+            allUserGroups.forEach(async ({ uid }) => {
+              if (!checkRoomExists(uid, activeGroups)) {
+                await createAndJoinRoom(ws, username, uid, activeGroups);
+              } else if (!checkUserInRoom(uid, username, activeGroups)) {
+                await joinRoom(ws, uid, username, activeGroups);
               }
             });
-
-            ws.send(
-              JSON.stringify({
-                meta: "info",
-                message: activeGroups,
-              })
-            );
+            console.log("activeGroups", activeGroups);
 
             return;
           } else if (data.meta === "logout") {

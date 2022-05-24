@@ -7,6 +7,7 @@ let socket = null;
 const useWebSocket = () => {
   const dispatch = useDispatch();
   const { chat } = useSelector((store) => store); // this is the state of the chat reducer
+  const { user } = useSelector((store) => store.auth); // this is the state of the user reducer
 
   function initializeWebsocket() {
     if (socket) return;
@@ -19,7 +20,8 @@ const useWebSocket = () => {
       console.log("Connected to server");
       let message = JSON.stringify({
         meta: "connection",
-        userID: process.env.REACT_APP_USER_ID,
+        userID: user.uid,
+        username: user.username,
       });
       socket.send(message);
     };

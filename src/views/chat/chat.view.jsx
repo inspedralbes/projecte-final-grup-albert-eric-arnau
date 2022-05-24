@@ -26,9 +26,8 @@ function Chat() {
 
   useEffect(() => {
     initializeWebsocket();
-    // loadGroupMessages();
-  }, []);
-  console.log(messages);
+    if (chat.activeGroupID) loadGroupMessages(activeGroupID);
+  }, [activeGroupID]);
 
   const handleMessage = (message) => {
     let newMessage = {

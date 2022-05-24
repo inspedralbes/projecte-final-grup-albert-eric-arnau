@@ -13,7 +13,6 @@ export const loadAllUserGroupsThunk = (UserID) => {
       if (response.ok) {
         const groups = await response.json();
         dispatch(loadAllGroups(groups));
-        console.log(groups);
       }
       return response.status;
     } catch (err) {}
