@@ -36,6 +36,7 @@ function Chat() {
       username: user.username,
       groupID: activeGroupID,
       userID: user.uid || "",
+      imgLink: user.imgLink,
       message,
     };
     sendMessage(newMessage);

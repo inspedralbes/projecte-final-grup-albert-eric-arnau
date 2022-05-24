@@ -28,7 +28,7 @@ const initializeWebsocket = (port) =>
           let data = JSON.parse(receivedData);
 
           if (data.meta === "connection") {
-            const { userID, username } = data;
+            const { userID, username, imgLink } = data;
 
             const allUserGroups = await getAllUserGroupsInDatabase(userID);
 
