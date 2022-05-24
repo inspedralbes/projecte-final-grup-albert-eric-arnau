@@ -45,7 +45,6 @@ function UserSettings() {
       changes = true;
     }
     if (changes) {
-      // userID, email, name, username, description, avatar, color;
       dispatch(
         updateUserThunk(
           user.uid,
