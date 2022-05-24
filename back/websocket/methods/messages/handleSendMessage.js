@@ -8,10 +8,17 @@ import { saveMessage } from "../../../database/methods/messages/index.js";
 import { handleBroadcastMessage } from "./index.js";
 
 const handleSendMessage = async (data, activeGroups) => {
-  const { groupID, userID, message, name, username, imgLink } = data;
+  const { groupID, userID, message, name, username, imgLink, color } = data;
 
   const time = Date.now();
-  const savedMessage = await saveMessage(groupID, userID, message, time);
+  const savedMessage = await saveMessage(
+    groupID,
+    userID,
+    message,
+    time,
+    color,
+    imgLink
+  );
 
   if (!savedMessage) return;
 

@@ -1,7 +1,7 @@
 import { addDoc, collection, doc } from "firebase/firestore";
 import { db } from "../../config/firebase.js";
 
-const saveMessage = async (groupID, userID, message, time) => {
+const saveMessage = async (groupID, userID, message, time, color, imgLink) => {
   try {
     const messagesCol = collection(db, "groups", groupID, "messages");
     const userRef = doc(db, "user", userID);
@@ -9,6 +9,8 @@ const saveMessage = async (groupID, userID, message, time) => {
       message,
       time,
       user: userRef,
+      color,
+      imgLink,
     });
 
     if (!messageDoc) throw new Error("Message could not be saved");
