@@ -1,6 +1,5 @@
 import { useStyles } from "./menu-link.styles";
 import { UnstyledButton } from "@mantine/core";
-import { Message, User, Settings, Selector } from "tabler-icons-react";
 import { useNavigate } from "react-router-dom";
 function MenuLink({ data }) {
   const navigate = useNavigate();

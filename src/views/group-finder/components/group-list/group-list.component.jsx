@@ -25,7 +25,7 @@ function GroupList({ search }) {
     } else {
       setGroups(allGroups);
     }
-  }, [search]);
+  }, [search, allGroups]);
 
   // TODO: useSelector with the groups state
   return (

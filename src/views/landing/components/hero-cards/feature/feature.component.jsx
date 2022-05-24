@@ -1,4 +1,4 @@
-import { Center, Text, ThemeIcon, useMantineTheme } from "@mantine/core";
+import { Text, ThemeIcon, useMantineTheme } from "@mantine/core";
 
 const Feature = ({ icon: Icon, title, description }) => {
   const theme = useMantineTheme();

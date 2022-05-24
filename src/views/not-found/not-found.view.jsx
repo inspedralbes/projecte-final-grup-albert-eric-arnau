@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Image,
-  Container,
-  Title,
-  Text,
-  Button,
-  SimpleGrid,
-} from "@mantine/core";
+import { Container, Title, Text, Button, SimpleGrid } from "@mantine/core";
 import { ReactComponent as ErrorImage } from "./assets/image.svg";
 import { useStyles } from "./not-found.styles";
 import { useNavigate } from "react-router-dom";

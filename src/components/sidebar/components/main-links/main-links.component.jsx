@@ -17,10 +17,10 @@ function MainLinks() {
   const links = useMemo(() => {
     return [
       { icon: Message, label: "Chat", to: PATHS.CHAT },
-      { icon: User, label: "Profile", to: `/profile/${user.uid}` },
       { icon: ClipboardList, label: "Group finder", to: PATHS.GROUP_FINDER },
       { icon: ClipboardPlus, label: "Create group", to: PATHS.GROUP_CREATE },
-      { icon: Settings, label: "Settings", to: PATHS.PROFILE_EDIT },
+      { icon: User, label: "Profile", to: `/profile/${user.uid}` },
+      { icon: Settings, label: "Profile settings", to: PATHS.PROFILE_EDIT },
     ];
   }, [user.uid]);
 

@@ -13,6 +13,9 @@ const groupReducer = (state = initialState, action) => {
     case groupTypes.GROUP_LOAD_ALL:
       newState = { ...state, groups: [payload] };
       break;
+    case groupTypes.GROUP_ADD:
+      newState = { ...state, groups: [...state.groups, payload] };
+      break;
     case groupTypes.GROUP_SET_ACTIVE:
       newState = { ...state, activeGroup: payload };
       break;

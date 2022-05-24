@@ -1,4 +1,5 @@
 import { getDownloadURL, uploadBytes } from "firebase/storage";
+import { addGroup } from "../actions/action-creates/group-creates";
 
 export const loadAllUserGroupsThunk = (UserID) => {
   return async (dispatch) => {
@@ -16,11 +17,11 @@ export const loadAllUserGroupsThunk = (UserID) => {
   };
 };
 
-export const joinGroupThunk = (idGroup, UserID, password) => {
+export const joinGroupThunk = (group, UserID, password) => {
   return async (dispatch) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/group/${idGroup}/join`,
+        `${process.env.REACT_APP_API_URL}/group/${group.id}/join`,
         {
           method: "PUT",
           headers: {
@@ -33,7 +34,7 @@ export const joinGroupThunk = (idGroup, UserID, password) => {
         }
       );
       if (response.ok) {
-        console.log("Group joined");
+        dispatch(addGroup(group));
       }
       return response.status;
     } catch (err) {
@@ -108,7 +109,7 @@ export const createGroupThunk = (
       );
       if (respose.ok) {
         const group = await respose.json();
-        // dispatch(createGroup(group));
+        dispatch(addGroup(group));
       }
       return respose.status;
     } catch (err) {}

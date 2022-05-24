@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextInput, Group, Button, Grid } from "@mantine/core";
+import { TextInput, Group, Button } from "@mantine/core";
 import { Send } from "tabler-icons-react";
 
 import { useStyles } from "./chat-input.styles";
@@ -25,11 +25,11 @@ function ChatInput({ handleMessage }) {
           type="submit"
           radius="xl"
           variant="gradient"
-          sx={{ width: "60px" }}
           gradient={{
-            from: "teal",
-            to: "blue",
-          }}>
+            from: "orange",
+            to: "red",
+          }}
+          sx={{ width: "60px" }}>
           <Send size={24} strokeWidth={2} color={"white"} />
         </Button>
       </Group>

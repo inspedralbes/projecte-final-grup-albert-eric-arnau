@@ -14,7 +14,7 @@ function Sidebar({ navbarType }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate(PATHS.GROUP_FINDER, { replace: true });
+    navigate(PATHS.HOME, { replace: true });
   };
 
   const handleLogout = () => {
@@ -61,9 +61,9 @@ function Sidebar({ navbarType }) {
         style={{ marginTop: "auto", position: "relative" }}>
         <Group>
           <UserButton
-            image={user.imgLink}
-            name={user.username}
-            email={user.name}
+            image={user.avatar}
+            name={user.name}
+            username={user.username}
             icon={<Selector size={14} />}
           />
           <Logout

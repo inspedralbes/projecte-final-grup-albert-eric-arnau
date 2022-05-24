@@ -10,7 +10,7 @@ function GroupItem({ group }) {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const handleCloseModal = (modal, password = "") => {
-    dispatch(joinGroupThunk(group.id, user.uid, password));
+    dispatch(joinGroupThunk(group, user.uid, password));
     modals.closeModal(modal);
   };
 
@@ -25,7 +25,11 @@ function GroupItem({ group }) {
               <Text>{group.name}</Text>
             </Group>
             <Text>{group.description}</Text>
-            <Text size="sm">{`Members: ${group.members.length} / ${group.limit}`}</Text>
+            <Text size="sm">
+              {group.members.length == group.limit
+                ? "Group is currenty full"
+                : `Members: ${group.members.length} / ${group.limit}`}
+            </Text>
           </Group>
           {group.password && (
             <TextInput
@@ -72,7 +76,11 @@ function GroupItem({ group }) {
         </Text>
       </td>
       <td>
-        <Text size="sm">{`${group.members.length} / ${group.limit}`}</Text>
+        <Text size="sm">
+          {group.members.length == group.limit
+            ? "Group is currenty full"
+            : `Members: ${group.members.length} / ${group.limit}`}
+        </Text>
         <Text size="xs" color="dimmed">
           Members limit
         </Text>

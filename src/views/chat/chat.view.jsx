@@ -1,55 +1,15 @@
-import { createStyles, Grid } from "@mantine/core";
+import { Grid } from "@mantine/core";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { ChatInput } from "../../components/chat/index";
 import { ChatMessage } from "../../components/chat/index";
+import { useStyles } from "./chat-view.styles";
 import useWebSocket from "../../hooks/useWebSocket";
-// const socket = new WebSocket("wss://groupem.herokuapp.com");
-// const socket = new WebSocket("ws://groupem.api.alumnes.inspedralbes.cat:7895/");
-
-// const RenderNewMessage = (user, message) => (
-//   <ChatMessage
-//     messageData={{
-//       user,
-//       message,
-//     }}
-//   />
-// );
-
-const useStyles = createStyles({
-  chatContainer: {
-    height: "90vh",
-    border: "1px solid black",
-    borderRadius: "15px",
-    overflowY: "auto",
-    display: "flex",
-    justifyContent: "flex-end",
-    flexDirection: "column",
-    "&::-webkit-scrollbar": {
-      border: "10px solid transparent",
-      width: "10px",
-      marginRight: "10px",
-    },
-
-    "&::-webkit-scrollbar-track": {
-      borderRadius: "10px",
-      backgroundColor: "#e1e1e1",
-      marginBottom: "5px",
-      marginTop: "5px",
-    },
-
-    "&::-webkit-scrollbar-thumb": {
-      border: "1px solid #e1e1e1",
-      borderRadius: "10px",
-      backgroundColor: "#3ddbc1",
-    },
-  },
-});
 
 function Chat() {
-  //!\ CUIDAO LOCO
   const chat = useSelector((state) => state.chat);
-  const { messages } = chat;
+  const { user } = useSelector((state) => state.auth);
+  const { messages, activeGroupID } = chat;
   const { initializeWebsocket, loadGroupMessages, sendMessage } =
     useWebSocket();
 
@@ -66,17 +26,17 @@ function Chat() {
 
   useEffect(() => {
     initializeWebsocket();
-    loadGroupMessages("uJZNitszHdqWRqceyXXn");
+    // loadGroupMessages();
   }, []);
   console.log(messages);
 
   const handleMessage = (message) => {
     let newMessage = {
       meta: "send_message",
-      name: "GunteR_",
-      username: "GunteR_",
-      groupID: "uJZNitszHdqWRqceyXXn",
-      userID: process.env.REACT_APP_USER_ID || "",
+      name: user.name,
+      username: user.username,
+      groupID: activeGroupID,
+      userID: user.uid || "",
       message,
     };
     sendMessage(newMessage);

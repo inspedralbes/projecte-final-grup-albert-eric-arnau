@@ -1,5 +1,4 @@
 import { Text, Container, Group, Tooltip, Paper } from "@mantine/core";
-import { NavLink } from "react-router-dom";
 import { Link } from "tabler-icons-react";
 import { useStyles } from "./footer.styles";
 

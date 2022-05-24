@@ -1,16 +1,8 @@
-import React from 'react';
-import {
-  UnstyledButton,
-  UnstyledButtonProps,
-  Group,
-  Avatar,
-  Text,
-} from '@mantine/core';
-import { ChevronRight } from 'tabler-icons-react';
-import { useStyles } from './user-button.styles';
+import React from "react";
+import { UnstyledButton, Group, Avatar, Text } from "@mantine/core";
+import { useStyles } from "./user-button.styles";
 
-
-function UserButton({ image, name, email, icon, ...others }) {
+function UserButton({ image, name, username, icon, ...others }) {
   const { classes } = useStyles();
 
   return (
@@ -24,7 +16,7 @@ function UserButton({ image, name, email, icon, ...others }) {
           </Text>
 
           <Text color="dimmed" size="xs">
-            {email}
+            {username}
           </Text>
         </div>
       </Group>

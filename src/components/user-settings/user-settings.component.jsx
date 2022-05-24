@@ -10,14 +10,12 @@ import {
   Textarea,
   Indicator,
   ColorPicker,
-  Group,
-  Avatar,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Dropzone, MIME_TYPES } from "@mantine/dropzone";
 
 import { useDispatch, useSelector } from "react-redux";
-import { InfoCircle, Edit, CloudUpload } from "tabler-icons-react";
+import { InfoCircle, CloudUpload } from "tabler-icons-react";
 import { updateUserThunk } from "../../redux/thunk/auth-thunk";
 import { useStyles } from "./user-settings.styles";
 import { useState } from "react";
