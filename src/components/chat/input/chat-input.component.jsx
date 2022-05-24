@@ -8,8 +8,10 @@ function ChatInput({ handleMessage }) {
   const [value, setValue] = useState("");
   const SendMessage = (e) => {
     e.preventDefault();
-    handleMessage(value);
-    setValue("");
+    if (value) {
+      handleMessage(value);
+      setValue("");
+    }
   };
 
   return (
