@@ -59,7 +59,7 @@ function Sidebar({ navbarType }) {
 
       <Navbar.Section
         className={classes.section}
-        style={{ marginTop: "auto", position: "relative" }}>
+        style={{ marginTop: "auto", marginLeft: 1, position: "relative" }}>
         <Group>
           <UserButton
             image={user.avatar}
