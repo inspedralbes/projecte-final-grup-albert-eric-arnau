@@ -6,7 +6,7 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import ChatMessage from "../../../../components/chat/message/chat-message.component";
+import { MessageBox } from "../message-box";
 
 function AppareanceForm({ form, createUser, next, prev }) {
   const handleSubmit = (e) => {
@@ -54,7 +54,7 @@ function AppareanceForm({ form, createUser, next, prev }) {
             {...form.getInputProps("color")}
           />
         </Group>
-        <ChatMessage
+        <MessageBox
           messageData={{
             time: 1652782796786,
             name: form.values?.displayName

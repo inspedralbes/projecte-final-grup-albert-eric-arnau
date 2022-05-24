@@ -41,9 +41,7 @@ function ChatMessage({ messageData = null }) {
             className={isLocal && classes.timeLocalMessage}>
             {messageData.time || "Hoy 10:30 pm"}
           </Text>
-          <Text className={classes.body} size="sm">
-            {messageData.message}
-          </Text>
+          <Text size="sm">{messageData.message}</Text>
         </Paper>
       </Group>
     )
