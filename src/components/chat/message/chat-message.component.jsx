@@ -7,7 +7,7 @@ function ChatMessage({ messageData = null }) {
   const { classes } = useStyles();
   const { user } = useSelector((store) => store.auth);
   const isLocal = user.uid === messageData.userID;
-
+  const date = new Date(messageData.time);
   return (
     messageData && (
       <Group
@@ -39,7 +39,11 @@ function ChatMessage({ messageData = null }) {
             size="xs"
             color="dimmed"
             className={isLocal && classes.timeLocalMessage}>
-            {messageData.time || "Hoy 10:30 pm"}
+            {date.toLocaleDateString("en-GB", {
+              hourCycle: "h12",
+              hour: "numeric",
+              minute: "numeric",
+            })}
           </Text>
           <Text size="sm">{messageData.message}</Text>
         </Paper>
