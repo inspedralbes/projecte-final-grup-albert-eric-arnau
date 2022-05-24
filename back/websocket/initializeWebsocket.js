@@ -39,7 +39,6 @@ const initializeWebsocket = (port) =>
                 await joinRoom(ws, uid, username, activeGroups);
               }
             });
-            console.log("activeGroups", activeGroups);
 
             return;
           } else if (data.meta === "logout") {
