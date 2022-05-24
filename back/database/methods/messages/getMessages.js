@@ -7,6 +7,7 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "../../config/firebase.js";
+import getUserDocument from "../user/getUserDocument.js";
 
 const getMessages = async (groupID, time, messagesLimit) => {
   const messages = [];
@@ -19,10 +20,11 @@ const getMessages = async (groupID, time, messagesLimit) => {
   );
   try {
     const messagesDocs = await getDocs(q);
-    messagesDocs.forEach((element) => {
-      const { message, time, user } = element.data();
-      messages.push({ message, time, userID: user.id });
-    });
+    for (const element of messagesDocs.docs) {
+      const { message, time, user, color, imgLink } = element.data();
+      const { name } = await getUserDocument(user.id);
+      messages.push({ message, time, userID: user.id, name, color, imgLink });
+    }
     return messages;
   } catch (error) {
     return {
