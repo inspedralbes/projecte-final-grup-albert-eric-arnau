@@ -18,3 +18,8 @@ export const setActiveChatGroupAction = (groupID) => ({
   type: chatTypes.GROUP_SET_ACTIVE,
   payload: groupID,
 });
+
+export const receiveMessageAction = (message) => ({
+  type: chatTypes.MESSAGE_RECEIVE,
+  payload: message,
+});

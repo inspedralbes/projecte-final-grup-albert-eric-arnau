@@ -1,5 +1,3 @@
-import { saveMessage } from "../../../database/methods/messages/index.js";
-
 const handleBroadcastMessage = (
   groupID,
   userID,
@@ -7,6 +5,7 @@ const handleBroadcastMessage = (
   username,
   message,
   time,
+  imgLink,
   activeGroups
 ) => {
   try {
@@ -22,6 +21,7 @@ const handleBroadcastMessage = (
           name,
           time,
           username,
+          imgLink,
           message,
         })
       );

@@ -5,11 +5,14 @@ import {
   setActiveGroup,
   setActiveChatGroupAction,
 } from "../../../../redux/actions";
+import PATHS from "../../../../routers/paths";
+import { useNavigate } from "react-router-dom";
 // import { notificationNumberDisplay } from "../../../../helpers/notificationNumberDisplay";
 
 function GroupLink({ data }) {
   const { name, imgLink, uid } = data;
   const { classes } = useStyles();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSelectGroup = () => {
@@ -20,7 +23,9 @@ function GroupLink({ data }) {
     dispatch(setActiveChatGroupAction(uid));
     console.log(data);
   };
-
+  function handleClick() {
+    navigate(PATHS.CHAT, { replace: true });
+  }
   return (
     <div style={{ position: "relative" }}>
       <a
@@ -28,6 +33,7 @@ function GroupLink({ data }) {
         onClick={(e) => {
           e.preventDefault();
           handleSelectGroup();
+          handleClick();
         }}
         key={name}
         className={classes.groupLink}>
