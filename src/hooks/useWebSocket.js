@@ -27,12 +27,14 @@ const useWebSocket = () => {
     };
 
     socket.onmessage = (event) => {
-      const { data } = event;
-
-      const { message, meta } = JSON.parse(data);
+      console.log(event);
+      let { data } = event;
+      data = JSON.parse(data);
+      console.log(data);
+      const { meta } = data;
       switch (meta) {
         case "receive_message":
-          receiveMessage(message);
+          receiveMessage(data);
           break;
         default:
           console.log("Message from server:" + event.message);
@@ -49,10 +51,8 @@ const useWebSocket = () => {
     socket.send(JSON.stringify(messageData));
   }
   function receiveMessage(messageData) {
-    console.log("receiveMessage", messageData);
+    console.log("messageData", messageData);
     dispatch(receiveMessageAction(messageData));
-    // dispatch(sendMessageAction(messageData));
-    // socket.send(JSON.stringify(messageData));
   }
 
   function createGroup(groupData) {
@@ -73,6 +73,7 @@ const useWebSocket = () => {
     closeWebsocket,
     loadGroupMessages,
     sendMessage,
+    receiveMessage,
     createGroup,
   };
 };
