@@ -9,7 +9,6 @@ export const loadGroupMessagesThunk = (groupID) => {
       );
       if (response.status === 200) {
         messages = await response.json();
-        console.log(messages);
         dispatch(loadGroupMessagesAction(messages));
       }
     } catch (err) {
